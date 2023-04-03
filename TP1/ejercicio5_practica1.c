@@ -26,10 +26,9 @@ int main()
   EJEMPLO:
   > SNUM = 1200; stlen(4);
   ptr apunta a C(1). i = 1;
-  i + 1 = 1.
-  cantidad de caracteres restantes: 4 - 1 = 3
-  3 mod 3 == 0
-  strlen(SNUM) > 3
+  Como la cantidad de caracteres restantes es 3, y
+  (3 mod 3) == 0
+  [strlen(SNUM) > 3]
   >> agrega un punto.
   fin.
   
