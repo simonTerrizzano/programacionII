@@ -14,8 +14,8 @@ int main()
 /*
   Caso Base: Si el (strlen(string) == 1) entonces devuelve un char y deja de llamar a la funcion.
 
-  Dado un string de numeros, llamemoslo SNUM. Sea C(i) un caracter de SNUM, donde i es un numero natural.
-  > C(0) denota el primer caracter de SNUM
+  Dado un string de numeros, llamemoslo SNUM. Sea C(i-1) un caracter de SNUM, donde i es un numero natural.
+  > C(1) denota el primer caracter de SNUM
   > C(max) denota el ultimo caracter no nulo de SNUM
 
   > Sea ptr un puntero a  caracter arbitrario de SNUM.
@@ -25,7 +25,7 @@ int main()
 
   EJEMPLO:
   > SNUM = 1200; stlen(4);
-  ptr apunta a C(0). i = 0;
+  ptr apunta a C(1). i = 1;
   i + 1 = 1.
   cantidad de caracteres restantes: 4 - 1 = 3
   3 mod 3 == 0
