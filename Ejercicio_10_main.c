@@ -3,7 +3,7 @@
 
 int main(void)
 {
-        int check=0;
+    int check=0;
     char ingreso[15];
     int num_a_explotar;
     char* ptr;
