@@ -33,4 +33,9 @@ unsigned int cantidad_de_caracteres(char *string);
 //Devuelve puntero a char donde se almacena el string modificado.
 char *eliminar_ultimo_char(char *palabra);
 char *pointer_last_letter(char *string);
+
+
+// Verifica si lo ingresado es un numero y luego el salto de linea. Retorna 1 de haber algun error. retorna 0 si todo es correcto.
+
+int ingreso_numero(int *direccion_donde_se_guarda_la_entrada, char *guardado_de_espacio);
 #endif
