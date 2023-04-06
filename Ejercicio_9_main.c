@@ -11,7 +11,7 @@ int main(void){
     int ingresonum;
 
     while (check!=1){
-        printf("Ingrese un número para sabes si es divisible por 7: ");
+        printf("Ingrese un número entero positivo para sabes si es divisible por 7: ");
         fflush(stdin);
         fgets(ingreso,100,stdin);
         ingresonum=strtol(ingreso, &ptr, 10);
@@ -19,9 +19,9 @@ int main(void){
         quitasalto(ingreso);
 
         if (cadenatododigito(ingreso)!=1){
-            printf("\nPor favor solo ingrese números\n");
+            printf("\nPor favor solo ingrese números enteros positivos\n");
         }
-        else if (strlen(ingreso)>=10){
+        else if (ingresonum>1000000000){
             printf("\nPor favor ingrese un número menor o igual a 999999999\n");
         }
         else if (ingresonum<=999999999){
