@@ -34,6 +34,7 @@ int ingreso_normalizado_enteros_positivos(int limite_inferior, int limite_superi
             fin=true;
         }
     }
+    printf("\n");
     return ingreso_normalizado;
 }
 
