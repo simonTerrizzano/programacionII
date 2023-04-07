@@ -23,11 +23,11 @@ int ingreso_normalizado_enteros_positivos(int limite_inferior, int limite_superi
         }
         else if (ingreso_normalizado>limite_superior)//Comprueba limite superior
         {
-            printf("\nError: Ingrese un numero menor que %i.\n",limite_superior);
+            printf("\nError: Ingrese un numero menor o igual que %i.\n",limite_superior);
 
         }
         else if (ingreso_normalizado<limite_inferior){//Comprueba limite inferior
-            printf("\nError: Ingrese un numero mayor que %i.\n",limite_inferior);
+            printf("\nError: Ingrese un numero mayor o igual que %i.\n",limite_inferior);
         }
         else//Si el ingreso está dentro del rango sale del bucle
         {
