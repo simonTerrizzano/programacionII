@@ -1,5 +1,3 @@
-#include<stdio.h>
-#include<stdbool.h>
 #include "DataEntry.c"
 
 #ifndef Ejercicio_9
