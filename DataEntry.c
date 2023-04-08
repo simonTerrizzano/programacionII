@@ -42,7 +42,7 @@ int ingreso_normalizado_enteros(int limite_inferior, int limite_superior){
             printf("\nIngrese un número (Número entero positivo entre %i y %i):\n",limite_inferior,limite_superior);
         }
         
-        fgets(ingreso,10,stdin);
+        fgets(ingreso,11,stdin);
         fflush(stdin);
         quitasalto(ingreso);
 
@@ -166,4 +166,26 @@ bool esNeg(char* cadena){
     
 
     return res;
+}
+
+bool esFlotante(char* cadena){
+    int control=0;
+    int punto=0;
+    bool res=false;
+    for (int i = 0; cadena[i]; i++){
+
+        if(cadena[i]=='.'){
+            punto++;
+        }
+        if (isdigit(cadena[i])!=1){
+                control++;
+            } 
+        }
+    
+    if (punto==1 && control==1 && cadena[0] != '.' && cadena[strlen(cadena)-1]!='.')
+    {
+        res=true;
+    }
+    
+
 }

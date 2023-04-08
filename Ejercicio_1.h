@@ -1,6 +1,3 @@
-#include<stdio.h>
-#include<string.h>
-#include<stdbool.h>
 #include "DataEntry.c"
 
 #ifndef Ejercicio_1
