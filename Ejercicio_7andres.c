@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-// onda_digital(char *forma_onda):la funcion mostrara en pantalla el string apuntado por forma_onda representado los valores con guiones.
+// onda_digital(char *forma_onda):la funcion mostrara en pantalla el string apuntado por forma_onda representando los valores con guiones.
 // La funcion solamente procesa los caracteres L y H mayusculas, cualquier otro caracter (incluso l y h(minusculas)) no pertenecen al dominio de la funcion. 
 void
 onda_digital(char *forma_de_onda);
