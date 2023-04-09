@@ -1,26 +1,18 @@
 #include "Ejercicio_7.c"
-
+#define SIZE_BUFFER 1000
 int main(void)
 {
-    char onda[100];
-
+    char onda[SIZE_BUFFER];
+    int ingreso_ok;
     printf("--Onda Digital--(Solo admite H y L para represental una onda digital alta o baja)\n");
-
-    while (ingreso_normalizado_onda_digital(onda)!=true)
-    {
-    ingreso_normalizado_string(onda,80);
-    if (ingreso_normalizado_onda_digital(onda)!=true)
-    {
-        printf("\nPor favor solo ingrese letras H o L\n");
-    }
-    
-    }
-    
+    fgets(onda, SIZE_BUFFER, stdin);
     onda_digital(onda);
+  
+    
 
     printf("\n\n");
 
-    //system("PAUSE");
-    exit(EXIT_SUCCESS);
+    //ssystem("PAUSE");
+
     return 0;
 }
