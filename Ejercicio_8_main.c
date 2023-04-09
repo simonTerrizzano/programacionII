@@ -28,7 +28,7 @@ int main(void)
 
     printf("\n\n");
 
-    system("PAUSE");
-
+    //system("PAUSE");
+    exit(EXIT_SUCCESS);
     return 0;
 }
