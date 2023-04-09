@@ -6,7 +6,6 @@ int main()
 {
     char salto_linea;
     int numerador, denominador;
-    int denominador_cero;
     printf("--Numerador--");
     printf("\n\nIngrese un numerador: ");
     scanf("%d%c", &numerador, &salto_linea);
