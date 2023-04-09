@@ -24,7 +24,7 @@ int main(void)
     {
 
 	printf("\nNumerador:%d\tDenominador:%d", numerador, denominador);
-	printf("\nResultado: %.4f", division(numerador, denominador, PRECISION));
+	printf("\nResultado: %.4f", division(abs(numerador), abs(denominador), PRECISION));
     }
     
     printf("\n\n");
