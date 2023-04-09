@@ -8,7 +8,7 @@ Ejemplos:
 division (10,2) => 5
 division (22,3) => 7,3333*/
 
-// float_division: recibe enteros positivos m,n y precision. Donde n es distinto de 0. y precision >= 1- 
+// float_division: recibe enteros positivos m,n y precision. Donde n es distinto de 0. y precision >= 1.
 // retorna: un numero k (real) donde k al multiplicarlo por n me da un numero igual(o muy cercano) a m. 
 // m = n*k --> m/n = k
 // NOTA 1: La funcion tiene como dominio enteros positivos. Si m o n fuera negativo(y no ambos), entonces al numero devuelto se le agrega signo negativo. 
