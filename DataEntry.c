@@ -164,8 +164,12 @@ void mayus(char* cadena){
 
 int cadenatododigito(char* cadena){
     
-    for (int i = 0; cadena[i]; i++){
-        if (isdigit(cadena[i])!=1)
+    for (int i = 0; cadena[i] != '\0'; i++){
+
+	if(*(cadena+0) == '-')
+	    continue;
+
+	if (!isdigit(cadena[i]))
         {
             return 0;
         } 
