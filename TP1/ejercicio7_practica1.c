@@ -1,30 +1,20 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "Ejercicio_7.h"
 
-void
-onda_digital(char *forma_de_onda);
-int main()
-{
+/*Se tiene una cadena que representa una onda digital de señales L (Low) y H (High). Se
+pide obtener recursivamente la onda que representa utilizando “_” y “|”.
+Ejemplos:
+ondaDigital (“LHLHL”) => “_ |¯ |_|¯ |_”
+ondaDigital (“HHHHLLLLHHHHHLLHH”) => “¯ ¯ ¯ ¯ | _ _ _ _ |¯ ¯ ¯ ¯ ¯ | _ _ | ¯ ¯ */
 
-    onda_digital("HHHHLLLLHHHHHLLHH");
-
-}
-  
-
-// onda_digital(char *const_char): recibe una cadena de caracteres indicando los niveles de la <<digital_wave>>.
-// imprime la señal represantada con guiones.
-
-void
-onda_digital(char *forma_de_onda)
+void onda_digital(char *forma_de_onda)
 {
     // Si el caracter no representara LOW o HIGH, o fuera el caracter nulo, entonces corta la funcion.
     // Si la forma de onda es LOW
-    if((*forma_de_onda) == 'L')
+    if((*forma_de_onda) == 'L' || *(forma_de_onda) == 'l')
     {
 	// Y la siguiente es HIGH
 	
-	if((*(forma_de_onda+1)) == 'H')
+	if((*(forma_de_onda+1)) == 'H' || *(forma_de_onda+1) == 'h')
 	{
 	   
 	    // Imprimimos low y comienza a subir
@@ -40,9 +30,9 @@ onda_digital(char *forma_de_onda)
 	
     }
     // lo siguiente es analogo a lo expuesto anteriormente.
-    else if((*forma_de_onda) == 'H')
+else if((*forma_de_onda) == 'H' || *(forma_de_onda) == 'h')
     {
-	if((*(forma_de_onda + 1)) == 'L')
+	if((*(forma_de_onda + 1)) == 'L' || *(forma_de_onda+1) == 'l')
 	{
 	    printf("¯|");
 	    onda_digital(forma_de_onda+1);
@@ -56,3 +46,4 @@ onda_digital(char *forma_de_onda)
 	
     }
 }
+
