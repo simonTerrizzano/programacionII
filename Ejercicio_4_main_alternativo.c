@@ -21,7 +21,7 @@ int main()
 	exit(EXIT_FAILURE);
     }
     
-    // si ambos tienen el mismo signo, entonces lo muestra positivo.
+    // si uno u otro tiene signo negativo, pero no ambos, entonces es negativo
     if( (numerador < 0 || denominador < 0)  && !(denominador < 0 && numerador < 0) )
     {
 	printf("\nResultado: -%.4f", division(abs(numerador), abs(denominador), PRECISION));
