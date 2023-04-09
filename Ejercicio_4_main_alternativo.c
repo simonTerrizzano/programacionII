@@ -16,7 +16,7 @@ int main()
     
     if(denominador==0)
     {
-	printf("La division por 0 no esta definida. Porfavor intente con un numero distinto de 0\n\n");
+	printf("La division por 0 no esta definida. Porfavor intente con un numero distinto de 0 la proxima vez\n\n");
 	exit(EXIT_FAILURE);
     }
     
