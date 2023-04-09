@@ -6,7 +6,7 @@ int main(void)
     int dimension,suma;
 
     printf("--Cantidad de elementos del conjunto--");
-    dimension=ingreso_normalizado_enteros(0,10);
+    dimension=ingreso_normalizado_enteros(0,20);
 
     int conjunto[dimension];
     int subconjuntos[dimension];
@@ -15,13 +15,13 @@ int main(void)
     while (cont!=dimension)
     {
         printf("\n%iº número\n",cont+1);
-        conjunto[cont]=ingreso_normalizado_enteros(-100,100);
+        conjunto[cont]=ingreso_normalizado_enteros(-100000,100000);
         cont++;
     }
 
     printf("--Cantidad que se querra que sumen los subconjuntos--");
 
-    suma=ingreso_normalizado_enteros(-1000,1000);
+    suma=ingreso_normalizado_enteros(-100000,100000);
 
     encontrarSubconjuntosQueSumanN(conjunto,dimension,suma,subconjuntos,0,0,suma,0);
 
