@@ -97,6 +97,30 @@ int ingreso_normalizado_enteros(int limite_inferior, int limite_superior){
     return ingreso_normalizado;
 }
 
+bool ingreso_normalizado_onda_digital(char* onda){
+
+    bool res;
+    int cont=0;
+    mayus(onda);
+
+    for (int i = 0; onda[i]; i++)
+    {
+        if(onda[i]!='L' && onda[i]!='H'){
+            cont++;
+        }
+    }
+    if (cont>=1)
+    {
+        res=false;
+    }else
+    {
+        res=true;
+    }
+    return res;
+    
+    
+}
+
 
 void quitaespacios(char* cadena){
     int i,j;
@@ -125,6 +149,14 @@ void minus(char* cadena){
     for (int i = 0;cadena[i]; i++)
     {
         cadena[i]=tolower(cadena[i]);
+    }
+    
+}
+
+void mayus(char* cadena){
+    for (int i = 0;cadena[i]; i++)
+    {
+        cadena[i]=toupper(cadena[i]);
     }
     
 }

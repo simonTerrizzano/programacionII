@@ -21,8 +21,8 @@ divisiblePor7 (110) => falso*/
 
 bool divpor7(int numavalid){
     int dig;
-    if (numavalid<70){
-        if (numavalid%7==0)
+    if (numavalid<70){//Caso base: Cuendo el numero sea menos que 70
+        if (numavalid%7==0)//Si es divisible por 7
         {
             return true;
         }
@@ -30,8 +30,9 @@ bool divpor7(int numavalid){
             return false;
         }
     }
-    dig=numavalid%10;
-    numavalid=numavalid/10;
-    numavalid-=dig*2;
-    return divpor7(numavalid);
+    /*SI es mayor a 70*/
+    dig=numavalid%10;//Se aisla último digito
+    numavalid=numavalid/10;//Se le saca el ultimo digito
+    numavalid-=dig*2;//Se le resta el digito aislado por 2
+    return divpor7(numavalid); //Llamada recursiva
 }

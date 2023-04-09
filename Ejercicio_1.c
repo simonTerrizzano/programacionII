@@ -8,15 +8,15 @@ palindromo(“neuquen”) => verdadero
 palindromo(“palindromo”) => falso */
 
 bool palindromo(char *palabra, int primero, int ultimo) {
-    if(primero > ultimo) {
+    if(primero > ultimo) {//Caso base: miestra los numeros a evaluar no sean el mismo
         return true;
     }
     else {
-        if (palabra[primero] != palabra[ultimo]) {
+        if (palabra[primero] != palabra[ultimo]) {//Evaluar si son diferentes
             return false;
         }
         else {
-        return palindromo(palabra, primero+1, ultimo-1);
+        return palindromo(palabra, primero+1, ultimo-1);//Correr un caracter para adentro
         }
     }
 }

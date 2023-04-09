@@ -13,5 +13,9 @@ int main(void)
 
     printf("El producto de %i y %i es %i",numero1_normalizado,numero2_normalizado ,multiplicacion_recursiva(numero1_normalizado,numero2_normalizado));
 
+    printf("\n\n");
+
+    system("PAUSE");
+    
     return 0;
 }

@@ -20,5 +20,10 @@ int main(void)
     else{
         printf("El string ingresado no es palindromo");
     }
+
+    printf("\n\n");
+
+    system("PAUSE");
+
     return 0;
 }

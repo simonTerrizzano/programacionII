@@ -12,5 +12,9 @@ int main(void)
 
     printf("\nResultado: %.4f", division(numerador, denominador, PRECISION));
 
+    printf("\n\n");
+
+    system("PAUSE");
+
     return 0;
 }

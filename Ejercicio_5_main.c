@@ -14,7 +14,9 @@ int main(void)
 
     agregar_separador_de_miles(numero_con_puntos);
 
-    // printf("%s",numero_con_puntos);
+    printf("\n\n");
+
+    system("PAUSE");
 
     return 0;
 }

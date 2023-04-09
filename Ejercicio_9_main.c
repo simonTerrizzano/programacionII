@@ -5,7 +5,7 @@ int main(void){
     bool res;
 
     int ingreso_normalizado;
-    ingreso_normalizado = ingreso_normalizado_enteros_positivos(0,99999999);
+    ingreso_normalizado = ingreso_normalizado_enteros(0,99999999);
     
     res = divpor7(ingreso_normalizado);
 
@@ -16,6 +16,10 @@ int main(void){
     else{
         printf("El número no es divisible por 7");
     }
+
+    printf("\n\n");
+
+    system("PAUSE");
 
     return 0;
 
