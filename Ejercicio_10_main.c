@@ -9,7 +9,7 @@ int main(int argc, char const *argv[]) {
         printf("Valor del numero");
         num = ingreso_normalizado_enteros(0,10000);
         printf("Valor de la bomba");
-        bomba= ingreso_normalizado_enteros(0,10000);
+        bomba= ingreso_normalizado_enteros(2,10000);
         printf("Se mostrara la lista resultante: \n");
         explocion(num, bomba, &contador);
         int* lista = explocion(num, bomba, &contador);
