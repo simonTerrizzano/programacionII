@@ -19,6 +19,52 @@ struct IteradorRep {
     int posicionActual;
 };
 
+bool l_es_vacia(Lista lista){
+    return lista->libre==0;
+}
+
+bool l_es_llena(Lista lista){
+    return lista->libre==TAMANIO_MAXIMO;
+}
+
+int l_longitud(Lista lista){
+    return lista->cantidad;
+}
+
+TipoElemento l_buscar(Lista lista, int clave){
+    int q = lista->inicio;
+    while (lista->cursor[q].siguiente != NULO) {
+        q = lista->cursor[q].siguiente;
+        if(lista->cursor[q].datos->clave==clave){
+            return lista->cursor[q].datos;
+        }
+    }
+    return NULL;
+    }
+TipoElemento l_recuperar(Lista lista, int pos){
+    if (1 <= pos && pos <= l_longitud(lista)) { 
+        int q = lista->inicio;
+        int i=0;
+        if (i=pos-1)
+        {
+            return lista->cursor[q].datos;
+        }
+
+        while (lista->cursor[q].siguiente != NULO) {
+            i++;
+            if (i=pos-1)
+            {
+            return lista->cursor[q].datos;
+            }
+            q = lista->cursor[q].siguiente;
+        }
+    }
+    else{
+        return NULL;
+    }
+}
+
+
 Lista l_crear () {
     Lista nueva_lista = (Lista) malloc(sizeof(struct ListaRep));
     nueva_lista->cursor = (struct Nodo*)calloc(TAMANIO_MAXIMO, sizeof(struct Nodo));
@@ -36,7 +82,9 @@ Lista l_crear () {
 }
 
 void l_agregar (Lista lista, TipoElemento elemento) {
-    if (l_es_llena(lista)) {return;} //Controlo la lista llena
+    if (l_es_llena(lista)) {
+        return;
+        } //Controlo la lista llena
     int p;
     p = lista->libre; // Tomo el primer libre
     lista->libre = lista->cursor[p].siguiente;
@@ -57,7 +105,9 @@ void l_agregar (Lista lista, TipoElemento elemento) {
 }
 
 void l_borrar (Lista lista, int clave) {
-    if (l_es_vacia(lista)) { return; } // Controlo la lista vacia
+    if (l_es_vacia(lista)){
+        return;
+        } // Controlo la lista vacia
     int q; int p = lista->inicio;
     // borro las claves que coinciden con el inicio
     while ((p != NULO) && (lista->cursor[p].datos->clave == clave)) {
@@ -123,4 +173,26 @@ void l_eliminar (Lista lista, int pos) {
     }
     lista->cantidad--;
     }
+}
+
+Iterador iterador(Lista lista){
+    Iterador iter = (Iterador) malloc(sizeof(struct IteradorRep));
+    iter->lista=lista;
+    iter->posicionActual=0;
+    return iter;
+}
+
+bool hay_siguiente(Iterador iterador){
+    return iterrador->cantidad < iterador->lista->cantidad;
+}
+
+
+TipoElemento siguiente(Iterador iterador) {
+    int i=0;
+    int q;
+    while (i<=iterador->posicionActual) {
+            q = lista->cursor[q].siguiente;
+            i++;
+        }
+    return iterador->lista->cursor[q+1];
 }
