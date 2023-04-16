@@ -36,10 +36,10 @@ int ingreso_normalizado_enteros(int limite_inferior, int limite_superior){
     {   
         if (limite_inferior<0)
         {
-            printf("\nIngrese un número (Número entero entre %i y %i):\n",limite_inferior,limite_superior);
+            printf("\nIngrese un numero (Número entero entre %i y %i):\n",limite_inferior,limite_superior);
         }else
         {
-            printf("\nIngrese un número (Número entero positivo entre %i y %i):\n",limite_inferior,limite_superior);
+            printf("\nIngrese un numero (Número entero positivo entre %i y %i):\n",limite_inferior,limite_superior);
         }
         
         fgets(ingreso,11,stdin);
@@ -78,7 +78,7 @@ int ingreso_normalizado_enteros(int limite_inferior, int limite_superior){
             }
         }else{
             if (cadenatododigito(ingreso)!=1){//Comprueba si el ingreso es un digito
-                printf("\nError: Por favor solo ingrese números enteros positivos.\n");
+                printf("\nError: Por favor solo ingrese numeros enteros positivos.\n");
             }
             else if (ingreso_normalizado>limite_superior)//Comprueba limite superior
             {
@@ -164,8 +164,12 @@ void mayus(char* cadena){
 
 int cadenatododigito(char* cadena){
     
-    for (int i = 0; cadena[i]; i++){
-        if (isdigit(cadena[i])!=1)
+    for (int i = 0; cadena[i] != '\0'; i++){
+
+	if(*(cadena+0) == '-')
+	    continue;
+
+	if (!isdigit(cadena[i]))
         {
             return 0;
         } 

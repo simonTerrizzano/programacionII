@@ -3,6 +3,6 @@
 #ifndef Ejercicio_9
 #define Ejercicio_9
 
-void explosivo(int N,int B);
+int* explocion(int num, int bomba, int* tamanio);
 
 #endif
