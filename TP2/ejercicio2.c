@@ -4,6 +4,7 @@
 #include "DataEntry.c"
 #include "tipo_elemento.c"
 
+
 /*
 2.Dada una lista cargada con valores al azar (en la clave) realizar los siguientes ejercicios:
 a. Que calcule el menor de los datos e indique la posición ordinal.
@@ -32,6 +33,7 @@ Lista lista_de_multiplos(Lista lista_original, int number);
 int main()
 {
 
+    
     int epsilon; // sera donde se guarde el numero que el usuario eliga para buscar los
     //multiplos en la lista 
     int almacenamiento_suma = 0; // se almacena la suma de todos los valores de los nodos
@@ -58,11 +60,11 @@ int main()
     // se agregaran nodos
     printf("\n--Ingreso de numeros--\n\nCosideraciones:\nI) el numero debe serentero\nII)los valores deben ser de [-1000,1000]\nIII)ingrese el comando exit para detener el ingreso de valores.\n");
 
-    while(!(l_es_llena(lista_1)) && *(ptr_exit) != true)
+    while(!(l_es_llena(lista_1)) && salida != true)
     {
 	*(ptr_data) = ingreso_normalizado_enteros(-1000, 1000, &salida);
 	//printf("\nValor dato: %d\n", dato); 
-	if(*(ptr_exit) == true)
+	if(salida == true)
 	{
 	    printf("\nEl ingreso de datos se da por finalizado\n");
 	}
@@ -89,29 +91,38 @@ int main()
 	}
     }
 
+    salida = false;
     // se genera el iterador a la lista.
     iter = iterador(lista_1);
     calcular_minimo(iter); // se calcula el minimo y se muestra
-    iter->posicion_actual = lista_1->inicio; // se reinicia el iterador
+    free(iter);
+
+
+    
+    iter = iterador(lista_1);
     // mostramos cuantas veces se repite un maximo
     printf("\nEl valor máximo es: %d y se repite %d veces\n", maximo_valor,
 	   cuantas_veces_se_repite(iter, maximo_valor));
-    iter->posicion_actual = lista_1->inicio; // se vuelve a reiniciar el iterador
-    // se muestra cuantas veces se encuentra el maximo en la lista
-    printf("\nEl promedio es de %f\n\n", promedio_suma_elementos(iter,
-   						 &almacenamiento_suma,lista_1->cantidad));
+    free(iter);
+    iter = iterador(lista_1); // se vuelve a reiniciar el iterador
+
+
+
+// se muestra cuantas veces se encuentra el maximo en la lista
+    printf("\nLongitud de lista: %d", l_longitud(lista_1));
+    printf("\nEl promedio es de %f \n\n", promedio_suma_elementos(iter,&almacenamiento_suma,l_longitud(lista_1)));
 
 
     // se pide al usuario un numero para buscar los multiplos en la lista
     printf("\nA partir de la lista anterior y un numero cualquiera se calcularan que elementos son multiplos de ese numero\n\nPorfavor, ingrese un numero: ");
-    epsilon = ingreso_normalizado_enteros(-1000, 1000, ptr_exit);
+    epsilon = ingreso_normalizado_enteros(-1000, 1000, &salida);
     lista_multiplos = lista_de_multiplos(lista_1,epsilon);
     iter = iterador(lista_multiplos);
     // muestra dichos multiplos
     while(hay_siguiente(iter))
     {
 	te = siguiente(iter);
-	printf("\n%d", *(int*)te->valor);
+	printf("%d ", *(int*)te->valor);
 
     }
 
@@ -199,15 +210,19 @@ void mostrar_elementos_lista_recursivamente(Iterador iter)
 
 double promedio_suma_elementos(Iterador iter, int *almacenamiento_suma, int cantidad)
 {
+    double prom;
     TipoElemento te;
     if(hay_siguiente(iter) == false)
     {
-	return *(almacenamiento_suma)/cantidad;
+	prom = *(almacenamiento_suma) / cantidad;
+	return prom;
     }
     else
     {
 	te = siguiente(iter);
+	
 	*(almacenamiento_suma)+= *(int*)te->valor;
+	//printf("\nalmacenamiento_suma = %d", *almacenamiento_suma);
 	promedio_suma_elementos(iter, almacenamiento_suma, cantidad);
     }
 }
