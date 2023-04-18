@@ -98,7 +98,7 @@ int main()
 	   cuantas_veces_se_repite(iter, maximo_valor));
     iter->posicion_actual = lista_1->inicio; // se vuelve a reiniciar el iterador
     // se muestra cuantas veces se encuentra el maximo en la lista
-    printf("\nEl promedio es de %d\n\n", promedio_suma_elementos(iter,
+    printf("\nEl promedio es de %f\n\n", promedio_suma_elementos(iter,
    						 &almacenamiento_suma,lista_1->cantidad));
 
 
