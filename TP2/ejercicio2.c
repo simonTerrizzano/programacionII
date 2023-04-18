@@ -91,6 +91,7 @@ int main()
 	}
     }
 
+    
     salida = false;
     // se genera el iterador a la lista.
     iter = iterador(lista_1);

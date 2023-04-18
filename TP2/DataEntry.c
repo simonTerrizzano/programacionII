@@ -24,7 +24,7 @@ void ingreso_normalizado_string(char cadena[100], int limite_superior){
 }
 
 
-// ptr_salida -> pone en true ptr_salida si se detecta que se ha ingresado como string <<exit>>
+// ptr_salida -> pone en 1 el contenido de ptr_salida si se detecta que se ha ingresado como string <<exit>>
 int ingreso_normalizado_enteros(int limite_inferior, int limite_superior, bool *ptr_salida){
     /*Esta función recibe un limite inferior y un limite superior 
     y devuelve el ingreso realizado solo si está entre esos limites*/
