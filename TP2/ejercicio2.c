@@ -3,7 +3,6 @@
 #include <string.h>
 #include "DataEntry.c"
 #include "tipo_elemento.c"
-#include "listas_cursor.c"
 
 /*
 2.Dada una lista cargada con valores al azar (en la clave) realizar los siguientes ejercicios:
