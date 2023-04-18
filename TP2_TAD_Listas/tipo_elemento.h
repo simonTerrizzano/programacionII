@@ -1,10 +1,12 @@
 #ifndef TIPO_ELEMENTO_H
 #define TIPO_ELEMENTO_H
 
+// TAD de datos
 struct TipoElementoRep {
     int clave;
-    void* valor;
+    void *valor;
 };
+
 typedef struct TipoElementoRep *TipoElemento;
 
 TipoElemento te_crear(int clave);
