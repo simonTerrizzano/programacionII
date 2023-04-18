@@ -4,20 +4,76 @@
 
 static const int TAMANIO_MAXIMO = 100;
 static const int NULO = -1;
+
 struct Nodo {
-    TipoElemento datos;
-    int siguiente; // Cambia el apuntador por un “int”
+TipoElemento datos;
+int siguiente;
 };
+
 struct ListaRep {
-    struct Nodo *cursor; // Apuntador al Arreglo de Nodos
-    int inicio;
-    int libre; // Contendrá los nodos libres o disponibles
-    int cantidad;
+struct Nodo *cursor;
+int inicio;
+int libre;
+int cantidad;
 };
+
 struct IteradorRep {
-    Lista lista;
-    int posicionActual;
+Lista lista;
+int posicionActual;
 };
+
+
+
+bool l_es_vacia(Lista lista){
+    return lista->libre==0;
+}
+
+bool l_es_llena(Lista lista){
+    return lista->libre==TAMANIO_MAXIMO;
+}
+
+int l_longitud(Lista lista){
+    return lista->cantidad;
+}
+
+TipoElemento l_buscar(Lista lista, int clave){
+    int q = lista->inicio;
+    while (lista->cursor[q].siguiente != NULO) {
+        q = lista->cursor[q].siguiente;
+        if(lista->cursor[q].datos->clave==clave){
+            return lista->cursor[q].datos;
+        }
+    }
+    return NULL;
+    }
+TipoElemento l_recuperar(Lista lista, int pos){
+    //printf("inicio recuperar\n");
+    if (1 <= pos && pos <= l_longitud(lista)) { 
+        /*printf("posicion %d\n",pos);
+        system("PAUSE");*/
+        int q = lista->inicio;
+        int i=0;
+        if (i==pos-1)
+        {
+            return lista->cursor[q].datos;
+        }
+
+        while (lista->cursor[q].siguiente != NULO) {
+            /*printf("posicion q %d\n",q);
+            system("PAUSE");*/
+            i++;
+            if (i==pos-1)
+            {
+            return lista->cursor[q].datos;
+            }
+            q = lista->cursor[q].siguiente;
+        }
+    }
+    else{
+        return NULL;
+    }
+}
+
 
 Lista l_crear () {
     Lista nueva_lista = (Lista) malloc(sizeof(struct ListaRep));
@@ -36,7 +92,9 @@ Lista l_crear () {
 }
 
 void l_agregar (Lista lista, TipoElemento elemento) {
-    if (l_es_llena(lista)) {return;} //Controlo la lista llena
+    if (l_es_llena(lista)) {
+        return;
+        } //Controlo la lista llena
     int p;
     p = lista->libre; // Tomo el primer libre
     lista->libre = lista->cursor[p].siguiente;
@@ -56,30 +114,44 @@ void l_agregar (Lista lista, TipoElemento elemento) {
     lista->cantidad++;
 }
 
-void l_borrar (Lista lista, int clave) {
-    if (l_es_vacia(lista)) { return; } // Controlo la lista vacia
-    int q; int p = lista->inicio;
-    // borro las claves que coinciden con el inicio
+void l_borrar(Lista lista, int clave) {
+    if (l_es_vacia(lista)) {
+        return;
+    } // Controla la lista vacía
+    int q = NULO; 
+    int p = lista->inicio;
+    // Borra las claves que coinciden con el inicio
     while ((p != NULO) && (lista->cursor[p].datos->clave == clave)) {
         q = p;
         lista->inicio = lista->cursor[p].siguiente;
-        // recupero el nodo en el libre para no perderlo
+        // Recupera el nodo en el libre para no perderlo
         lista->cursor[q].siguiente = lista->libre;
         lista->libre = q;
-        // Descuento 1 y arranco de nuevo desde el inicio
+        // Descuenta 1 y arranca de nuevo desde el inicio
         lista->cantidad--;
-        p = lista->inicio; // Vuelvo a intentar desde el inicio
+        p = lista->inicio; // Vuelve a intentar desde el inicio
     }
-    // Borro las claves en el resto de la lista
-    p = lista->inicio;
-    while ((p != NULO) && (lista->cursor[p].siguiente != NULO)) {//Similar a punteros, solo no olvidar encadenar el libre
-        if (lista->cursor[p].datos->clave==clave)
-        {
-            struct Nodo *temp = li
+    // Borra las claves en el resto de la lista
+    while ((p != NULO)) {
+        if (lista->cursor[p].datos->clave == clave) {
+            if (q == NULO) { // Caso borra en inicio
+                lista->inicio = lista->cursor[p].siguiente;
+            } else {
+                lista->cursor[q].siguiente = lista->cursor[p].siguiente;
+            }
+            // Recupera el nodo en el libre para no perderlo
+            lista->cursor[p].siguiente = lista->libre;
+            lista->libre = p;
+            // Descuenta 1 y sigue avanzando
+            lista->cantidad--;
+            p = lista->cursor[q].siguiente;
+        } else {
+            q = p;
+            p = lista->cursor[q].siguiente;
         }
-        
     }
 }
+
 
 void l_insertar (Lista lista, TipoElemento elemento, int pos) {
     if (l_es_llena(lista)) {return;} //Control de lista llena
@@ -123,4 +195,38 @@ void l_eliminar (Lista lista, int pos) {
     }
     lista->cantidad--;
     }
+}
+void l_mostrarLista (Lista lista) {
+    printf("Contenido de la lista: ");
+    for (int i = 0; i < lista->cantidad*2; i=i+2) {
+        printf("%d ", lista->cursor->datos[i].clave);
+    }
+    printf("\n");
+}
+
+Iterador iterador(Lista lista){
+    Iterador iter = (Iterador) malloc(sizeof(struct IteradorRep));
+    iter->lista=lista;
+    iter->posicionActual=0;
+    return iter;
+}
+
+bool hay_siguiente(Iterador iterador){
+    return iterador->posicionActual < iterador->lista->cantidad-1;
+}
+
+
+TipoElemento siguiente(Iterador iterador) {
+    int i=0;
+    int q=0;
+    if (iterador->posicionActual==0)
+    {
+        return iterador->lista->cursor[q].datos;
+    }
+    
+    while (i<=iterador->posicionActual) {
+            q = iterador->lista->cursor[q].siguiente;
+            i++;
+        }
+    return iterador->lista->cursor[q].datos;
 }
