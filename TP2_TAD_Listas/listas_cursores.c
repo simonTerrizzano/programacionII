@@ -117,7 +117,7 @@ void l_borrar(Lista lista, int clave)
     // Borro las claves en el resto de la lista
     // nos colocamos en la cabecera con <p>
     p=lista->inicio;
-    while((p!=NULO) && (lista->cursor[p].siguiente != NULO))
+    while((p!=NULO))
     {
 
 	q = lista->cursor[p].siguiente;
