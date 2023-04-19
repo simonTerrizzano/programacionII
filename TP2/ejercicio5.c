@@ -85,6 +85,7 @@ int main()
 	coeficientes[i] = coeficiente;
     }
 
+	// crea la lista con los coeficientes 
     for(int i = 0; i < TERMINOS; i++)
     {
 	clave = (random() % 500) + 1;
@@ -94,6 +95,7 @@ int main()
 	
     }
 
+	// muestra la lista con clave y dato
     iter = iterador(lista_coeficientes);
     while(hay_siguiente(iter))
     {
