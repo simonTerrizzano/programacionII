@@ -1,4 +1,4 @@
-#ejercicio_5.h
+#ejercicio5.h
 
 /* comprobar_termino: se encarga de detectar que el termino a almacenar no contenga errores, esto es, detectar que:
 > No haya espacios entre numeros/variables
