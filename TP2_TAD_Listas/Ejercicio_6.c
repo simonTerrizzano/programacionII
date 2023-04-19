@@ -1,10 +1,4 @@
-#include "listas_cursores.c"
-#include "tipo_elemento.c"
-#include "DataEntry.c"
-
-bool esSubLista(Lista lista1, Lista lista2);
-int generarValoresLista(Lista lista, int num);
-int ingresoValorLista(Lista lista);
+#include Ejercicio_6.h
 
 bool esSubLista(Lista lista1, Lista lista2){
     if (l_es_vacia(lista1)||l_es_vacia(lista2))
