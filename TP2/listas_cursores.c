@@ -11,15 +11,12 @@ struct nodo
 };
 
 // cursor: se trata de un arreglo de nodos.
-
 struct ListaRep
 {
     struct nodo *cursor; // apunta al arreglo de nodos
     int inicio;
     int libre; // contiene el nodo libre
     int cantidad; // mantiene cuenta de cantidad de nodos
-
-
 };
 
 
@@ -117,7 +114,7 @@ void l_borrar(Lista lista, int clave)
     // Borro las claves en el resto de la lista
     // nos colocamos en la cabecera con <p>
     p=lista->inicio;
-    while((p!=NULO) && (lista->cursor[p].siguiente != NULO))
+    while((p!=NULO))
     {
 
 	q = lista->cursor[p].siguiente;
@@ -223,7 +220,7 @@ void l_mostrarLista(Lista lista)
     printf("\nContenido de la lista:\n");
     while(p!=NULO)
     {
-	printf("%3d", lista->cursor[p].datos->clave);
+	printf("%3d / ", lista->cursor[p].datos->clave);
 	p = lista->cursor[p].siguiente;
     }
 
