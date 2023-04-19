@@ -2,60 +2,47 @@
 #include "tipo_elemento.c"
 #include "DataEntry.c"
 
-void compararListas(Lista lista1, Lista lista2);
-void ingresarValoresLista(Lista lista);
-void generarValoresLista(Lista lista, int num);
+bool esSubLista(Lista lista1, Lista lista2);
+int generarValoresLista(Lista lista, int num);
+int ingresoValorLista(Lista lista);
 
-void compararListas(Lista lista1, Lista lista2){
+bool esSubLista(Lista lista1, Lista lista2){
     if (l_es_vacia(lista1)||l_es_vacia(lista2))
     {
-        printf("almenos una de las listas estan vacias, se cerrara el programa \n");
+        printf("Las listas estan vacias, se cerrara el programa \n");
         system("PAUSE");
     }
-    
-    int clavesM1 = 0, clavesM2 = 0, contador1 = 0, contador2 = 0;
-    bool end1 = false,end2 = false;
-    Iterador it1 = iterador(lista1), it2;
-    TipoElemento x, y;
-    for (int i = 0; i < l_longitud(lista1); i++)
+    TipoElemento x;
+    Iterador iter1,iter2;
+    int contador = 0;
+    iter1 = iterador(lista1);
+    iter2 = iterador(lista2);
+    for (int i = 1; i < l_longitud(lista2)+1; i++)
     {
-        x = siguiente(it1);
-        it2 = iterador(lista2);
-        for (int j = 0; j < l_longitud(lista2); j++)
+        x = siguiente(iter2);
+        if (l_buscar(lista1,x->clave)!=NULL)
         {
-            y = siguiente(it2);
-            if (x->clave>y->clave)
-            {
-                clavesM1=clavesM1+1;
-            }
-            else if (x->clave<y->clave)
-            {
-                clavesM2=clavesM2+1;
-            }
+            contador = contador + 1;
         }
     }
-    
-    printf("\n");
-    if (clavesM1>clavesM2)
+    printf("\nsiendo x la longitud de la lista 1 y siendo y la longitud de la lista 2... \n");
+    printf("La notacion asintotica de la funcion, es de o(x*y)\n");
+    if (contador == l_longitud(lista2))
     {
-        printf("La lista 1 es mayor que la lista 2, teniendo la lista 1 %d comparaciones mayores y la lista 2 %d comparaciones mayores",clavesM1,clavesM2);
-    }
-    else if (clavesM1<clavesM2)
-    {
-        printf("La lista 1 es menor que la lista 2, teniendo la lista 1 %d comparaciones mayores y la lista 2 %d comparaciones mayores",clavesM1,clavesM2);
+        return true;
     }
     else{
-        printf("La lista 1 es de igual tamanio que la lista 2, teniendo la lista 1 %d comparaciones mayores y la lista 2 %d comparaciones mayores",clavesM1,clavesM2);
+        return false;
     }
-    printf("\nsiendo x la longitud de la lista 1 y siendo y la longitud de la lista 2... \n");
-    printf("La notacion asintotica de la funcion, sin contar las funciones que se llaman del tad, es de  o(y*x)\n");
-    return;
 }
 
-void generarValoresLista(Lista lista, int num){
+int generarValoresLista(Lista lista, int num){
+    bool fin=false;
+    unsigned int seed;
     for (int i = 0; i < num; i++)
     {
-        TipoElemento x = te_crear(rand()%100);
+        srand(seed);
+        TipoElemento x = te_crear(rand()%10);
         l_agregar(lista, x);
     }
     
@@ -112,25 +99,40 @@ int main(int argc, char const *argv[])
         generarValoresLista(lista2,3);
         l_mostrarLista(lista1);
         l_mostrarLista(lista2);
-        compararListas(lista1,lista2);
-        system("PAUSE");
+        if (esSubLista(lista1,lista2))
+        {
+        printf("\nEs sublista\n");
+            system("PAUSE");
+        }
+        else{
+            printf("\nNo es sublista\n");
+            system("PAUSE");
+        }
     }
     else{
         if (ingresoValorLista(lista1)!=0){
-            return -1;
+            return;
         }
         printf("\n");
         system("PAUSE");
         printf("\n");
         if (ingresoValorLista(lista2)!=0){
-            return -1;
+            return;
         }
         l_mostrarLista(lista1);
         l_mostrarLista(lista2);
         system("PAUSE");
-        compararListas(lista1,lista2);
-        system("PAUSE");
+        if (esSubLista(lista1,lista2))
+        {
+        printf("\nEs sublista\n");
+            system("PAUSE");
+        }
+        else{
+            printf("\nNo es sublista\n");
+            system("PAUSE");
+        }
     }
     
     return 0;
 }
+
