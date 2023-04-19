@@ -157,7 +157,7 @@ void l_mostrarLista(Lista lista)
     printf("Contenido de la lista: ");
     for(int i=0; i < lista->cantidad; i++)
     {
-	printf("%d ", lista->valores[i]->clave);
+	printf("%d /", lista->valores[i]->clave);
     }
 
     printf("\n");
