@@ -2,7 +2,7 @@
 #define PILAS_H
 
 #include <stdbool.h>
-#include "D:\Mario\Prog_2_2009\2023\TADs\Tipos\tipo_elemento.h"
+#include "tipo_elemento.h"
 
 struct PilaRep;
 typedef struct PilaRep *Pila;
