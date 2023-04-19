@@ -22,4 +22,9 @@ return: retorna 1 si se detectaron errores, 0 si no se detectaron errores.
 int comprobar_termino(char *ptr_termino, char *var, bool *VARSET);
 void ingresar_termino(char *polinomio, char *letra_variable, bool *VARSET, bool *comando_salir_detectado);
 bool operador_valido(char operador);
+
+
+double calcular_monomio(int coeficiente, int exponente, double x);
+double calcular_polinomio(Lista lista_exponentes, Lista lista_coeficientes, double x);
+Lista calcular_outputs(Lista lista_exponentes, Lista lista_coeficientes, t_intervalo intervalo, double salto);
 #endif
