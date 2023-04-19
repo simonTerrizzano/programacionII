@@ -3,7 +3,8 @@
 #include "DataEntry.c"
 
 bool esSubLista(Lista lista1, Lista lista2);
-void generarValoresLista(Lista lista, int num);
+int generarValoresLista(Lista lista, int num);
+int ingresoValorLista(Lista lista);
 
 bool esSubLista(Lista lista1, Lista lista2){
     if (l_es_vacia(lista1)||l_es_vacia(lista2))
@@ -35,7 +36,8 @@ bool esSubLista(Lista lista1, Lista lista2){
     }
 }
 
-void generarValoresLista(Lista lista, int num){
+int generarValoresLista(Lista lista, int num){
+    bool fin=false;
     for (int i = 0; i < num; i++)
     {
         unsigned int seed;
@@ -46,23 +48,91 @@ void generarValoresLista(Lista lista, int num){
     
 }
 
-int main(int argc, char const *argv[])
-{
-    Lista lista1, lista2;
-    lista1 = l_crear(lista1);
-    lista2 = l_crear(lista2);
-    generarValoresLista(lista1,10);
-    generarValoresLista(lista2,3);
-    l_mostrarLista(lista1);
-    l_mostrarLista(lista2);
-    if (esSubLista(lista1,lista2))
+int ingresoValorLista(Lista lista){
+    bool fin = false;
+    bool error = false;
+    bool numero;
+    TipoElemento x;
+    printf("Ingrese 1 para ingresar numeros, o 2 para ingresar char");
+    if (ingreso_normalizado_enteros(1,2,&fin)==1)
     {
-        printf("\nEs sublista\n");
-        system("PAUSE");
+        while (!fin)
+        {
+            printf("Ingresar 100001 para finalizar el ingreso");
+            x = te_crear(ingreso_normalizado_enteros(-100000,100001,&error));
+            if (error){return -1;}
+            if(x->clave==100001){return 0;}
+            l_agregar(lista, x);
+            if (l_es_llena(lista)){return 1;}
+        }
     }
     else{
-        printf("\nNo es sublista\n");
-        system("PAUSE");
+        printf("Ingresar un numero para finalizar el ingreso\n");
+        while (!fin)
+        {
+            char caracter;
+            
+            while (scanf(" %c", &caracter) == 1 && !isdigit(caracter)) {
+            // Realizar operaciones con el caracter ingresado
+                printf("Ingresó el caracter '%c'\n", caracter);
+                x = te_crear(caracter);
+                l_agregar(lista, x);
+                if (l_es_llena(lista)){return 1;}
+            }
+            fin = true;
+        }
     }
     return 0;
 }
+
+int main(int argc, char const *argv[])
+{
+    Lista lista1, lista2;
+    int temp;
+    bool tempbool;
+    lista1 = l_crear(lista1);
+    lista2 = l_crear(lista2);
+    printf("Generar valores al azar 1 \n Ingresar valores 2\n");
+    temp = ingreso_normalizado_enteros(1,2,&tempbool);
+    if (temp == 1){
+        generarValoresLista(lista1,10);
+        generarValoresLista(lista2,3);
+        l_mostrarLista(lista1);
+        l_mostrarLista(lista2);
+        if (esSubLista(lista1,lista2))
+        {
+        printf("\nEs sublista\n");
+            system("PAUSE");
+        }
+        else{
+            printf("\nNo es sublista\n");
+            system("PAUSE");
+        }
+    }
+    else{
+        if (ingresoValorLista(lista1)!=0){
+            return;
+        }
+        printf("\n");
+        system("PAUSE");
+        printf("\n");
+        if (ingresoValorLista(lista2)!=0){
+            return;
+        }
+        l_mostrarLista(lista1);
+        l_mostrarLista(lista2);
+        system("PAUSE");
+        if (esSubLista(lista1,lista2))
+        {
+        printf("\nEs sublista\n");
+            system("PAUSE");
+        }
+        else{
+            printf("\nNo es sublista\n");
+            system("PAUSE");
+        }
+    }
+    
+    return 0;
+}
+
