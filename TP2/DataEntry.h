@@ -8,7 +8,7 @@
 #define DataEntry
 
 int ingreso_normalizado_enteros(int limite_inferior, int limite_superior, bool *ptr_salida);
-void ingreso_normalizado_string(char cadena[100], int limite_superior);
+void ingreso_normalizado_string(char cadena[100], int limite_superior, bool *ptr_salida);
 bool ingreso_normalizado_onda_digital(char* cadena);
 void quitaespacios(char* cadena);
 void quitasalto(char* cadena);
@@ -16,7 +16,7 @@ int cadenatododigito(char* cadena);
 bool esNeg(char* cadena);
 void minus(char* cadena);
 void mayus(char* cadena);
-int comprobar_polinomio(char *actual);
+int detecta_comando_exit(char *ingreso, bool *ptr_salida);
 
 
 #endif

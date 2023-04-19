@@ -1,25 +1,36 @@
 #include "DataEntry.h"
-void ingreso_normalizado_string(char cadena[100], int limite_superior){
+
+void ingreso_normalizado_string(char cadena[100], int limite_superior, bool *ptr_salida){
     /*Función que recibe una cadena a modificar 
     por ingreso de teclado y un limite en el largo que se quiere procesar*/
- 
+
+    char cadena_aux[100];
     int check=0;
 
     
     while (check!=1)
     {
-        printf("Ingrese un string:");
-        fgets(cadena,100,stdin);
-        quitasalto(cadena);//Sacamis salto de linea agregado por fgets
-        minus(cadena);//Normalizamos a minúscula
-
-        if (strlen(cadena)>limite_superior)//Verificamos el largo
-        {
-            printf("El string debe tener menos de %i caracteres\n",limite_superior);
-        }
-        else{
-            check=1;
-        } 
+        printf("Ingrese un string (100 caracteres): ");
+        fgets(cadena_aux,100,stdin);
+        quitasalto(cadena_aux);//Sacamis salto de linea agregado por fgets
+        minus(cadena_aux);//Normalizamos a minúscula
+	if(detecta_comando_exit(cadena_aux, ptr_salida))
+	{
+	    strcpy(cadena, " ");
+	    check = 1;
+	    
+	}
+	else
+	{
+	    if (strlen(cadena)>limite_superior)//Verificamos el largo
+	    {
+		printf("El string debe tener menos de %i caracteres\n",limite_superior);
+	    }
+	    else{
+		strcpy(cadena, cadena_aux); // si sale todo bien , copiamos la cadena :)
+		check=1;
+	    } 
+	}
     }
 }
 
@@ -46,14 +57,7 @@ int ingreso_normalizado_enteros(int limite_inferior, int limite_superior, bool *
         fgets(ingreso,11,stdin);
         fflush(stdin);
         quitasalto(ingreso);
-
-	if(!(strcmp(ingreso,"exit")))
-	{
-	    *ptr_salida = true;
-	    return -1;
-	    
-	}
-	else
+	if(!detecta_comando_exit(ingreso, ptr_salida))
 	{
 	    ingreso_normalizado=strtol(ingreso, &ptr, 10);//Convierte el ingreso en char a un int en base 10
 
@@ -101,9 +105,16 @@ int ingreso_normalizado_enteros(int limite_inferior, int limite_superior, bool *
                 fin=true;
             }
         }
+
+	    printf("\n");
+	    return ingreso_normalizado;
+    
 	}
-	printf("\n");
-	return ingreso_normalizado;
+	else
+	{
+	    print("\n");
+	    return -1;
+	}
     }
     
 }
@@ -131,8 +142,17 @@ bool ingreso_normalizado_onda_digital(char* onda){
     
     
 }
-
-
+int detecta_comando_exit(char *ingreso, bool *ptr_salida)
+{
+	if(!(strcmp(ingreso,"exit")))
+	{
+	    *ptr_salida = true;
+	    return 1;
+	    
+	}
+	else
+	{ return 0;}
+}
 void quitaespacios(char* cadena){
     int i,j;
     i=0;
@@ -239,77 +259,6 @@ bool esFlotante(char* cadena){
 
 /*
 
->>Controlar que al leer la cadena siempre haya operadores entre términos, esto es, por ejemplo:
-4x^2 3x no debe estar permitido. Lo correcto es 4x^2 ∗ 3x
 
->>Se restringirá el polinomio a una variable, por lo tanto, se deberá comprobar que en el
-polinomio se encontró uno y solo un símbolo no numérico que represente a la variable. En
-este caso restringiremos para que la variable sea representada por una letra del alfabeto.
 
->>Los exponentes solamente pueden ser números reales positivos. Sin embargo, se restringira a
-solamente números naturales.
-
->> El grado maximo será 9
- */
-int comprobar_polinomio(char *actual)
-{
-    bool buscando_operando;
-    bool space;
-    bool ultimo_leido_numero;
-    buscando_operando = false;
-    ultimo_leido_numero = false;
-    unsigned char variable;
-    variable = '\0'; // Se inicializa con un NULL para establecer que todavia no se ha encontrado variable.
-   
-    while(*(actual) != '\0')
-    {
-	if((*(actual)) == '+' || (*(actual)) == '-' || (*(actual) == '*') || (*(actual))
-	   == '/')
-	{
-	    if(buscando_operando){return -1;}
-	    else
-	    {
-		ultimo_leido_numero = false;
-		buscando_operando = true;
-	    }
-	    
-	}
-	    
-	//si lo leido es un número o una letra entonces, moviliza el puntero hasta que lo
-	//leido sea un
-	//espacio o un operador
-	while(isalnum(actual))
-	{
-	    printf("\n%c es alphanumerico\n", *(actual));
-	    if(ultimo_leido_numero == true)
-		return -1;
-
-	    if(*(actual) == '^')
-	    {
-		if(!isdigit(actual+1))
-		{
-		    return -1;
-		}
-	    }
-   
-	    if(isalpha(actual) && variable == '\0')
-	    {
-		variable = *(actual);
-	    }
-	    else if(isalpha(actual) && (*(actual) != variable))
-	    {
-		return -1;
-		    
-	    }
-	    	    
-	    actual = actual+1;	
-	    
-	}
-	
-	ultimo_leido_numero = true;
-	
-	actual = actual +1;
-
-    }
-}
 
