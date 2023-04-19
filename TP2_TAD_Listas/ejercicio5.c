@@ -1,13 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
-#include <stdbool.h>
-#include "DataEntry.c"
-#include "tipo_elemento.c"
-#include "listas.h"
-#define CANTIDAD_CAR 101
-#define TERMINOS 5
+#include "ejercicio5.h"
 
 
 
