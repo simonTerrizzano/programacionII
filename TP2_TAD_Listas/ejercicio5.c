@@ -1,14 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
-#include <stdbool.h>
-#include "DataEntry.c"
-#include "tipo_elemento.c"
-#include "listas.h"
-#include "listas_apuntadores.c"
-#define CANTIDAD_CAR 101
-#define TERMINOS 5
+#ejercicio_5.h
 
 /* comprobar_termino: se encarga de detectar que el termino a almacenar no contenga errores, esto es, detectar que:
 > No haya espacios entre numeros/variables
