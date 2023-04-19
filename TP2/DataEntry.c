@@ -112,7 +112,7 @@ int ingreso_normalizado_enteros(int limite_inferior, int limite_superior, bool *
 	}
 	else
 	{
-	    print("\n");
+	    printf("\n");
 	    return -1;
 	}
     }
@@ -257,7 +257,7 @@ bool esFlotante(char* cadena){
 
 }
 
-/*
+
 
 
 
