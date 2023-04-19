@@ -4,7 +4,15 @@
 
 void compararListas(Lista lista1, Lista lista2);
 void ingresarValoresLista(Lista lista);
+void generarValoresLista(Lista lista, int num);
+
 void compararListas(Lista lista1, Lista lista2){
+    if (l_es_vacia(lista1)||l_es_vacia(lista2))
+    {
+        printf("almenos una de las listas estan vacias, se cerrara el programa \n");
+        system("PAUSE");
+    }
+    
     int clavesM1 = 0, clavesM2 = 0, contador1 = 0, contador2 = 0;
     bool end1 = false,end2 = false;
     Iterador it1 = iterador(lista1), it2;
@@ -26,6 +34,7 @@ void compararListas(Lista lista1, Lista lista2){
             }
         }
     }
+    
     printf("\n");
     if (clavesM1>clavesM2)
     {
@@ -38,8 +47,9 @@ void compararListas(Lista lista1, Lista lista2){
     else{
         printf("La lista 1 es de igual tamanio que la lista 2, teniendo la lista 1 %d claves mayores y la lista 2 %d claves mayores",clavesM1,clavesM2);
     }
-    
-    
+    printf("\nsiendo x la longitud de la lista 1 y siendo y la longitud de la lista 2... \n");
+    printf("La notacion asintotica de la funcion, sin contar las funciones que se llaman del tad, es de  o(y*x)\n");
+    return;
 }
 
 void generarValoresLista(Lista lista, int num){
@@ -64,3 +74,4 @@ int main(int argc, char const *argv[])
     system("PAUSE");
     return 0;
 }
+
