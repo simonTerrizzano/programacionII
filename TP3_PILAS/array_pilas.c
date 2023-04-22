@@ -65,10 +65,12 @@ TipoElemento p_tope(Pila pila)
 
 void p_mostrar(Pila pila)
 {
+    TipoElemento te;
     int aux_index = pila->top;
     while(p_es_vacia(pila) == false)
     {
-	p_tope(pila);
+	te = p_tope(pila);
+	printf("\nClave: %d\n", te->clave);
 	pila->top--;
     }
     pila->top = aux_index;
