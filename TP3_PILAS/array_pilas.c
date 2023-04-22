@@ -2,7 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define MAX 100 
+#define MAX 100
+
 struct PilaRep
 {
     int top; // mantiene el indice del array al que está apuntando actualmente
@@ -12,8 +13,8 @@ struct PilaRep
 
 Pila p_crear()
 {
-    Pila nueva_pila = (Pila*) malloc(sizeof(Pila));
-    nueva_pila->elementos = (TipoElementos*) calloc(MAX, sizeof(TipoElementos));
+    Pila nueva_pila = (Pila) malloc(sizeof(struct PilaRep));
+    nueva_pila->elementos = (TipoElemento*) calloc(MAX, sizeof(TipoElemento));
     nueva_pila->top = 0;
     return nueva_pila;
 }
@@ -55,7 +56,7 @@ TipoElemento p_tope(Pila pila)
 {
     if(p_es_vacia(pila) == false)
     {
-	return pila->elementos[top-1];
+	return pila->elementos[(pila->top)-1];
     }
     else
     {
@@ -75,3 +76,4 @@ void p_mostrar(Pila pila)
     }
     pila->top = aux_index;
 }
+

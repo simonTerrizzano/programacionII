@@ -1,4 +1,5 @@
 #ifndef PILAS_H
+
 #define PILAS_H
 
 #include <stdbool.h>
@@ -60,5 +61,5 @@ bool p_es_llena(Pila pila);
  * @param pila - una instancia de tipo Pila.
  */
 void p_mostrar(Pila pila);
-
 #endif // PILAS_H
+

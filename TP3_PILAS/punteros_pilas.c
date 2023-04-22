@@ -3,6 +3,7 @@
 #include <string.h>
 #include "pilas.h"
 #define MAX 100
+
 typedef struct 
 {
     TipoElemento elemento;
