@@ -30,8 +30,7 @@ void p_apilar(Pila pila, TipoElemento elemento)
     nodo *new_nodo = (nodo*) malloc(sizeof(nodo));
     new_nodo->siguiente = pila->tope;
     pila->tope = new_nodo;
-    pila->tope->elemento = elemento;
-    pila->cantidad++;   
+    pila->tope->elemento = elemento; 
 }
 
 
