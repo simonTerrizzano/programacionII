@@ -20,7 +20,7 @@ Pila p_crear()
 }
 
 bool p_es_vacia(Pila pila){return (pila->top == 0);}
-bool p_es_llena(Pila pila){return (pila->top == MAX);}
+//bool p_es_llena(Pila pila){return (pila->top == MAX);}
 
 void p_apilar(Pila pila, TipoElemento elemento)
 {
