@@ -27,6 +27,7 @@ int main()
 	
     }
 
+    p_mostrar(pila_1);
     /*printf("\nIngrese la clave que quiere buscar");
     clave = ingreso_normalizado_enteros(-1000, 1000, &exit);
     buscar_clave(pila_1, clave);
@@ -44,6 +45,15 @@ int main()
     p_insertar(pila_1, elemento, pos);
     p_mostrar(pila_1);
     */
+    /*printf("\n%s", "INGRESE CLAVE DE ELEMENTO A ELIMINAR\n");
+    clave = ingreso_normalizado_enteros(1, 500, &exit);
+    p_eliminar_elemento(pila_1, clave);*/
+    printf("\n%s", "INGRESE POSICION DE UNO DE LOS ELEMENTOS A INTERCAMBIAR\n");
+    unsigned int pos_1 = ingreso_normalizado_enteros(1, pila_1->cantidad, &exit);
+    printf("\n%s", "INGRESE POSICION DE UNO DE LOS ELEMENTOS A INTERCAMBIAR\n");
+    unsigned int pos_2 = ingreso_normalizado_enteros(1, pila_1->cantidad, &exit);
+    intercambiar(pila_1, pos_1, pos_2);
+    p_mostrar(pila_1);
     free(pila_1);
 
 }
