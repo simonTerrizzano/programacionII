@@ -13,12 +13,14 @@ typedef struct
 struct PilaRep
 {
     nodo *tope;
+    size_t cantidad;
 };
 
 Pila p_crear()
 {
     Pila nueva_pila = (Pila) malloc(sizeof(struct PilaRep));
     nueva_pila->tope = NULL;
+    nueva_pila->cantidad = 0;
     return nueva_pila;
 }
 
@@ -30,7 +32,8 @@ void p_apilar(Pila pila, TipoElemento elemento)
     nodo *new_nodo = (nodo*) malloc(sizeof(nodo));
     new_nodo->siguiente = pila->tope;
     pila->tope = new_nodo;
-    pila->tope->elemento = elemento; 
+    pila->tope->elemento = elemento;
+    pila->cantidad++;   
 }
 
 
@@ -42,6 +45,7 @@ TipoElemento p_desapilar(Pila pila)
 	del_node = pila->tope;
 	pila->tope = pila->tope->siguiente;
 	free(del_node);
+	pila->cantidad--;
 	return pila->tope->elemento;
     }
     else

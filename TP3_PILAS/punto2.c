@@ -1,13 +1,9 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include "array_pilas.c"
-#include "tipo_elemento.c"
-#include "DataEntry.c"
-#include "funcionalidades_extra_pila.c"
+#include "punto2.h"
 void buscar_clave(Pila pila, int clave);
 int main()
 {
+    char salto;
+    unsigned int pos;
     int clave;
     TipoElemento elemento;
     int valores[MAX];
@@ -18,12 +14,12 @@ int main()
     // carga de elementos
     while(p_es_llena(pila_1) == false && exit == false)
     {
-	printf("\nIngrese el valor que quiere guardar en la pila o escriba exit para salir\n");
+	printf("\n--Ingrese el valor que quiere guardar en la pila o escriba (exit) para salir--\n");
 	*(ptr_values)=ingreso_normalizado_enteros(-1000,1000,&exit);
 	if(!exit)
 	{
 	    clave = (random() % 500) + 1;
-	    printf("\nClave: %d", clave);
+	    //printf("\nClave: %d", clave);
 	    elemento = te_crear_con_valor(clave, ptr_values);
 	    p_apilar(pila_1, elemento);
 	    ptr_values++;
@@ -31,10 +27,23 @@ int main()
 	
     }
 
-    printf("\nIngrese la clave que quiere buscar");
+    /*printf("\nIngrese la clave que quiere buscar");
     clave = ingreso_normalizado_enteros(-1000, 1000, &exit);
     buscar_clave(pila_1, clave);
     p_mostrar(pila_1);
+    */
+    
+    /*printf("\nIngrese un numero para agregar en la pila:");
+    *(ptr_values) = ingreso_normalizado_enteros(-1000, 1000, &exit);
+    clave++;
+    printf("clave elemento nuevo: %d", clave);
+    elemento = te_crear_con_valor(clave, ptr_values);
+    ptr_values++;
+    printf("\n---[Ingrese posicion ordinal]--- ");
+    pos = ingreso_normalizado_enteros(1, 100, &exit);
+    p_insertar(pila_1, elemento, pos);
+    p_mostrar(pila_1);
+    */
     free(pila_1);
 
 }
@@ -64,3 +73,4 @@ void buscar_clave(Pila pila, int clave)
 	printf("\nLa clave %d no se encuentra en la pila :(", aux->clave);
     }
 }
+

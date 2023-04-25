@@ -6,6 +6,7 @@
 
 struct PilaRep
 {
+    size_t cantidad;
     int top; // mantiene el indice del array al que está apuntando actualmente
     TipoElemento *elementos; // apunta a un tipo elementos del array
 };
@@ -16,11 +17,12 @@ Pila p_crear()
     Pila nueva_pila = (Pila) malloc(sizeof(struct PilaRep));
     nueva_pila->elementos = (TipoElemento*) calloc(MAX, sizeof(TipoElemento));
     nueva_pila->top = 0;
+    nueva_pila->cantidad = 0;
     return nueva_pila;
 }
 
 bool p_es_vacia(Pila pila){return (pila->top == 0);}
-//bool p_es_llena(Pila pila){return (pila->top == MAX);}
+bool p_es_llena(Pila pila){return (pila->top == MAX);}
 
 void p_apilar(Pila pila, TipoElemento elemento)
 {
@@ -29,6 +31,7 @@ void p_apilar(Pila pila, TipoElemento elemento)
     {
 	pila->elementos[pila->top] = elemento;
 	pila->top++;
+	pila->cantidad++;
     }
     else
     {
@@ -40,6 +43,7 @@ TipoElemento p_desapilar(Pila pila)
 {
     if(p_es_vacia(pila) == false)
     {
+	pila->cantidad--;
 	pila->top--;
 	return pila->elementos[pila->top];
 	
