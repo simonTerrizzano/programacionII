@@ -93,3 +93,68 @@ void intercambiar(Pila pila, unsigned int posicion_1, unsigned int posicion_2)
 	}
     }
 }
+
+
+Pila p_duplicar(Pila p_src)
+{
+    TipoElemento elemento_auxiliar;
+    Pila p_duplicada = p_crear();
+    Pila p_auxiliar = p_crear();
+    while(p_es_vacia(p_src) == false)
+    {
+	elemento_auxiliar = p_desapilar(p_src);
+	p_insertar(p_duplicada, elemento_auxiliar, 1);
+	p_apilar(p_auxiliar, elemento_auxiliar);
+	
+    }
+
+    p_devolver(p_src, p_auxiliar);
+    return p_duplicada;
+
+}
+
+unsigned int p_contar_elementos(Pila p_src)
+{
+    unsigned int contador_elementos = 0;
+    TipoElemento aux;
+    Pila p_aux = p_crear();
+    while(p_es_vacia(p_src) == false)
+    {
+	aux = p_desapilar(p_src);
+	contador_elementos++;
+	p_apilar(p_aux, aux);
+
+    }
+
+    p_devolver(p_src, p_aux);
+    return contador_elementos;
+
+    
+}
+
+void buscar_clave(Pila pila, int clave)
+{
+    // se crea la pila
+    Pila pila_aux = p_crear();
+    TipoElemento aux;
+    // comenzamos desapilando 
+    aux = p_desapilar(pila);
+    while(aux->clave != clave)
+    {
+	p_apilar(pila_aux, aux);
+	aux = p_desapilar(pila);
+    }
+
+    p_apilar(pila, aux);
+    p_devolver(pila, pila_aux);
+    if(aux->clave == clave)
+    {
+	printf("\nLa clave %d existe en la pila :^)", aux->clave);
+    }
+    else
+    {
+	printf("\nLa clave %d no se encuentra en la pila :(", aux->clave);
+    }
+}
+
+
