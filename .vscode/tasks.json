@@ -10,7 +10,6 @@
                 "${file}",
                 "${workspaceFolder}\\TP3_Pilas\\Implementaciones_TAD_Pilas\\pilas_con_arreglos.c",
                 "${workspaceFolder}\\DataEntry\\DataEntry.c",
-                "${workspaceFolder}\\TP3_Pilas\\Implementaciones_TAD_Pilas\\implementaciones_extra.c",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],

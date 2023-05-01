@@ -6,13 +6,13 @@ int main(void)
     int cantingresoP1;
     int cantingresoP2;
     int numero_a_apilar;
-    int check=0;
+    int i=0;
 
     Pila P1=p_crear();
     Pila P2=p_crear();
-    Pila PR;
+    Pila PR=p_crear();
 
-    TipoElemento elemento = te_crear(0);
+    TipoElemento elemento;
 
     printf("Ingrese la cantidad de elementos de la 1ra Pila entre 0 y %i",TAMANIO_MAXIMO);
     cantingresoP1 = ingreso_normalizado_enteros(0,10);
@@ -20,23 +20,39 @@ int main(void)
     printf("Ingrese la cantidad de elementos de la 2da Pila entre 0 y %i",TAMANIO_MAXIMO);
     cantingresoP2 = ingreso_normalizado_enteros(0,10);
 
-    printf("Carga de la 1ra Pila");
+
+    printf("Carga de la 1ra Pila\n");
 
     for (int i = 0; i < cantingresoP1; i++)
     {
-        numero_a_apilar=ingreso_normalizado_enteros(-1000,1000);
-        elemento->clave=numero_a_apilar;
+        printf("%iº número",i+1);
+        elemento=te_crear(ingreso_normalizado_enteros(-1000,1000));
         p_apilar(P1,elemento);
     }
     
-    printf("Carga de la 2da Pila");
 
+    printf("Pila 1 antes de la 2 \n");
+
+    p_mostrar(P1);
+
+
+    printf("Carga de la 2da Pila\n");
+    i=0;
     for (int i = 0; i < cantingresoP2; i++)
     {
-        numero_a_apilar=ingreso_normalizado_enteros(-1000,1000);
-        elemento->clave=numero_a_apilar;
+        printf("%iº número",i+1);
+        elemento=te_crear(ingreso_normalizado_enteros(-1000,1000));
         p_apilar(P2,elemento);
     }
+
+
+    printf("Pila 2\n");
+
+    p_mostrar(P2);
+
+    printf("Pila 1 despues de la 2 \n");
+
+    p_mostrar(P1);
 
     PR = elemEnComun(P1,P2);
 
