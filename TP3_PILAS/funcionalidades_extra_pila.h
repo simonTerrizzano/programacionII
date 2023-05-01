@@ -17,3 +17,7 @@ Pila p_duplicar(Pila p_src);
 void p_buscar_clave(Pila pila, int clave);
 // p_contar_elementos: Recibe una pila, y retorna la cantidad de elementos contados
 unsigned int p_contar_elementos(Pila p_src);
+
+
+// EXTRA
+void p_cargar_con_enteros(Pila p_src);
