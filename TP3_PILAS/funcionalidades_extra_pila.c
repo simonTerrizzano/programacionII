@@ -158,3 +158,29 @@ void buscar_clave(Pila pila, int clave)
 }
 
 
+void p_cargar_con_enteros(Pila p_src)
+{
+    int clave;
+    int *ptr_values = calloc(MAX, sizeof(int));
+    bool exit = false;
+    TipoElemento elemento;
+    while(p_es_llena(p_src) == false && exit == false)
+    {
+	printf("\n--Ingrese el valor que quiere guardar en la pila o escriba (exit) para salir--\n");
+	*(ptr_values)=ingreso_normalizado_enteros(-1000,1000,&exit);
+	if(!exit)
+	{
+	    printf("\n -- Ingrese clave --");
+	    clave =  ingreso_normalizado_enteros(0,500,&exit);
+	    //printf("\nClave: %d", clave);
+	    elemento = te_crear_con_valor(clave, ptr_values);
+	    p_apilar(p_src, elemento);
+	    ptr_values++;
+	}
+
+    }
+
+    p_mostrar(p_src);
+    
+
+}

@@ -1,11 +1,10 @@
 #include "punto3.h"
-#include "punto5.c"
 #define MAX 100
 int main()
 {
-    int opcion;
-    char salto;
-    unsigned int pos;
+    //int opcion;
+    //char salto;
+    //unsigned int pos;
     int clave;
     TipoElemento elemento;
     int valores[MAX];
@@ -28,13 +27,11 @@ int main()
 	    ptr_values++;
 	}
     }
-    p_duplicada = p_invertida(pila_1);
-    //TipoElemento te_new = te_crear(205);
-    //p_insertar(p_duplicada, te_new, p_duplicada->cantidad);
+    p_duplicada = p_duplicar(pila_1);
+    TipoElemento te_new = te_crear(205);
+    p_insertar(p_duplicada, te_new, p_duplicada->cantidad);
     printf("Son iguales? %s", ((p_contenidos_iguales(pila_1, p_duplicada)) ? "si":"no"));
     p_mostrar(pila_1);
-    printf("\n\n");
-    p_mostrar(p_duplicada);
     free(pila_1);
     
 }
