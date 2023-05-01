@@ -1,6 +1,6 @@
 #include "pilas.h"
 #include "tipo_elemento.c"
-#include "implementaciones_extra.c"
+
 
 
 struct Nodo{
@@ -20,9 +20,6 @@ Pila p_crear() {
     return nueva_pila;
 }
 
-int p_longitud(Pila P){
-    return P->cant;
-}
 
 void p_apilar (Pila pila, TipoElemento elemento) {
     if (p_es_llena(pila))
@@ -75,6 +72,11 @@ void p_mostrar (Pila pila) {
         p_apilar(Paux, X);
     }
     // Recorro la pila auxiliar para pasarla a la original (o bien construyo la utilidad intercambiar)
-    tranferir(Paux,pila);
+    while (p_es_vacia(Paux))
+    {
+        X=p_desapilar(Paux);
+        p_apilar(pila,X);
+    }
+    
     printf("\n");
 }

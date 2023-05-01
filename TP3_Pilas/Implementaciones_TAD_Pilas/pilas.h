@@ -65,12 +65,5 @@ bool p_es_llena(Pila pila);
  */
 void p_mostrar(Pila pila);
 
-/**
- * Retorna longitud de la Pila
- * 
- * @param P - una instancia de tipo Pila
- * @return int - entero correspondiente a la longitud
- */
-int p_longitud(Pila P);
 
 #endif // PILAS_H

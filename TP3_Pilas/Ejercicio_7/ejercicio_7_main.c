@@ -20,8 +20,10 @@ int main(void)
     printf("Ingrese la cantidad de elementos de la 2da Pila entre 0 y %i",TAMANIO_MAXIMO);
     cantingresoP2 = ingreso_normalizado_enteros(0,10);
 
-
+    if (cantingresoP2>0)
+    {
     printf("Carga de la 1ra Pila\n");
+    }
 
     for (int i = 0; i < cantingresoP1; i++)
     {
@@ -29,14 +31,12 @@ int main(void)
         elemento=te_crear(ingreso_normalizado_enteros(-1000,1000));
         p_apilar(P1,elemento);
     }
-    
-
-    printf("Pila 1 antes de la 2 \n");
-
-    p_mostrar(P1);
-
-
+    if (cantingresoP2>0)
+    {
     printf("Carga de la 2da Pila\n");
+    }
+    
+    
     i=0;
     for (int i = 0; i < cantingresoP2; i++)
     {
@@ -46,17 +46,13 @@ int main(void)
     }
 
 
-    printf("Pila 2\n");
-
-    p_mostrar(P2);
-
-    printf("Pila 1 despues de la 2 \n");
-
-    p_mostrar(P1);
-
     PR = elemEnComun(P1,P2);
 
-    p_mostrar(PR);
+    if(p_es_vacia(PR)){
+        printf("\nLas pilas no tienen elementos en común");
+    }else{
+        p_mostrar(PR);
+    }
     
     return 0;
 }

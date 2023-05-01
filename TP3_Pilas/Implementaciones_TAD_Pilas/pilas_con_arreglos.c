@@ -1,6 +1,5 @@
 #include "pilas.h"
 #include "tipo_elemento.c"
-#include "implementaciones_extra.c"
 
 
 
@@ -17,9 +16,6 @@ Pila p_crear(){
     return nueva_pila;
 }
 
-int p_longitud(Pila P){
-    return P->tope;
-}
 
 void p_apilar(Pila pila, TipoElemento elemento){
     if (p_es_llena(pila))
@@ -50,7 +46,7 @@ TipoElemento p_tope(Pila pila){
 }
 
 bool p_es_vacia(Pila pila){
-    return pila->tope <= 0;
+    return pila->tope == 0;
 }
 
 bool p_es_llena(Pila pila){
@@ -77,5 +73,10 @@ void p_mostrar(Pila pila){
         p_apilar(pilaAUX, elemento_a_mostrar);
     }
 
-    tranferir(pilaAUX,pila);
+    while (p_es_vacia(pilaAUX)!=true)
+    {
+        elemento_a_mostrar=p_desapilar(pilaAUX);
+        p_apilar(pila,elemento_a_mostrar);
+    }
+    
 }
