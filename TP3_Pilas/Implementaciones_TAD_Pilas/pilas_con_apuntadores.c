@@ -2,7 +2,6 @@
 #include "tipo_elemento.c"
 #include "implementaciones_extra.c"
 
-static const int TAMANIO_MAXIMO = 10;
 
 struct Nodo{
     TipoElemento datos;
@@ -20,6 +19,11 @@ Pila p_crear() {
     nueva_pila->cant=0;
     return nueva_pila;
 }
+
+int p_longitud(Pila P){
+    return P->cant;
+}
+
 void p_apilar (Pila pila, TipoElemento elemento) {
     if (p_es_llena(pila))
     {

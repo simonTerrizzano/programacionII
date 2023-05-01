@@ -6,6 +6,8 @@
 #include <stdio.h>
 #include "tipo_elemento.h"
 
+static const int TAMANIO_MAXIMO = 10;
+
 
 typedef struct PilaRep *Pila;
 
@@ -62,5 +64,13 @@ bool p_es_llena(Pila pila);
  * @param pila - una instancia de tipo Pila.
  */
 void p_mostrar(Pila pila);
+
+/**
+ * Retorna longitud de la Pila
+ * 
+ * @param P - una instancia de tipo Pila
+ * @return int - entero correspondiente a la longitud
+ */
+int p_longitud(Pila P);
 
 #endif // PILAS_H

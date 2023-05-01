@@ -2,7 +2,7 @@
 #include "tipo_elemento.c"
 #include "implementaciones_extra.c"
 
-static const int TAMANIO_MAXIMO = 10;
+
 
 struct PilaRep
 {
@@ -15,6 +15,10 @@ Pila p_crear(){
     nueva_pila->valores = calloc((TAMANIO_MAXIMO+1), sizeof(TipoElemento));
     nueva_pila->tope = 0;
     return nueva_pila;
+}
+
+int p_longitud(Pila P){
+    return P->tope;
 }
 
 void p_apilar(Pila pila, TipoElemento elemento){
