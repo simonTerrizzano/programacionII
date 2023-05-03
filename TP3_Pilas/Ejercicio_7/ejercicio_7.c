@@ -18,6 +18,7 @@ Pila elemEnComun(Pila P1,Pila P2){
     Pila Pila_Aux_P1=p_crear();
     Pila Pila_Aux_P2=p_crear();
     int vector[TAMANIO_MAXIMO];
+    memset(arreglo, 0, TAMANIO_MAXIMO*sizeof(int));
     int k=0;
 
     while (p_es_vacia(P1)!=true){
@@ -26,7 +27,7 @@ Pila elemEnComun(Pila P1,Pila P2){
         while (p_es_vacia(P2)!=true){
             ElemP2=p_desapilar(P2);//Elaluamos todos los elementos de la 2da pila por cada elemento de la 1ra
             p_apilar(Pila_Aux_P2,ElemP2); //Apilamos un una pila auxiliar para no perder la original  
-            if (ElemP1->clave==ElemP2->clave&&numeroyaencontrado(ElemP1->clave,vector,k)!=true){
+            if (ElemP1->clave==ElemP2->clave && numeroyaencontrado(ElemP1->clave,vector,k)!=true){
                 //Evaluamos si las clave son iguales 
                 //y ademas si la clave no fue encontrada previamente
                 p_apilar(PR,ElemP1);

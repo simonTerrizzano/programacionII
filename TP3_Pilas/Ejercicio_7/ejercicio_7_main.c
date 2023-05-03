@@ -3,10 +3,9 @@
 
 int main(void)
 {
-    int cantingresoP1;
-    int cantingresoP2;
-    int numero_a_apilar;
-    int i=0;
+    int cantingresoP1=0;
+    int cantingresoP2=0;
+    int i;
 
     Pila P1=p_crear();
     Pila P2=p_crear();
@@ -25,7 +24,7 @@ int main(void)
     printf("Carga de la 1ra Pila\n");
     }
 
-    for (int i = 0; i < cantingresoP1; i++)
+    for (i = 0; i < cantingresoP1; i++)
     {
         printf("%iº número",i+1);
         elemento=te_crear(ingreso_normalizado_enteros(-1000,1000));
@@ -38,7 +37,7 @@ int main(void)
     
     
     i=0;
-    for (int i = 0; i < cantingresoP2; i++)
+    for (i = 0; i < cantingresoP2; i++)
     {
         printf("%iº número",i+1);
         elemento=te_crear(ingreso_normalizado_enteros(-1000,1000));

@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include "tipo_elemento.h"
 
-static const int TAMANIO_MAXIMO = 10;
+static int TAMANIO_MAXIMO = 10;
 
 
 typedef struct PilaRep *Pila;
