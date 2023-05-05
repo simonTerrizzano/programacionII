@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "array_pilas.c"
+//#include "array_pilas.c"
 #include "tipo_elemento.c"
 #include "DataEntry.c"
 #include "funcionalidades_extra_pila.c"

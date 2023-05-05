@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <string.h>
 #define MAX 100
-
 struct PilaRep
 {
     size_t cantidad;
@@ -54,6 +53,7 @@ TipoElemento p_desapilar(Pila pila)
 	
     }
 
+    return NULL;
 }
 
 TipoElemento p_tope(Pila pila)
@@ -66,6 +66,7 @@ TipoElemento p_tope(Pila pila)
     {
 	perror("La pila esta vacia!");
     }
+    return NULL;
 }
 
 void p_mostrar(Pila pila)

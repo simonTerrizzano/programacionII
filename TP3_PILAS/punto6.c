@@ -5,12 +5,8 @@ Pila p_eliminar_ocurrencias_recursivo(Pila p_src, int clave_buscada)
     Pila pila_aux = p_duplicar(p_src);
     p_proc_el_recur(p_src, pila_modf, clave_buscada);
     p_src = p_duplicar(pila_aux);
-    free(pila_aux);
-    pila_aux = p_crear();
-    p_devolver(pila_aux, pila_modf);
-    free(pila_modf);
-    return pila_aux;
-} // COMPLEJIDAD ALGORITMICA O(N).
+    return pila_modf;
+}
 
 
 void p_proc_el_recur(Pila p_src, Pila p_modf, int clave_buscada)
@@ -29,7 +25,7 @@ void p_proc_el_recur(Pila p_src, Pila p_modf, int clave_buscada)
     
     p_proc_el_recur(p_src, p_modf, clave_buscada);
 
-} // COMPLEJIDAD ALGORITMICA O(N).
+}
 
 
 
@@ -56,4 +52,3 @@ Pila p_eliminar_ocurrencias_iter(Pila p_src, int clave)
 
 
 }
-// COMPLEJIDAD ALGORITMICA O(N).

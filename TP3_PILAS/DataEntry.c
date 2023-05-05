@@ -10,7 +10,7 @@ void ingreso_normalizado_string(char cadena[100], int limite_superior, bool *ptr
     
     while (check!=1)
     {
-        printf("Ingrese un string (100 caracteres): ");
+        printf("\nIN--->  ");
         fgets(cadena_aux,100,stdin);
         quitasalto(cadena_aux);//Sacamis salto de linea agregado por fgets
         minus(cadena_aux);//Normalizamos a minúscula
@@ -47,10 +47,10 @@ int ingreso_normalizado_enteros(int limite_inferior, int limite_superior, bool *
     {   
         if (limite_inferior<0)
         {
-            printf("\nIngrese un numero (Número entero entre %i y %i):\n",limite_inferior,limite_superior);
+            printf("\nIN[%d;%d]---> ",limite_inferior,limite_superior);
         }else
         {
-            printf("\nIngrese un numero (Número entero positivo entre %i y %i):\n",limite_inferior,limite_superior);
+            printf("\nIN[%d;%d]---> ",limite_inferior,limite_superior);
         }
         
         fgets(ingreso,11,stdin);
@@ -115,7 +115,7 @@ int ingreso_normalizado_enteros(int limite_inferior, int limite_superior, bool *
 	    return -1;
 	}
     }
-    
+    return -1;
 }
 
 bool ingreso_normalizado_onda_digital(char* onda){
@@ -156,14 +156,15 @@ void quitaespacios(char* cadena){
     int i,j;
     i=0;
     j=0;
-    char * cadenaaux;
+    char *cadenaaux = malloc(sizeof(char)*(strlen(cadena)+1));
     while (cadena[i]!='\0') {
         if(cadena[i]!=' '){
-            cadenaaux[j]=cadena[i];
+            *(cadenaaux+j)=*(cadena+i);
             j++;
         }
         i++;
-    } 
+    }
+    strcpy(cadena, cadenaaux);
 }
 void quitasalto(char* cadena){
     int i=0;
@@ -237,7 +238,8 @@ bool esNeg(char* cadena){
 bool esFlotante(char* cadena){
     int control=0;
     int punto=0;
-    bool res=false;
+    bool res;
+    res=false;
     for (int i = 0; cadena[i]; i++){
 
         if(cadena[i]=='.'){
@@ -253,7 +255,7 @@ bool esFlotante(char* cadena){
         res=true;
     }
     
-
+    return res;
 }
 
 
