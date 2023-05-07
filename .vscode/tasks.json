@@ -8,7 +8,7 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 "${file}",
-                "${workspaceFolder}\\TP3_Pilas\\Implementaciones_TAD_Pilas\\pilas_con_arreglos.c",
+                "${workspaceFolder}\\TP3_Pilas\\Implementaciones_TAD_Pilas\\pilas_con_apuntadores.c",
                 "${workspaceFolder}\\DataEntry\\DataEntry.c",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"

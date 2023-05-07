@@ -9,14 +9,12 @@ struct Nodo{
 };
 struct PilaRep{
     struct Nodo *tope;
-    unsigned int cant;
 };
 
 
 Pila p_crear() {
     Pila nueva_pila = (Pila) malloc(sizeof(struct PilaRep));
     nueva_pila->tope = NULL;
-    nueva_pila->cant=0;
     return nueva_pila;
 }
 
@@ -31,7 +29,7 @@ void p_apilar (Pila pila, TipoElemento elemento) {
     nuevo_nodo->datos = elemento;
     nuevo_nodo->siguiente = pila->tope;
     pila->tope = nuevo_nodo;
-    pila->cant++;
+
 }
 TipoElemento p_desapilar (Pila pila) {
     if (p_es_vacia(pila))
@@ -42,7 +40,6 @@ TipoElemento p_desapilar (Pila pila) {
     TipoElemento elemento = tope_actual->datos;
     pila->tope = tope_actual->siguiente;
     free(tope_actual);
-    pila->cant--;
     return elemento;
 }
 TipoElemento p_tope (Pila pila) {
@@ -54,29 +51,50 @@ TipoElemento p_tope (Pila pila) {
     return tope_actual->datos;
 }
 
+int longitud(Pila pila){
+    int i=0;
+    struct Nodo *N = pila->tope;
+
+    while (N != NULL)
+    {
+        i++;
+        N=N->siguiente;
+    }
+    return i;
+    
+}
+
 bool p_es_llena(Pila pila){
-    return pila->cant==TAMANIO_MAXIMO;
+    return (longitud(pila)==TAMANIO_MAXIMO);
 }
 bool p_es_vacia (Pila pila) {
     return pila->tope == NULL;
 }
-void p_mostrar (Pila pila) {
-    Pila Paux = p_crear();
-    int num=0;
-    TipoElemento X;
-    printf("Contenido de la pila: ");
-    // Recorro la pila desopilándola y pasándola al auxiliar
-    while (p_es_vacia(pila) != true) {
-        X = p_desapilar(pila);
-        printf("%d ", X->clave);
-        p_apilar(Paux, X);
-    }
-    // Recorro la pila auxiliar para pasarla a la original (o bien construyo la utilidad intercambiar)
-    while (p_es_vacia(Paux))
+
+
+void p_mostrar(Pila pila){
+    Pila P_aux=p_crear();
+    TipoElemento elemento;
+    if (p_es_vacia(pila))
     {
-        X=p_desapilar(Paux);
-        p_apilar(pila,X);
+        printf("La pila está vacia");
+        return;
     }
     
-    printf("\n");
+    printf("Contenido de la pila: ");
+
+    while (p_es_vacia(pila)!=true)
+    {
+        elemento=p_desapilar(pila);
+        printf("%i ",elemento->clave);
+        p_apilar(P_aux,elemento);
+    }
+
+    while (p_es_vacia(P_aux)!=true)
+    {
+        elemento=p_desapilar(P_aux);
+        p_apilar(pila,elemento);
+    }
+    
+    
 }
