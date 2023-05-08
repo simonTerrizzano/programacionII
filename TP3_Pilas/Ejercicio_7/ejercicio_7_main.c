@@ -3,6 +3,8 @@
 
 int main(void)
 {
+    int eleccion;
+    bool salir=false;
     int cantingresoP1=0;
     int cantingresoP2=0;
     int i;
@@ -44,14 +46,40 @@ int main(void)
         p_apilar(P2,elemento);
     }
 
+    p_mostrar(P1);
+    p_mostrar(P2);
+    printf("\n\n");
+     do
+    {
+        printf( "\n   1. Comparar pilas ingresadas ");
+        printf( "\n   2. Salir " );
+        printf( "\n\n   Introduzca opcion (1-2): ");
 
-    PR = elemEnComun(P1,P2);
+        eleccion=ingreso_normalizado_enteros(1,2);
 
-    if(p_es_vacia(PR)){
-        printf("\nLas pilas no tienen elementos en común");
-    }else{
-        p_mostrar(PR);
-    }
+        /* Inicio del anidamiento */
+
+        switch ( eleccion )
+        {
+            case 1: PR = elemEnComun(P1,P2);
+
+                    if(p_es_vacia(PR)){
+                        printf("\nLas pilas no tienen elementos en común");
+                        printf("\n\n");
+                    }else{
+                        printf("Los elementos que las pilas tienen en común son: ");
+                        p_mostrar(PR);
+                        printf("\n\n");
+                    }
+            
+                    break;
+
+            case 2: salir=true;
+                    
+         }
+
+    } while ( salir==false );
+
     
     return 0;
 }

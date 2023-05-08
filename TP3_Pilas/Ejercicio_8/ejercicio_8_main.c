@@ -43,7 +43,7 @@ int main(void)
         while (p_es_vacia(PR)!=true)
         {
             elemento_a_mostrar=p_desapilar(PR);
-            printf("[%d:%d] ",elemento_a_mostrar->clave,                );
+            printf("[%d:%d] ",elemento_a_mostrar->clave,*((int*)elemento_a_mostrar->valor));
             p_apilar(pilaAUX, elemento_a_mostrar);
         }
         printf(")");
