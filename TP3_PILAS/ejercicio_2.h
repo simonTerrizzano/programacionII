@@ -1,8 +1,12 @@
+#ifndef ejercicios_2
+#define ejercicios_2
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "pilas.h"
 #include "tipo_elemento.h"
+
 // p_devolver: desapila todo lo que este en p_src y lo apila en p_dest
 void p_devolver(Pila p_dest, Pila p_src);
 // p_insertar: inserta un nuevo elemento en cierta posicion.
@@ -14,10 +18,12 @@ void p_intercambiar(Pila pila, unsigned int posicion_1, unsigned int posicion_2)
 // p_duplicar: a partir de una pila(fuente) se devolvera una pila que es su duplicado.
 Pila p_duplicar(Pila p_src);
 // p_buscar_clave: busca si existe cierta clave en la pila. Muestra en pantalla el resultado
-void p_buscar_clave(Pila pila, int clave);
+bool p_buscar_clave(Pila pila, int clave);
 // p_contar_elementos: Recibe una pila, y retorna la cantidad de elementos contados
 unsigned int p_contar_elementos(Pila p_src);
 
 
 // EXTRA
 void p_cargar_con_enteros(Pila p_src);
+
+#endif

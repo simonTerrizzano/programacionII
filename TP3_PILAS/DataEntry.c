@@ -258,7 +258,22 @@ bool esFlotante(char* cadena){
     return res;
 }
 
+void comienza_ingreso()
+{
+    printf("\n---INGRESO DE DATOS---\n--> escriba exit para salir\n");
+    
+}
 
+bool ingreso_clave_aleatoria()
+{
+    bool salida;
+    int SELECCION;
+    printf("\nSeleccione como se completaran las claves de los elementos\n1 - Aleatoria\n2 - Manual\n");
+    SELECCION = ingreso_normalizado_enteros(1, 2, &salida);
+
+    return (SELECCION == 1);
+    
+}
 
 
 

@@ -1,88 +1,100 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include "pilas.h"
-#define MAX 100
-
-struct nodo
-{
-    TipoElemento elemento;
-    struct nodo *siguiente;
+#include "tipo_elemento.h"
+#define TAMANIO_MAXIMO 100
+struct Nodo{
+    TipoElemento datos;
+    struct Nodo *siguiente;
+};
+struct PilaRep{
+    struct Nodo *tope;
 };
 
 
- 
-struct PilaRep
-{
-    struct nodo *tope;
-    size_t cantidad;
-};
-
-Pila p_crear()
-{
+Pila p_crear() {
     Pila nueva_pila = (Pila) malloc(sizeof(struct PilaRep));
     nueva_pila->tope = NULL;
-    nueva_pila->cantidad = 0;
     return nueva_pila;
 }
 
-//bool p_es_llena(Pila pila){return (pila->cantidad == MAX);}
-bool p_es_vacia(Pila pila){return (pila->tope == NULL);}
 
-void p_apilar(Pila pila, TipoElemento elemento)
-{
-    struct nodo *new_nodo = malloc(sizeof(struct nodo));
-    new_nodo->siguiente = pila->tope;
-    pila->tope = new_nodo;
-    pila->tope->elemento = elemento;
-    pila->cantidad++;   
+void p_apilar (Pila pila, TipoElemento elemento) {
+    if (p_es_llena(pila))
+    {
+        return;
+    }
+    
+    struct Nodo *nuevo_nodo = malloc(sizeof(struct Nodo));
+    nuevo_nodo->datos = elemento;
+    nuevo_nodo->siguiente = pila->tope;
+    pila->tope = nuevo_nodo;
+
+}
+TipoElemento p_desapilar (Pila pila) {
+    if (p_es_vacia(pila))
+    {
+        return NULL;
+    }
+    struct Nodo *tope_actual = pila->tope;
+    TipoElemento elemento = tope_actual->datos;
+    pila->tope = tope_actual->siguiente;
+    free(tope_actual);
+    return elemento;
+}
+TipoElemento p_tope (Pila pila) {
+    if (p_es_vacia(pila))
+    {
+        return NULL;
+    }    
+    struct Nodo *tope_actual = pila->tope;
+    return tope_actual->datos;
+}
+
+int longitud(Pila pila){
+    int i=0;
+    struct Nodo *N = pila->tope;
+
+    while (N != NULL)
+    {
+        i++;
+        N=N->siguiente;
+    }
+    return i;
+    
+}
+
+bool p_es_llena(Pila pila){
+    return (longitud(pila)==TAMANIO_MAXIMO);
+}
+bool p_es_vacia (Pila pila) {
+    return pila->tope == NULL;
 }
 
 
-TipoElemento p_desapilar(Pila pila)
-{
-    if(p_es_vacia(pila) == false)
+void p_mostrar(Pila pila){
+    Pila P_aux=p_crear();
+    TipoElemento elemento;
+    if (p_es_vacia(pila))
     {
-	struct nodo *del_node;
-	del_node = pila->tope;
-	pila->tope = pila->tope->siguiente;
-	free(del_node);
-	pila->cantidad--;
-	return pila->tope->elemento;
+        printf("La pila está vacia");
+        return;
     }
-    else
-    {
-	printf("\nLa pila esta vacia!");
-	return NULL;
-    }
-}
+    
+    printf("Contenido de la pila: ");
 
-TipoElemento p_tope(Pila pila)
-{
-    if(p_es_vacia(pila) == false)
+    while (p_es_vacia(pila)!=true)
     {
-	return pila->tope->elemento;
-	
-    }
-    else
-    {
-	printf("\nLa pila esta vacia!");
-	return NULL;   
-    }
-}
-
-void p_mostrar(Pila pila)
-{
-    TipoElemento te;
-    struct nodo *aux_nodo;
-    aux_nodo = pila->tope;
-    while(pila->tope->siguiente != NULL)
-    {
-	te = pila->tope->elemento;
-	printf("\nClave: %d\n", te->clave);
-	pila->tope = pila->tope->siguiente;
+        elemento=p_desapilar(pila);
+        printf("%i ",elemento->clave);
+        p_apilar(P_aux,elemento);
     }
 
-    pila->tope = aux_nodo;
-
+    while (p_es_vacia(P_aux)!=true)
+    {
+        elemento=p_desapilar(P_aux);
+        p_apilar(pila,elemento);
+    }
+    
+    
 }

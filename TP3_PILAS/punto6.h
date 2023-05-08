@@ -3,10 +3,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-//#include "array_pilas.c"
-#include "tipo_elemento.c"
-#include "DataEntry.c"
-#include "funcionalidades_extra_pila.c"
+#include "tipo_elemento.h"
+#include "DataEntry.h"
+#include "ejercicio_2.h"
 
 
 Pila p_eliminar_ocurrencias_recursivo(Pila p_src, int clave_buscada);

@@ -17,6 +17,6 @@ bool esNeg(char* cadena);
 void minus(char* cadena);
 void mayus(char* cadena);
 int detecta_comando_exit(char *ingreso, bool *ptr_salida);
-
-
+void comienza_ingreso();
+bool ingreso_clave_aleatoria();
 #endif
