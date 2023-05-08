@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "TP3_Pilas\Implementaciones_TAD_Pilas\pilas.h"
-#include "C:\Users\PC\Documents\ProgramacionII\programacionII\programacionII\DataEntry\DataEntry.h"
+#include "DataEntry\DataEntry.h"
 
 Pila elemEnComun(Pila P1,Pila P2);
 bool numeroyaencontrado(int numero, int *arreglo,int n);
