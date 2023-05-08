@@ -9,7 +9,7 @@ int main(void)
 
     Pila PR=p_crear();
     
-    printf("\nLa complejidad algoritmica de la funcion es de O(n^2)\n");
+  
     
     TipoElemento elemento;
 
@@ -60,7 +60,7 @@ int main(void)
         printf("\nLa pila está vacia, no hay elementos repetidos que mostrar");
     }
     
-    
+    printf("\nLa complejidad algoritmica de la funcion es de O(n^2)\n");
 
     return 0;
 }
