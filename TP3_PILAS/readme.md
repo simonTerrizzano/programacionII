@@ -1,2 +1,3 @@
-### PUNTO 2 
-Todas las funciones de este punto estan escritas en el archivo de "funcionalidades extra".
+# COMO COMPILAR LOS EJERCICIOS CON EL MAKE:
+1) en la terminal dentro de la carpeta poner make fundamentales. Esto lo que hará es producir todos los codigo objeto necesario para los programas.
+2) para compilar luego el main de un ejercicio bajo cierta implementacion se escribe por ejemplo: make main_6_array
