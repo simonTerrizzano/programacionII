@@ -8,7 +8,9 @@ int main(void)
     Pila P1=p_crear();
 
     Pila PR=p_crear();
-
+    
+    printf("\nLa complejidad algoritmica de la funcion es de O(n^2)\n");
+    
     TipoElemento elemento;
 
     printf("Ingrese la cantidad de elementos de la Pila entre 0 y %i",TAMANIO_MAXIMO);
