@@ -11,7 +11,7 @@ int main(void)
     int posicion_1;
     int posicion_2;
 
-    printf("Eliga el modo de carga de la pila: \n 1.Aleatoria \n 2. Por teclado \n");
+    printf("Eliga el modo de carga de la pila: \n 1.Aleatoria \n 2.Por teclado \n");
 
     eleccion = ingreso_normalizado_enteros(1, 2);
 
@@ -36,6 +36,10 @@ int main(void)
             p_apilar(pila, x);
         }
     }
+
+    p_mostrar(pila);
+    printf("\n\n")
+
     do
     {
         printf("-No se puede insertar elemento en posiciones mayores al Tamaño máximo establecito \n");

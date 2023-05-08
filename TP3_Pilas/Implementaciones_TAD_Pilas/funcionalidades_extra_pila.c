@@ -1,4 +1,4 @@
-#include "ejercicio_2.h"
+#include "funcionalidades_extra_pila.h"
 
 void p_devolver(Pila p_dest, Pila p_src)
 {
@@ -70,7 +70,6 @@ void p_intercambiar(Pila pila, unsigned int posicion_1, unsigned int posicion_2)
     pos_min = posicion_1;
     }
     int cont=1;
-    
     while(p_es_vacia(pila) == false)
     {
 	elemento_auxiliar = p_desapilar(pila);
