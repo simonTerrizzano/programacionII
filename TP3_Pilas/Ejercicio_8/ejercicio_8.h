@@ -4,8 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "C:\Users\PC\Documents\ProgramacionII\programacionII\programacionII\TP3_Pilas\Implementaciones_TAD_Pilas\pilas.h"
-#include "C:\Users\PC\Documents\ProgramacionII\programacionII\programacionII\DataEntry\DataEntry.h"
+#include "TP3_Pilas\Implementaciones_TAD_Pilas\pilas.h"
+#include "DataEntry\DataEntry.h"
 
 Pila elementosRepetidos(Pila pila);
 bool numeroyaencontrado(int numero, int *arreglo,int n);
