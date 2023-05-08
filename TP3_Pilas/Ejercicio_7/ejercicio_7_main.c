@@ -80,6 +80,7 @@ int main(void)
 
     } while ( salir==false );
 
+    printf("\n\nDeterminamos que la complejidad algoritmica en este ejercicio es de O(n^a) siendo n largo de la 1ra pila y a el largo de la 2da")
     
     return 0;
 }

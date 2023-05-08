@@ -56,7 +56,6 @@ Pila elementosRepetidos(Pila pila){
             elemento_a_contar->valor=&pcont[j];
             j++;
             p_apilar(PR,elemento_a_contar);
-            // printf("%d",*((int*)elemento_a_contar->valor));
         }
 
         while (p_es_vacia(pAux)!=true)

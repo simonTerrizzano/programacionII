@@ -99,7 +99,7 @@ int main(void)
 
     } while ( salir==false );
 
-
+        printf("\n\nDeterminamos que la complejidad algoritmica de este ejercicio es de O(n) siendo n el largo de la pila a invertir.")
 
 
     return 0;

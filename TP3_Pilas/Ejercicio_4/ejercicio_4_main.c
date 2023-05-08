@@ -28,8 +28,11 @@ int main(void)
         
         }
     } while (salir==false);
+
+
     
 
+    printf("\n\nDeterminamos que la complejidad algoritmica de este ejercicio es de O(log(n)) siendo n el número a convertir.")
 
 
     return 0;

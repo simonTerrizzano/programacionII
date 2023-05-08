@@ -13,7 +13,6 @@ void p_numero_a_base(int n, unsigned int b)
     TipoElemento numero;
 
     printf("\n(%d)[b:10] a ---> (x)[b:%d]", n, b);
-    // getchar();
     // se apilan todos los restos 
     while(dividendo > 0)
     {

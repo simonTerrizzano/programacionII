@@ -92,7 +92,7 @@ int main(void)
     } while ( salir==false );
 
 
-
+        printf("\n\nDeterminamos que la complejidad algoritmica de este ejercicio tanto en su modalidad retursiva como iterativa es de O(n) siendo n el largo de la pila.")
 
     return 0;
 }
