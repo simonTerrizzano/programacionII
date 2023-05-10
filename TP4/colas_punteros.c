@@ -21,8 +21,7 @@ typedef struct ColaRep *Cola;
 
 Cola c_crear()
 {
-    Cola cola_nueva = malloc(sizeof(struct ColaRep)); // asigno memoria para nueva cola 
-    //cola_nueva->frente = (Nodo) malloc(sizeof(struct nodo) * TAMANIO_MAXIMO); // asigno memoria para elementos
+    Cola cola_nueva = malloc(sizeof(struct ColaRep)); // asigno memoria para nueva cola
     cola_nueva->frente = cola_nueva->final = NULL;
     return cola_nueva;
 
