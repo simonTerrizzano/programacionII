@@ -17,7 +17,7 @@ typedef struct ColaRep *Cola;
 Cola c_crear()
 {
     Cola cola_nueva = malloc(sizeof(struct ColaRep));
-    cola_nueva->valores = (TipoElemento) malloc(sizeof(TipoElemento) * TAMANIO_MAXIMO) // se crea el array de elementos 
+    cola_nueva->valores = (TipoElemento*) malloc((sizeof(TipoElemento)) * TAMANIO_MAXIMO); // se crea el array de elementos 
     cola_nueva->frente = NULO;
     cola_nueva->final = NULO;
     return cola_nueva;
@@ -63,14 +63,17 @@ TipoElemento c_desencolar(Cola cola)
 	else
 	{
 	    elemento_a_devolver = cola->valores[cola->frente];
-	    free(cola->valores[cola->frente]);
 	    cola->frente++;
 	}
     }
     else
     {
+	elemento_a_devolver = NULL;
 	printf("\nError. Queue underflow :(\n");
     }
+    return elemento_a_devolver;
+
+    
 }
 
 TipoElemento c_recuperar(Cola cola)

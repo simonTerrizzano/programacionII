@@ -17,7 +17,7 @@ typedef struct ColaRep *Cola;
 Cola c_crear()
 {
     Cola cola_nueva = malloc(sizeof(struct ColaRep));
-    cola_nueva->datos = (TipoElemento) malloc(sizeof(TipoElemento) * TAMANIO_MAXIMO);
+    cola_nueva->datos = (TipoElemento*) malloc(sizeof(TipoElemento) * TAMANIO_MAXIMO);
     cola_nueva->frente = NULO;
     cola_nueva->final = NULO;
     return cola_nueva;
@@ -29,24 +29,21 @@ void c_encolar(Cola cola, TipoElemento elemento)
 {
     if(c_es_llena(cola) == false)
     {
-	if(c_es_vacia(cola) == false)
+	if(c_es_vacia(cola) == true)
 	{
-	    if(cola->final == MAX-1)
-	    {
-		cola->final = 0;
-	    }
-	    else
-	    {
-		cola->final = (cola->final % TAMANIO_MAXIMO-1) + 1;
-	    }
+	    cola->frente++;
+	    cola->final++;
+	    cola->datos[cola->final] = elemento;
 	}
 	else
 	{
 	    cola->final++;
-	    cola->frente++;
-	    
+	    if(cola->final == TAMANIO_MAXIMO)
+	    {
+		cola->final = 0;
+	    }
+	    cola->datos[cola->final] = elemento;
 	}
-	
     }
     else
     {
@@ -60,22 +57,28 @@ TipoElemento c_desencolar(Cola cola)
     TipoElemento elemento_aux;
     if(c_es_vacia(cola) == false)
     {
-	if(cola->frente == TAMANIO_MAXIMO-1)
+	if(cola->final == cola->frente)
 	{
 	    elemento_aux = cola->datos[cola->frente];
-	    cola->frente = 0;
+	    cola->frente=NULO;
+	    cola->final=NULO;
 	}
 	else
 	{
 	    elemento_aux = cola->datos[cola->frente];
 	    cola->frente++;
-	}	
+	    if(cola->frente == TAMANIO_MAXIMO)
+		cola->frente=0;
+	}
     }
     else
     {
+	elemento_aux = NULL;
+	return NULL;
 	printf("\nQueue Underflow\n");
     }
     
+    return elemento_aux;   
 }
 
 TipoElemento c_recuperar(Cola cola)
@@ -85,14 +88,14 @@ TipoElemento c_recuperar(Cola cola)
     return elemento_a_devolver;
 }
 
-void c_mostar(Cola cola)
+void c_mostrar(Cola cola)
 {
     TipoElemento elemento_auxiliar;
     int pos_frente = cola->frente;
     printf("\nClaves: ");
     if(c_es_vacia(cola) == false)
     {
-	elemento_auxiliar = cola->valores[pos_frente];
+	elemento_auxiliar = cola->datos[pos_frente];
 	printf("%d ", elemento_auxiliar->clave);
 
 	while(pos_frente != cola->final)
@@ -102,7 +105,7 @@ void c_mostar(Cola cola)
 	    {
 		pos_frente = 0;
 	    }
-	    elemento_auxiliar = cola->valores[pos_frente];
+	    elemento_auxiliar = cola->datos[pos_frente];
 	    printf("%d ", elemento_auxiliar->clave);
 	}
     }    
@@ -111,7 +114,7 @@ void c_mostar(Cola cola)
 unsigned int c_longitud(Cola cola)
 {
     unsigned int contador = 0;
-    TipoElemento elemento_auxiliar;
+    //TipoElemento elemento_auxiliar;
     int pos_frente = cola->frente;
     while(pos_frente != cola->final && (c_es_vacia(cola) == false))
     {
