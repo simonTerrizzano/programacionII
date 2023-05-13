@@ -13,4 +13,5 @@ void c_encolar(Cola cola, TipoElemento elemento); // pone en la cola un elemento
 TipoElemento c_desencolar(Cola cola); // retira de la cola un elemento
 TipoElemento c_recuperar(Cola cola); // retorna el frente de la cola (sin desencolarlo)
 void c_mostrar(Cola cola); // muestra los elementos de la cola
+unsigned int c_longitud(Cola cola);
 #endif // COLAS_H

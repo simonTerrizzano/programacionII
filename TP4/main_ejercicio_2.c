@@ -49,11 +49,29 @@ int main()
 	    }
 	}
     }
-    printf("\nIngrese la clave del elemento a buscar para corroborar si existe\n");
+
 
     c_mostrar(cola_1);
+    printf("\n--Seleccione opcion--\n1-Buscar elemento por clave\n2-Insertar Elemento(cualquiera)\n");
+    opcion = ingreso_normalizado_enteros(1, 6, &salida);
+    switch(opcion)
+    {
 
-    c_elemento_existe(cola_1, ingreso_normalizado_enteros(0, 500, &salida));
+    case 1: printf("\nIngrese clave del elemento a buscar\n");
+	clave = ingreso_normalizado_enteros(0, 500, &salida);
+	c_elemento_existe(cola_1, ingreso_normalizado_enteros(0, 500, &salida));
+	break;
+
+    case 2: printf("\nIngrese la posicion en la que quiere insertar el el elemento");
+	clave = ingreso_normalizado_enteros(1, 100, &salida);
+	elemento = te_crear((random() % 500));
+	c_insertar_elemento(cola_1, elemento, clave);
+	break;
+
+    default:
+	break;
+	
+    }
 
     c_mostrar(cola_1);
 

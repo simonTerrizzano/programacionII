@@ -21,7 +21,8 @@ typedef struct ColaRep *Cola;
 
 Cola c_crear()
 {
-    Cola cola_nueva = malloc(sizeof(struct ColaRep)); // asigno memoria para nueva cola
+    Cola cola_nueva = malloc(sizeof(struct ColaRep)); // asigno memoria para nueva cola 
+    //cola_nueva->frente = (Nodo) malloc(sizeof(struct nodo) * TAMANIO_MAXIMO); // asigno memoria para elementos
     cola_nueva->frente = cola_nueva->final = NULL;
     return cola_nueva;
 
@@ -76,11 +77,9 @@ void c_encolar(Cola cola, TipoElemento elemento)
 TipoElemento c_desencolar(Cola cola)
 {
     TipoElemento elemento_a_devolver;
-    Nodo aux;
     if(c_es_vacia(cola) == false)
     {
 	elemento_a_devolver = cola->frente->datos;
-	aux = cola->frente;
 	cola->frente = cola->frente->siguiente;
     }
 
