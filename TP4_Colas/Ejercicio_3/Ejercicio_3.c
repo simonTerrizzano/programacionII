@@ -1,8 +1,4 @@
-#include "colasApuntadores.c"
-#include <time.h>
-#include "DataEntry.c"
-
-bool compararIgualdadCola(Cola C1,Cola C2);
+#include "Ejercicio_3.h"
 
 bool compararIgualdadCola(Cola C1,Cola C2){
     Cola temp = c_crear();
@@ -22,25 +18,10 @@ bool compararIgualdadCola(Cola C1,Cola C2){
     }
     while (!c_es_vacia(temp))
     {
-        Y = c_desencolar(temp);
         X = c_desencolar(temp);
-        c_encolar(C2,Y);
+        Y = c_desencolar(temp);
         c_encolar(C1,X);
+        c_encolar(C2,Y);
     }
     return resultado;
-}
-
-void Randomizar(Cola cola);
-void Randomizar(Cola cola){
-    TipoElemento X;
-    srand(time(0));
-    for (int i = 0; i < 10; i++)
-    {
-        X = te_crear(rand()%100);
-        c_encolar(cola,X);
-    }
-}
-
-int main(){
-
 }

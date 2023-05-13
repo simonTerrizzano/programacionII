@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
-static const int TAMANIO_MAXIMO = 100;
+
 struct ColaRep {
     TipoElemento *valores;
     unsigned int frente;
@@ -10,7 +10,7 @@ struct ColaRep {
 };
 // Funcion interna que hace avanzar el frente y el final hacia adelante
 int paso (int posicion) {
-    return ((posicion % TAMANIO_MAXIMO) + 1);
+    return ((posicion % TAMANIO_MAXIMO)+1);
 }
 Cola c_crear() {
     Cola nueva_cola = (Cola) malloc(sizeof(struct ColaRep));
@@ -23,10 +23,19 @@ Cola c_crear() {
 }
 // Operación encolar de complejidad constante. ¿ Porque ?
 void c_encolar (Cola cola, TipoElemento elemento) {
+    if(c_es_llena(cola)){
+        return;
+    }
     cola->final = paso(cola->final); // Hago avanzar el final
     cola->valores[cola->final] = elemento;
+    
 }
 TipoElemento c_desencolar (Cola cola) { // Cual es su complejidad ?
+    if (c_es_vacia(cola))
+    {
+        return NULL;
+    }
+    
     TipoElemento elemento = cola->valores[cola->frente];
     cola->frente = paso(cola->frente); // Avanza el Frente
     return elemento;
@@ -44,8 +53,14 @@ TipoElemento c_recuperar (Cola cola) {
     return X;
 }
 void c_mostrar (Cola cola) {
+    if (c_es_vacia(cola))
+    {
+        printf("\nLa cola está vacia.");
+        return;
+    }
     Cola Caux = c_crear();
     TipoElemento X = te_crear(0);
+    
     printf("Imprimiendo las Claves de la Cola \n");
     // La cola se debe desencolar y guardar en una auxiliar
     while (c_es_vacia(cola) != true) {
@@ -58,7 +73,7 @@ void c_mostrar (Cola cola) {
         X = c_desencolar(Caux);
         c_encolar(cola, X);
     }
-} // CUAL SERIA LA COMPLEJIDAD DEL MOSTRAR ?
+}
 
 int c_longitud (Cola C){
     if (c_es_vacia(C))
@@ -67,7 +82,7 @@ int c_longitud (Cola C){
     }
     else if (c_es_llena(C))
     {
-        return 255;
+        return TAMANIO_MAXIMO;
     }
     else{
         int contador = 0;

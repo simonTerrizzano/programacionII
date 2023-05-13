@@ -1,9 +1,10 @@
 #ifndef COLAS_H
 #define COLAS_H
-#define MAX 100
 
 #include <stdbool.h>
-#include "tipo_elemento.c"
+#include "tipo_elemento.h"
+
+static const int TAMANIO_MAXIMO = 10;
 
 struct ColaRep;
 typedef struct ColaRep *Cola;

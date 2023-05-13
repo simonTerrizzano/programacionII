@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <limits.h>
 #include <math.h>
-#define MAX 100
 
 struct ColaRep
 {
@@ -17,7 +16,7 @@ typedef struct ColaRep *Cola;
 Cola c_crear()
 {
     Cola nueva_cola = (Cola) malloc(sizeof(struct ColaRep));
-    nueva_cola->valores = (TipoElemento*) malloc(MAX * sizeof(TipoElemento));
+    nueva_cola->valores = (TipoElemento*) malloc(TAMANIO_MAXIMO * sizeof(TipoElemento));
     nueva_cola->frente = 0;
     nueva_cola->final = 0;
     return nueva_cola;
@@ -28,7 +27,7 @@ bool c_es_vacia(Cola cola){
 }
 
 bool c_es_llena (Cola cola){
-    return (cola->final == MAX);
+    return (cola->final == TAMANIO_MAXIMO);
 }
 
 void c_encolar(Cola C, TipoElemento elemento){
@@ -59,16 +58,22 @@ TipoElemento c_desencolar(Cola cola) {
 } 
 
 void c_mostrar (Cola C){
+    if (c_es_vacia(C))
+    {
+        printf("La cola está vacia.");
+        return;
+    }
+    
     Cola T = c_crear();
     int final = C->final;
     TipoElemento X;
+    printf("Imprimiendo las Claves de la Cola \n");
     while (!c_es_vacia(C))
     {
         X = c_desencolar(C);
-        printf("%d/",X->clave);
+        printf("Clave: %d\n",X->clave);
         c_encolar(T, te_crear(X->clave));
     }
-    printf("\n");
     while (!c_es_vacia(T))
     {
         X = c_desencolar(T);
@@ -91,7 +96,7 @@ int c_longitud (Cola C){
     }
     else if (c_es_llena(C))
     {
-        return 255;
+        return TAMANIO_MAXIMO;
     }
     else{
         int contador = 0;

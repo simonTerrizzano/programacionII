@@ -1,10 +1,4 @@
-#include "colasApuntadores.c"
-#include <time.h>
-#include "DataEntry.c"
-
-void Randomizar(Cola cola);
-bool estaEnCola(Cola cola, TipoElemento X);
-int colarse(Cola C, TipoElemento X, int pos);
+#include "Ejercicio_2.h"
 
 void Randomizar(Cola cola){
     TipoElemento X;
@@ -45,6 +39,12 @@ int colarse(Cola C, TipoElemento X, int pos){
     int contador=1;
     TipoElemento Y;
     Cola temp = c_crear();
+    if (c_es_llena(C))
+    {
+        printf("La cola está llena.")
+        return -1;
+    }
+    
     if (c_es_vacia(C) && pos == 1)
     {
         c_encolar(C,X);
@@ -80,10 +80,6 @@ int colarse(Cola C, TipoElemento X, int pos){
     }
     
 }
-
-int contarElementos(Cola C);
-Cola copiarCola(Cola C);
-Cola invertirCola(Cola C);
 
 Cola invertirCola(Cola C){
     Cola temp = c_crear();
@@ -123,45 +119,4 @@ Cola copiarCola(Cola C){
 
 int contarElementos(Cola C){
     return c_longitud(C);
-}
-
-int main(int argc, char const *argv[])
-{
-    bool * tempb;
-    Cola cola = c_crear();
-    Randomizar(cola);
-    c_mostrar(cola);
-    printf("\n");
-    printf("La longitud de la cola es de %d",c_longitud(cola));
-    printf("\n");
-    TipoElemento X = te_crear(ingreso_normalizado_enteros(-1000,1000,tempb));
-    printf("\n");
-    if (estaEnCola(cola, X))
-    {
-        printf("Esta en cola");
-    }
-    else{
-        printf("No esta en cola");
-    }
-    printf("\n");
-    c_mostrar(cola);
-    printf("\n");
-    int pos = ingreso_normalizado_enteros(-100,100,tempb);
-    int resultado = colarse(cola,X,pos);
-    if (resultado==1)
-    {
-        printf("Se inserto el tipoelemento en la posicion %d \n",pos);
-        c_mostrar(cola);
-    }
-    else if (resultado == 0)
-    {
-        printf("Se inserto el tipoelemento en el inicio de la lista \n",pos);
-        c_mostrar(cola);
-    }
-    else{
-        printf("Error al insertar tipoelemento");
-    }
-    
-    system("PAUSE");
-    return 0;
 }
