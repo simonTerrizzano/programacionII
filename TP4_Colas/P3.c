@@ -1,6 +1,5 @@
-#include "colasApuntadores.c"
+#include "UtilidadesColas.c"
 #include <time.h>
-#include "DataEntry.c"
 
 bool compararIgualdadCola(Cola C1,Cola C2);
 
@@ -30,17 +29,22 @@ bool compararIgualdadCola(Cola C1,Cola C2){
     return resultado;
 }
 
-void Randomizar(Cola cola);
-void Randomizar(Cola cola){
-    TipoElemento X;
-    srand(time(0));
-    for (int i = 0; i < 10; i++)
-    {
-        X = te_crear(rand()%100);
-        c_encolar(cola,X);
-    }
-}
-
 int main(){
-
+    bool resultado;
+    TipoElemento X;
+    Cola cola1 = c_crear();
+    Cola cola2 = c_crear();
+    printf("Se creara la cola 1 \n");
+    crearCola(cola1);
+    printf("Se creara la cola 2 \n");
+    crearCola(cola2);
+    resultado = compararIgualdadCola(cola1, cola2);
+    if (resultado)
+    {
+        printf("Las colas son iguales \n");
+    }
+    else{
+        printf("Las colas no son iguales \n");
+    }
+    system("PAUSE");
 }

@@ -2,14 +2,14 @@
 #include <time.h>
 #include "DataEntry.c"
 
-void Randomizar(Cola cola);
+void Randomizar(Cola cola,int num);
 bool estaEnCola(Cola cola, TipoElemento X);
 int colarse(Cola C, TipoElemento X, int pos);
 
-void Randomizar(Cola cola){
+void Randomizar(Cola cola,int num){
     TipoElemento X;
     srand(time(0));
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < num; i++)
     {
         X = te_crear(rand()%100);
         c_encolar(cola,X);
@@ -128,13 +128,31 @@ int contarElementos(Cola C){
 int main(int argc, char const *argv[])
 {
     bool * tempb;
+    int temp,temp2;
+    TipoElemento X;
     Cola cola = c_crear();
-    Randomizar(cola);
+    printf("Crear la cola o randomizarla? : \n  1-randomizarla \n  2-crearla\n");
+    temp = ingreso_normalizado_enteros(1,2,tempb);
+    if(temp == 1){
+        printf("\n Cuantas claves se le generaran a la cola?: \n");
+        temp2 = ingreso_normalizado_enteros(1,99,tempb);
+        Randomizar(cola,temp2);
+    }
+    else{
+        printf("\n Cuantas claves se le agregara a la cola?: \n");
+        temp2 = ingreso_normalizado_enteros(1,99,tempb);
+        while (temp2 != 0)
+        {
+            X = te_crear(ingreso_normalizado_enteros(-1000,1000,tempb));
+            c_encolar(cola,X);
+            temp2 = temp2 - 1;
+        }
+    }
     c_mostrar(cola);
     printf("\n");
     printf("La longitud de la cola es de %d",c_longitud(cola));
     printf("\n");
-    TipoElemento X = te_crear(ingreso_normalizado_enteros(-1000,1000,tempb));
+    X = te_crear(ingreso_normalizado_enteros(-1000,1000,tempb));
     printf("\n");
     if (estaEnCola(cola, X))
     {
@@ -146,16 +164,19 @@ int main(int argc, char const *argv[])
     printf("\n");
     c_mostrar(cola);
     printf("\n");
+    printf("Ingrese clave del Tipo elemento a insertar: ");
+    X=te_crear(ingreso_normalizado_enteros(-1000,1000,tempb));
+    printf("\n Ingrese la posicion a la cual insertarlo: ");
     int pos = ingreso_normalizado_enteros(-100,100,tempb);
     int resultado = colarse(cola,X,pos);
     if (resultado==1)
     {
-        printf("Se inserto el tipoelemento en la posicion %d \n",pos);
+        printf("\n Se inserto el tipoelemento en la posicion %d \n",pos);
         c_mostrar(cola);
     }
     else if (resultado == 0)
     {
-        printf("Se inserto el tipoelemento en el inicio de la lista \n",pos);
+        printf("\n Se inserto el tipoelemento en el inicio de la lista \n",pos);
         c_mostrar(cola);
     }
     else{
