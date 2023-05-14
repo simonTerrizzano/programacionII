@@ -1,26 +1,47 @@
 CC = gcc
 CFLAGS = -g -Wall
 FUNDAMENTALES = tipo_elemento.o DataEntry.o
-IMPLEMENTACIONES = colas_array_circular.o colas_array_no_circular.o colas_punteros.o
-
-main_ejercicio_2_array_no_circular: main_ejercicio_2.c ejercicio_2.h
-	$(CC) $(CFLAGS) main_ejercicio_2.c $(FUNDAMENTALES) colas_array_no_circular.o -o main_ejercicio_2_array_no_circular
-
-main_ejercicio_2_array_circular: main_ejercicio_2.c ejercicio_2.h
-	$(CC) $(CFLAGS) main_ejercicio_2.c $(FUNDAMENTALES) colas_array_circular.c -o main_ejercicio_2_array_circular
-
-main_ejercicio_2_punteros: main_ejercicio_2.c ejercicio_2.h
-	$(CC) $(CFLAGS) main_ejercicio_2.c $(FUNDAMENTALES) colas_punteros.c -o main_ejercicio_2_punteros
+IMPLEMENTACIONES = colasApuntadores.o colasArrayCircular.o colasArrayNoCircular.o
 
 
-# instruccion para compilar los fundamentales
+#----------------------PUNTO 2 ----------------------------------------------------------------------
+main_ejercicio_2_ArrayNoCircular: main_ejercicio_2.c
+	$(CC) $(CFLAGS) main_ejercicio_2.c tipo_elemento.o DataEntry_alt.o colasArrayNoCircular.o -o main_ejercicio_2_ArrayNoCircular
+
+main_ejercicio_2_Apuntadores: main_ejercicio_2.c
+	$(CC) $(CFLAGS) main_ejercicio_2.c tipo_elemento.o DataEntry_alt.o colasApuntadores.o -o main_ejercicio_2_Apuntadores
+
+main_ejercicio_2_ArrayCircular: main_ejercicio_2.c
+	$(CC) $(CFLAGS) main_ejercicio_2.c tipo_elemento.o DataEntry_alt.o colasArrayCircular.o -o main_ejercicio_2_ArrayCircular
+#----------------------PUNTO 3 ----------------------------------------------------------------------
+main_ejercicio_3_ArrayNoCircular: Ejercicio_3_main.c
+	$(CC) $(CFLAGS) Ejercicio_3_main.c $(FUNDAMENTALES) colasArrayNoCircular.o -o main_ejercicio_3_ArrayNoCircular
+
+main_ejercicio_3_Apuntadores: Ejercicio_3_main.c
+	$(CC) $(CFLAGS) Ejercicio_3_main.c $(FUNDAMENTALES) colasApuntadores.o -o main_ejercicio_3_Apuntadores
+
+main_ejercicio_3_ArrayCircular: Ejercicio_3_main.c
+	$(CC) $(CFLAGS) Ejercicio_3_main.c $(FUNDAMENTALES) colasArrayCircular.o -o main_ejercicio_3_ArrayCircular
+#----------------------PUNTO 4 ----------------------------------------------------------------------
+main_ejercicio_4_ArrayNoCircular: Ejercicio_4_main.c
+	$(CC) $(CFLAGS) Ejercicio_4_main.c $(FUNDAMENTALES) colasArrayNoCircular.o -o main_ejercicio_4_ArrayNoCircular
+
+main_ejercicio_4_Apuntadores: Ejercicio_4_main.c
+	$(CC) $(CFLAGS) Ejercicio_4_main.c $(FUNDAMENTALES) colasApuntadores.o -o main_ejercicio_4_Apuntadores
+
+main_ejercicio_4_ArrayCircular: Ejercicio_4_main.c
+	$(CC) $(CFLAGS) Ejercicio_4_main.c $(FUNDAMENTALES) colasArrayCircular.o -o main_ejercicio_4_ArrayCircular
+#----------------------PUNTO 5 ----------------------------------------------------------------------
+
 fundamentales: $(FUNDAMENTALES)
-# instruccion para compilar las implementaciones
 implementaciones: $(IMPLEMENTACIONES)
-colas_punteros.o: colas_punteros.c colas.h
-colas_array_circular.o: colas_array_circular.c colas.h
-colas_array_no_circular.o: colas_array_no_circular.c colas.h
+
+colasApuntadores.o: colasApuntadores.c colas.h
+colasArrayNoCircular.o: colasArrayNoCircular.c colas.h
+colasArrayCircular.o: colasArrayCircular.c colas.h
+
 tipo_elemento.o: tipo_elemento.c tipo_elemento.h
+DataEntry_alt.o: DataEntry_alt.c DataEntry_alt.h
 DataEntry.o: DataEntry.c DataEntry.h
 clean:
-	-rm *.o 
+	-rm *.o

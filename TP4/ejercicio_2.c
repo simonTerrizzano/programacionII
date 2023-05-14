@@ -1,7 +1,6 @@
 #include "ejercicio_2.h"
 #include "colas.h"
 
-
 void c_devolver(Cola c_dest, Cola c_src)
 {
     TipoElemento elemento_aux;
@@ -13,7 +12,7 @@ void c_devolver(Cola c_dest, Cola c_src)
 
 }
 
-void c_elemento_existe(Cola cola, int clave)
+bool c_elemento_existe(Cola cola, int clave)
 {
     bool encontrado = false;
     TipoElemento elemento_auxiliar;
@@ -41,6 +40,9 @@ void c_elemento_existe(Cola cola, int clave)
     {
 	printf("\nNo se encuentra el elemento de clave %d :(\n", clave);
     }
+
+    return encontrado;
+
 }
 
 void c_insertar_elemento(Cola cola, TipoElemento elemento_nuevo,  int pos)
@@ -56,7 +58,7 @@ void c_insertar_elemento(Cola cola, TipoElemento elemento_nuevo,  int pos)
     }
 
     // si la posicion es mayor que la posicion del ultimo elemento entonces sencillamente se lo pone como ultimo
-    if(pos > c_longitud(cola))
+    if(pos > longitud(cola))
 	c_encolar(cola, elemento_nuevo);
     // si la posicion que se ingreso es valida
     else if(posicion_es_valida)
@@ -65,7 +67,7 @@ void c_insertar_elemento(Cola cola, TipoElemento elemento_nuevo,  int pos)
 	while(c_es_vacia(cola) == false)
 	{
 	    contador++;
-	    if(contador == pos-1)
+	    if(contador == pos)
 	    {
 		c_encolar(cola_auxiliar, elemento_nuevo);
 	    }
@@ -112,5 +114,43 @@ void c_eliminar_elemento(Cola cola, int clave)
 
 	printf("\nError. No existe elemento con dicha clave");
     }
+
+}
+
+Cola c_copiar_cola(Cola C)
+{
+    Cola temp = c_crear();
+    Cola CCopia = c_crear();
+    TipoElemento X;
+    while (!c_es_vacia(C))
+    {
+        X = c_desencolar(C);
+        c_encolar(temp,X);
+    }
+    while (!c_es_vacia(temp))
+    {
+        X = c_desencolar(temp);
+        c_encolar(CCopia,X);
+        c_encolar(C,X);
+    }
+    return CCopia;
+}
+
+int c_contar_elementos(Cola C){
+    return longitud(C);
+}
+
+Cola c_cola_invertida(Cola cola)
+{
+    Cola cola_duplicada = c_copiar_cola(cola);
+    Cola cola_aux = c_crear();
+    TipoElemento elemento;
+    while(c_es_vacia(cola_duplicada) == false)
+    {
+	elemento = c_desencolar(cola_duplicada);
+	c_insertar_elemento(cola_aux, elemento, 1);
+    }
+   
+    return cola_aux;
 
 }
