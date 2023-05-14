@@ -53,6 +53,7 @@ int main(int argc, char const *argv[])
     c_mostrar(cola);
     printf("\nCola de numeros no repetidos: \n");
     c_mostrar(resultado);
+    printf("Complejidad algoritmica de la funcion elementosNoRepetidos = O(n^2)")
     system("PAUSE");
     return 0;
 }
