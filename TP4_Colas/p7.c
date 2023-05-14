@@ -1,3 +1,6 @@
+#include "UtilidadesColas.c"
+#include "limits.h"
+
 int valorMasCercano(int a, int b, int c, int Obj);
 int valorMasCercano(int a, int b, int c, int Obj) {
     int distanciaA = abs(a - Obj);
@@ -25,7 +28,7 @@ void atenderVentanillas(int tiempo,Cola ventanilla1,Cola ventanilla2,Cola ventan
     Z = c_desencolar(ventanilla3);
     while ((X->clave!=0 || Y->clave != 0 || Z->clave != 0) && (!c_es_vacia(ventanilla1) || !c_es_vacia(ventanilla2) || !c_es_vacia(ventanilla3)))
     {
-        if (anteriorAtendido == 0 && (!c_es_vacia(ventanilla1) &&!c_es_vacia(ventanilla2) && !c_es_vacia(ventanilla3)))
+        if (anteriorAtendido == 0)
         {
             atender = valorMasCercano(X->clave, Y->clave, Z->clave, tiempo);
             if (X->clave == atender && X->clave != 0)
@@ -48,7 +51,7 @@ void atenderVentanillas(int tiempo,Cola ventanilla1,Cola ventanilla2,Cola ventan
                 Y->clave=Y->clave-tiempo;
                 if (!c_es_vacia(ventanilla2) && Y->clave<=0)
                 {
-                    X=c_desencolar(ventanilla2);
+                    Y=c_desencolar(ventanilla2);
                     terminoAtenderC2=1;
                     contadorC2++;
                 }
@@ -61,7 +64,7 @@ void atenderVentanillas(int tiempo,Cola ventanilla1,Cola ventanilla2,Cola ventan
                 Z->clave=Z->clave-tiempo;
                 if (!c_es_vacia(ventanilla3) && Z->clave<=0)
                 {
-                    X=c_desencolar(ventanilla3);
+                    Z=c_desencolar(ventanilla3);
                     terminoAtenderC3=1;
                     contadorC3++;
                 }
@@ -69,7 +72,7 @@ void atenderVentanillas(int tiempo,Cola ventanilla1,Cola ventanilla2,Cola ventan
             }
         }
         else{
-            if(anteriorAtendido == 1 && (!c_es_vacia(ventanilla2) && !c_es_vacia(ventanilla3))){
+            if(anteriorAtendido == 1 ){
                 atender = valorMasCercano(rempl , Y->clave, Z->clave, tiempo);
                 if(Y->clave == atender && Y->clave != 0)
                 {
@@ -78,7 +81,7 @@ void atenderVentanillas(int tiempo,Cola ventanilla1,Cola ventanilla2,Cola ventan
                     Y->clave=Y->clave-tiempo;
                     if (!c_es_vacia(ventanilla2) && Y->clave<=0)
                     {
-                        X=c_desencolar(ventanilla2);
+                        Y=c_desencolar(ventanilla2);
                         terminoAtenderC2=1;
                         contadorC2++;
                     }
@@ -91,14 +94,14 @@ void atenderVentanillas(int tiempo,Cola ventanilla1,Cola ventanilla2,Cola ventan
                     Z->clave=Z->clave-tiempo;
                     if (!c_es_vacia(ventanilla3) && Z->clave<=0)
                     {
-                        X=c_desencolar(ventanilla3);
+                        Z=c_desencolar(ventanilla3);
                         terminoAtenderC3=1;
                         contadorC3++;
                     }
                     anteriorAtendido = 3;
                 }
             }
-            else if(anteriorAtendido == 2 && (!c_es_vacia(ventanilla1) && !c_es_vacia(ventanilla3))){
+            else if(anteriorAtendido == 2 ){
                 atender = valorMasCercano(X->clave,rempl , Z->clave, tiempo);
                 if (X->clave == atender && X->clave != 0)
                 {
@@ -120,14 +123,14 @@ void atenderVentanillas(int tiempo,Cola ventanilla1,Cola ventanilla2,Cola ventan
                     Z->clave=Z->clave-tiempo;
                     if (!c_es_vacia(ventanilla3) && Z->clave<=0)
                     {
-                        X=c_desencolar(ventanilla3);
+                        Z=c_desencolar(ventanilla3);
                         terminoAtenderC3=1;
                         contadorC3++;
                     }
                     anteriorAtendido = 3;
                 }
             }
-            else if(anteriorAtendido == 3 && (!c_es_vacia(ventanilla1) || !c_es_vacia(ventanilla2))){
+            else if(anteriorAtendido == 3){
                 atender = valorMasCercano(X->clave, Y->clave, rempl , tiempo);
                 if (X->clave == atender && X->clave != 0)
                 {
@@ -149,13 +152,13 @@ void atenderVentanillas(int tiempo,Cola ventanilla1,Cola ventanilla2,Cola ventan
                     Y->clave=Y->clave-tiempo;
                     if (!c_es_vacia(ventanilla2) && Y->clave<=0)
                     {
-                        X=c_desencolar(ventanilla2);
+                        Y=c_desencolar(ventanilla2);
                         terminoAtenderC2=1;
                         contadorC2++;
                     }
                     anteriorAtendido = 2;
                 }
-                printf("%d",atender);
+                //printf("%d",atender);
             }
             else{
                 return;
