@@ -23,7 +23,7 @@ void crearCola(Cola cola){
         while (temp2 != 0)
         {
             printf("Clave del TipoElemento %d : ",i);
-            X = te_crear(ingreso_normalizado_enteros(-1000,1000,tempb));
+            X = te_crear(ingreso_normalizado_enteros(1,1000,tempb));
             c_encolar(cola,X);
             i=i+1;
             temp2 = temp2 - 1;
