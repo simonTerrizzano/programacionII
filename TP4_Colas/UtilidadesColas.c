@@ -23,7 +23,7 @@ void crearCola(Cola cola){
         while (temp2 != 0)
         {
             printf("Clave del TipoElemento %d : ",i);
-            X = te_crear(ingreso_normalizado_enteros(1,1000,tempb));
+            X = te_crear(ingreso_normalizado_enteros(1,1000,tempb));          
             c_encolar(cola,X);
             i=i+1;
             temp2 = temp2 - 1;
@@ -36,8 +36,8 @@ void Randomizar(Cola cola,int num){
     srand(time(0));
     for (int i = 0; i < num; i++)
     {
-        X = te_crear(rand()%100 + 1);
-        c_encolar(cola,X);
+        X = te_crear(rand()%100 + 1);           // El valor que tendra X sera de entre 1 y 100, cambiar el %100 para determinar otro limite de generacion(el minimo es 0), se suma 1 para que el valor no sea 0 (causaria problemas en el punto 7)
+        c_encolar(cola,X);                      
     }
 }
 
