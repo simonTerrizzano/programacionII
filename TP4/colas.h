@@ -18,5 +18,5 @@ void c_mostrar(Cola cola);
 
 TipoElemento c_desencolar(Cola cola);
 TipoElemento c_recuperar (Cola cola);
-int longitud (Cola C);
+int c_longitud (Cola C);
 #endif // COLAS_H

@@ -58,7 +58,7 @@ void c_insertar_elemento(Cola cola, TipoElemento elemento_nuevo,  int pos)
     }
 
     // si la posicion es mayor que la posicion del ultimo elemento entonces sencillamente se lo pone como ultimo
-    if(pos > longitud(cola))
+    if(pos > c_longitud(cola))
 	c_encolar(cola, elemento_nuevo);
     // si la posicion que se ingreso es valida
     else if(posicion_es_valida)
@@ -137,7 +137,7 @@ Cola c_copiar_cola(Cola C)
 }
 
 int c_contar_elementos(Cola C){
-    return longitud(C);
+    return c_longitud(C);
 }
 
 Cola c_cola_invertida(Cola cola)

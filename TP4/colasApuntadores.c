@@ -51,7 +51,7 @@ TipoElemento c_desencolar(Cola cola){
     return elemento;
 }
 
-int longitud(Cola cola){
+int c_longitud(Cola cola){
     int i=0;
     struct Nodo *N = cola->frente;
     while (N!=NULL)
