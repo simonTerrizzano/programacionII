@@ -20,152 +20,66 @@ void atenderVentanillas(int tiempo,Cola ventanilla1,Cola ventanilla2,Cola ventan
 void atenderVentanillas(int tiempo,Cola ventanilla1,Cola ventanilla2,Cola ventanilla3){
     int terminoAtenderC1 = 1,terminoAtenderC2 = 1,terminoAtenderC3 = 1;
     int anteriorAtendido=0, atender;
-    int rempl = 999999;
     int contadorC1 = 1,contadorC2 = 1,contadorC3 = 1;
+    bool Vvacia1 = false,Vvacia2 = false, Vvacia3 = false;
     TipoElemento X,Y,Z;
     X = c_desencolar(ventanilla1);
     Y = c_desencolar(ventanilla2);
     Z = c_desencolar(ventanilla3);
-    while ((X->clave!=0 || Y->clave != 0 || Z->clave != 0) && (!c_es_vacia(ventanilla1) || !c_es_vacia(ventanilla2) || !c_es_vacia(ventanilla3)))
+    while (!Vvacia1 || !Vvacia2 || !Vvacia3)
     {
-        if (anteriorAtendido == 0)
+        if (!Vvacia1)
         {
-            atender = valorMasCercano(X->clave, Y->clave, Z->clave, tiempo);
-            if (X->clave == atender && X->clave != 0)
+            X->clave = X->clave - tiempo;
+            if (X->clave<=0 && !Vvacia1)
             {
-                terminoAtenderC1=0;
-                printf("Cliente %d , Cola 1 \n", contadorC1);
-                X->clave=X->clave-tiempo;
-                if (!c_es_vacia(ventanilla1) && X->clave<=0)
+                printf("Cliente %d Cola 1\n",contadorC1);
+                contadorC1++;
+                if (!c_es_vacia(ventanilla1))
                 {
                     X=c_desencolar(ventanilla1);
-                    terminoAtenderC1=1;
-                    contadorC1++;
                 }
-                anteriorAtendido = 1;
+                else{
+                    Vvacia1 = true;
+                }
             }
-            else if(Y->clave == atender && Y->clave != 0)
+        }
+        if(!Vvacia2){
+            Y->clave = Y->clave - tiempo;
+            if (Y->clave<=0 && !Vvacia2)
             {
-                terminoAtenderC2=0;
-                printf("Cliente %d , Cola 2 \n", contadorC2);
-                Y->clave=Y->clave-tiempo;
-                if (!c_es_vacia(ventanilla2) && Y->clave<=0)
+                printf("Cliente %d Cola 2\n",contadorC2);
+                contadorC2++;
+                if (!c_es_vacia(ventanilla2))
                 {
-                    Y=c_desencolar(ventanilla2);
-                    terminoAtenderC2=1;
-                    contadorC2++;
+                    Z=c_desencolar(ventanilla2);
                 }
-                anteriorAtendido = 2;
+                else{
+                    Vvacia2 = true;
+                }
             }
-            else if(Z->clave == atender && Z->clave != 0)
+        }
+        if (!Vvacia3)
+        {
+            Z->clave = Z->clave - tiempo;
+            if (Z->clave<=0 && !Vvacia3)
             {
-                terminoAtenderC3=0;
-                printf("Cliente %d , Cola 3 \n", contadorC3);
-                Z->clave=Z->clave-tiempo;
-                if (!c_es_vacia(ventanilla3) && Z->clave<=0)
+                printf("Cliente %d Cola 3\n",contadorC3);
+                contadorC3++;
+                if (!c_es_vacia(ventanilla3))
                 {
                     Z=c_desencolar(ventanilla3);
-                    terminoAtenderC3=1;
-                    contadorC3++;
                 }
-                anteriorAtendido = 3;
+                else{
+                    Vvacia3 = true;
+                }
             }
         }
-        else{
-            if(anteriorAtendido == 1 ){
-                atender = valorMasCercano(rempl , Y->clave, Z->clave, tiempo);
-                if(Y->clave == atender && Y->clave != 0)
-                {
-                    terminoAtenderC2=0;
-                    printf("Cliente %d , Cola 2 \n", contadorC2);
-                    Y->clave=Y->clave-tiempo;
-                    if (!c_es_vacia(ventanilla2) && Y->clave<=0)
-                    {
-                        Y=c_desencolar(ventanilla2);
-                        terminoAtenderC2=1;
-                        contadorC2++;
-                    }
-                    anteriorAtendido = 2;
-                }
-                else if(Z->clave == atender && Z->clave != 0)
-                {
-                    terminoAtenderC3=0;
-                    printf("Cliente %d , Cola 3 \n", contadorC3);
-                    Z->clave=Z->clave-tiempo;
-                    if (!c_es_vacia(ventanilla3) && Z->clave<=0)
-                    {
-                        Z=c_desencolar(ventanilla3);
-                        terminoAtenderC3=1;
-                        contadorC3++;
-                    }
-                    anteriorAtendido = 3;
-                }
-            }
-            else if(anteriorAtendido == 2 ){
-                atender = valorMasCercano(X->clave,rempl , Z->clave, tiempo);
-                if (X->clave == atender && X->clave != 0)
-                {
-                    terminoAtenderC1=0;
-                    printf("Cliente %d , Cola 1 \n", contadorC1);
-                    X->clave=X->clave-tiempo;
-                    if (!c_es_vacia(ventanilla1) && X->clave<=0)
-                    {
-                        X=c_desencolar(ventanilla1);
-                        terminoAtenderC1=1;
-                        contadorC1++;
-                    }
-                    anteriorAtendido = 1;
-                }
-                else if(Z->clave == atender && Z->clave != 0)
-                {
-                    terminoAtenderC3=0;
-                    printf("Cliente %d , Cola 3 \n", contadorC3);
-                    Z->clave=Z->clave-tiempo;
-                    if (!c_es_vacia(ventanilla3) && Z->clave<=0)
-                    {
-                        Z=c_desencolar(ventanilla3);
-                        terminoAtenderC3=1;
-                        contadorC3++;
-                    }
-                    anteriorAtendido = 3;
-                }
-            }
-            else if(anteriorAtendido == 3){
-                atender = valorMasCercano(X->clave, Y->clave, rempl , tiempo);
-                if (X->clave == atender && X->clave != 0)
-                {
-                    terminoAtenderC1=0;
-                    printf("Cliente %d , Cola 1 \n", contadorC1);
-                    X->clave=X->clave-tiempo;
-                    if (!c_es_vacia(ventanilla1) && X->clave<=0)
-                    {
-                        X=c_desencolar(ventanilla1);
-                        terminoAtenderC1=1;
-                        contadorC1++;
-                    }
-                    anteriorAtendido = 1;
-                }
-                else if(Y->clave == atender && Y->clave != 0)
-                {
-                    terminoAtenderC2=0;
-                    printf("Cliente %d , Cola 2 \n", contadorC2);
-                    Y->clave=Y->clave-tiempo;
-                    if (!c_es_vacia(ventanilla2) && Y->clave<=0)
-                    {
-                        Y=c_desencolar(ventanilla2);
-                        terminoAtenderC2=1;
-                        contadorC2++;
-                    }
-                    anteriorAtendido = 2;
-                }
-                //printf("%d",atender);
-            }
-            else{
-                return;
-            }
-        }
+        
+        
     }
     return;
+    
 }
 
 int main(int argc, char const *argv[])
