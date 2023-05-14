@@ -36,7 +36,7 @@ void Randomizar(Cola cola,int num){
     srand(time(0));
     for (int i = 0; i < num; i++)
     {
-        X = te_crear(rand()%100);
+        X = te_crear(rand()%100 + 1);
         c_encolar(cola,X);
     }
 }
