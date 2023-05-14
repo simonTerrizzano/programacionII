@@ -1,25 +1,8 @@
 #include "UtilidadesColas.c"
 #include "limits.h"
 
-int valorMasCercano(int a, int b, int c, int Obj);
-int valorMasCercano(int a, int b, int c, int Obj) {
-    int distanciaA = abs(a - Obj);
-    int distanciaB = abs(b - Obj);
-    int distanciaC = abs(c - Obj);
-
-    if (distanciaA <= distanciaB && distanciaA <= distanciaC) {
-        return a;
-    } else if (distanciaB <= distanciaC) {
-        return b;
-    } else {
-        return c;
-    }
-}
-
 void atenderVentanillas(int tiempo,Cola ventanilla1,Cola ventanilla2,Cola ventanilla3);
 void atenderVentanillas(int tiempo,Cola ventanilla1,Cola ventanilla2,Cola ventanilla3){
-    int terminoAtenderC1 = 1,terminoAtenderC2 = 1,terminoAtenderC3 = 1;
-    int anteriorAtendido=0, atender;
     int contadorC1 = 1,contadorC2 = 1,contadorC3 = 1;
     bool Vvacia1 = false,Vvacia2 = false, Vvacia3 = false;
     TipoElemento X,Y,Z;
@@ -102,6 +85,13 @@ int main(int argc, char const *argv[])
     printf("Ventanilla 3: ");
     c_mostrar(V3);
     printf("\n");
+    if (c_es_vacia(V1)||c_es_vacia(V2)||c_es_vacia(V3))
+    {
+        printf("No se permiten colas vacias");
+        system("PAUSE");
+        return -1;
+    }
+    
     printf("Cuanto tiempo se dispondra para atender las ventanillas?: ");
     tiempo = ingreso_normalizado_enteros(1,100,temp);
     atenderVentanillas(tiempo,V1,V2,V3);
