@@ -116,7 +116,7 @@ int main(int argc, char const *argv[])
     printf("La cola es la siguiente: \n");
     c_mostrar(cola);
     Divisores(cola);
-    printF("La complejidad algoritmica de la funcion Divisores sin contar las funciones de los TAD de colas es de O(n^6)");  //Complejidad algoritmica
+    printF("La complejidad algoritmica de la funcion Divisores sin contar las funciones de los TAD de colas es de O(n^4)");  //Complejidad algoritmica
     system("PAUSE");
     return 0;
 }
