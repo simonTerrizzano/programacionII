@@ -1,6 +1,3 @@
-#include "UtilidadesColas.c"
-#include "limits.h"
-
 int valorMasCercano(int a, int b, int c, int Obj);
 int valorMasCercano(int a, int b, int c, int Obj) {
     int distanciaA = abs(a - Obj);
@@ -72,7 +69,7 @@ void atenderVentanillas(int tiempo,Cola ventanilla1,Cola ventanilla2,Cola ventan
             }
         }
         else{
-            if(anteriorAtendido == 1 && (!c_es_vacia(ventanilla1) && !c_es_vacia(ventanilla2) && !c_es_vacia(ventanilla3))){
+            if(anteriorAtendido == 1 && (!c_es_vacia(ventanilla2) && !c_es_vacia(ventanilla3))){
                 atender = valorMasCercano(rempl , Y->clave, Z->clave, tiempo);
                 if(Y->clave == atender && Y->clave != 0)
                 {
@@ -101,7 +98,7 @@ void atenderVentanillas(int tiempo,Cola ventanilla1,Cola ventanilla2,Cola ventan
                     anteriorAtendido = 3;
                 }
             }
-            else if(anteriorAtendido == 2 && (!c_es_vacia(ventanilla1) && !c_es_vacia(ventanilla2) && !c_es_vacia(ventanilla3))){
+            else if(anteriorAtendido == 2 && (!c_es_vacia(ventanilla1) && !c_es_vacia(ventanilla3))){
                 atender = valorMasCercano(X->clave,rempl , Z->clave, tiempo);
                 if (X->clave == atender && X->clave != 0)
                 {
@@ -130,7 +127,7 @@ void atenderVentanillas(int tiempo,Cola ventanilla1,Cola ventanilla2,Cola ventan
                     anteriorAtendido = 3;
                 }
             }
-            else if(anteriorAtendido == 3 && (!c_es_vacia(ventanilla1) && !c_es_vacia(ventanilla2) && !c_es_vacia(ventanilla3))){
+            else if(anteriorAtendido == 3 && (!c_es_vacia(ventanilla1) || !c_es_vacia(ventanilla2))){
                 atender = valorMasCercano(X->clave, Y->clave, rempl , tiempo);
                 if (X->clave == atender && X->clave != 0)
                 {
@@ -158,6 +155,7 @@ void atenderVentanillas(int tiempo,Cola ventanilla1,Cola ventanilla2,Cola ventan
                     }
                     anteriorAtendido = 2;
                 }
+                printf("%d",atender);
             }
             else{
                 return;
@@ -193,3 +191,4 @@ int main(int argc, char const *argv[])
     system("PAUSE");
     return 0;
 }
+
