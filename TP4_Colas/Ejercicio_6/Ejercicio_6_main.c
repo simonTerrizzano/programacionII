@@ -90,6 +90,7 @@ int main(void)
         printf(" %i:%s ",x->clave,(char*)x->valor);
 
     }
-    
+    printf("\n\nDeterminamos que la complejidad algoritmica de este ejercicioes de O(n^a) siendo n el largo de la cola.");
+
     return 0;
 }

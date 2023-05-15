@@ -78,6 +78,7 @@ int main(void)
 
 
         printf("\n\n");
+printf("\n\nDeterminamos que la complejidad algoritmica de este ejercicioes de O(n^2) siendo n el largo de la cola.");
 
     return 0;
 }
