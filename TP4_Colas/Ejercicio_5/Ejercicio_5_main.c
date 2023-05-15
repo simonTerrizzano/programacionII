@@ -9,6 +9,7 @@ int main(void)
     printf("La cola es la siguiente: \n");
     c_mostrar(cola);
     Divisores(cola);
+    printF("La complejidad algoritmica de la funcion Divisores sin contar las funciones de los TAD de colas es de O(n^a)");  //Complejidad algoritmica
     system("PAUSE");
     return 0;
 }
