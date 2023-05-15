@@ -36,10 +36,10 @@ int main(void)
                 printf("Quedan %i intentos.\n", intentos);
                 printf("Ingrese el %iº elemento: ",i+1);
                 x = te_crear(ingreso_normalizado_enteros(1,100));
-                if (numeroyaencontrado(x->clave,arrPilas,j)!=true)
+                if (numeroyaencontrado(x->clave,arrPilas,j)!=true)//validamos que no se haya ingresado el número anteriormente
                 {
                     p_apilar(pila,x);
-                    arrPilas[j]=x->clave;
+                    arrPilas[j]=x->clave;//se agrega el elemento al arreglo para que no se pueda ingresar otra vez
                     j++;
                     salir=true;
                 }else{
@@ -65,10 +65,10 @@ int main(void)
                 printf("Quedan %i intentos.\n", intentos);
                 printf("Ingrese el %iº elemento: ",i+1);
                 x = te_crear(ingreso_normalizado_enteros(1,100));
-                if (numeroyaencontrado(x->clave,arrColas,j)!=true)
+                if (numeroyaencontrado(x->clave,arrColas,j)!=true)//validamos que no se haya ingresado el número anteriormente
                 {
                     c_encolar(cola,x);
-                    arrColas[j]=x->clave;
+                    arrColas[j]=x->clave;//se agrega el elemento al arreglo para que no se pueda ingresar otra vez
                     j++;
                     salir=true;
                 }else{
@@ -85,7 +85,7 @@ int main(void)
 
     for (i = 1; i <= l_longitud(LR); i++)
     {
-        x=l_recuperar(LR,i);
+        x=l_recuperar(LR,i);//recorremos la lista
 
         printf(" %i:%s ",x->clave,(char*)x->valor);
 
