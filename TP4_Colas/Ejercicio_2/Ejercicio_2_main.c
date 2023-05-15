@@ -23,7 +23,7 @@ int main(void)
     c_mostrar(cola);
     printf("\n");
     printf("Ingrese una posición donde insertar el número que buscó anteriormente: ");
-    int pos = ingreso_normalizado_enteros(1,TAMANIO_MAXIMO);
+    int pos = ingreso_normalizado_enteros(1,TAMANIO_MAXIMO_COLAS);
     int resultado = colarse(cola,X,pos);
     
     c_mostrar(cola);

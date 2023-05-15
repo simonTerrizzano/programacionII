@@ -16,7 +16,7 @@ typedef struct ColaRep *Cola;
 Cola c_crear()
 {
     Cola nueva_cola = (Cola) malloc(sizeof(struct ColaRep));
-    nueva_cola->valores = (TipoElemento*) malloc(TAMANIO_MAXIMO * sizeof(TipoElemento));
+    nueva_cola->valores = (TipoElemento*) malloc(TAMANIO_MAXIMO_COLAS * sizeof(TipoElemento));
     nueva_cola->frente = 0;
     nueva_cola->final = 0;
     return nueva_cola;
@@ -27,7 +27,7 @@ bool c_es_vacia(Cola cola){
 }
 
 bool c_es_llena (Cola cola){
-    return (cola->final == TAMANIO_MAXIMO);
+    return (cola->final == TAMANIO_MAXIMO_COLAS);
 }
 
 void c_encolar(Cola C, TipoElemento elemento){
@@ -96,7 +96,7 @@ int c_longitud (Cola C){
     }
     else if (c_es_llena(C))
     {
-        return TAMANIO_MAXIMO;
+        return TAMANIO_MAXIMO_COLAS;
     }
     else{
         int contador = 0;

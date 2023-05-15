@@ -10,15 +10,15 @@ struct ColaRep {
 };
 // Funcion interna que hace avanzar el frente y el final hacia adelante
 int paso (int posicion) {
-    return ((posicion % TAMANIO_MAXIMO)+1);
+    return ((posicion % TAMANIO_MAXIMO_COLAS)+1);
 }
 Cola c_crear() {
     Cola nueva_cola = (Cola) malloc(sizeof(struct ColaRep));
-    nueva_cola->valores = (TipoElemento*)calloc((TAMANIO_MAXIMO + 1), sizeof(TipoElemento));
+    nueva_cola->valores = (TipoElemento*)calloc((TAMANIO_MAXIMO_COLAS + 1), sizeof(TipoElemento));
     // Esto es fundamental ya que esta vacia si hacemos un paso con el final y nos
     // encontramos con el frente. No se usa el casillero “0”.
     nueva_cola->frente = 1;
-    nueva_cola->final = TAMANIO_MAXIMO;
+    nueva_cola->final = TAMANIO_MAXIMO_COLAS;
     return nueva_cola;
 }
 // Operación encolar de complejidad constante. ¿ Porque ?
@@ -82,7 +82,7 @@ int c_longitud (Cola C){
     }
     else if (c_es_llena(C))
     {
-        return TAMANIO_MAXIMO;
+        return TAMANIO_MAXIMO_COLAS;
     }
     else{
         int contador = 0;

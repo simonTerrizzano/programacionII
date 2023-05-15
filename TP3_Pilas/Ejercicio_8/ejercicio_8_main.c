@@ -11,7 +11,7 @@ int main(void)
 
     TipoElemento elemento;
 
-    printf("Ingrese la cantidad de elementos de la Pila entre 0 y %i",TAMANIO_MAXIMO);
+    printf("Ingrese la cantidad de elementos de la Pila entre 0 y %i",TAMANIO_MAXIMO_PILAS);
     cantingresoP1 = ingreso_normalizado_enteros(0,10);
 
 

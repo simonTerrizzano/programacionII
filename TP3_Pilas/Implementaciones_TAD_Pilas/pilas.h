@@ -4,9 +4,9 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include "tipo_elemento.h"
+#include "C:\Users\PC\Documents\ProgramacionII\programacionII\TipoElemento\tipo_elemento.h"
 
-static int TAMANIO_MAXIMO = 10;
+static int TAMANIO_MAXIMO_PILAS = 10;
 
 
 typedef struct PilaRep *Pila;

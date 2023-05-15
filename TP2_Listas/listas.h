@@ -2,7 +2,7 @@
 #define LISTAS_H
 
 #include <stdbool.h>
-#include "tipo_elemento.h"
+#include "C:\Users\PC\Documents\ProgramacionII\programacionII\TipoElemento\tipo_elemento.h"
 
 struct ListaRep;
 typedef struct ListaRep *Lista;

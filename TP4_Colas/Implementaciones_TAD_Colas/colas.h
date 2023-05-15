@@ -2,9 +2,9 @@
 #define COLAS_H
 
 #include <stdbool.h>
-#include "tipo_elemento.h"
+#include "C:\Users\PC\Documents\ProgramacionII\programacionII\TipoElemento\tipo_elemento.h"
 
-static const int TAMANIO_MAXIMO = 10;
+static const int TAMANIO_MAXIMO_COLAS = 10;
 
 struct ColaRep;
 typedef struct ColaRep *Cola;

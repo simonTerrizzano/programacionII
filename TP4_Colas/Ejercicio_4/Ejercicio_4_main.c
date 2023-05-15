@@ -26,7 +26,7 @@ int main(void)
     else
     {
         printf("Ingrese cantidad de elementos para cargar en la cola.\n");
-        cantidad = ingreso_normalizado_enteros(0,   TAMANIO_MAXIMO);
+        cantidad = ingreso_normalizado_enteros(0,   TAMANIO_MAXIMO_COLAS);
 
         for (int i = 0; i < cantidad; i++)
         {

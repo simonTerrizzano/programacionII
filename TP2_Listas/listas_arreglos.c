@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-static const int TAMANIO_MAXIMO = 10;
+static const int TAMANIO_MAXIMO_LISTAS = 10;
 
 struct ListaRep {
     TipoElemento *valores;
@@ -24,7 +24,7 @@ struct IteradorRep {
 Lista l_crear() {
     Lista nueva_lista = (Lista) malloc(sizeof(struct ListaRep));
     // TODO hacer flexible y que la lista crezca sola
-    nueva_lista->valores = (TipoElemento*)calloc(TAMANIO_MAXIMO, sizeof(TipoElemento));
+    nueva_lista->valores = (TipoElemento*)calloc(TAMANIO_MAXIMO_LISTAS, sizeof(TipoElemento));
     nueva_lista->cantidad = 0;
     return nueva_lista;
 }
@@ -34,7 +34,7 @@ bool l_es_vacia(Lista lista) {
 }
 
 bool l_es_llena(Lista lista) {
-    return (lista->cantidad == TAMANIO_MAXIMO);
+    return (lista->cantidad == TAMANIO_MAXIMO_LISTAS);
 }
 
 int l_longitud(Lista lista) {

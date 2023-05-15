@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-static const int TAMANIO_MAXIMO = 100;
+static const int TAMANIO_MAXIMO_LISTAS = 100;
 static const int NULO = -1;
 struct Nodo {
     TipoElemento datos;
@@ -24,7 +24,7 @@ bool l_es_vacia(Lista lista){
 }
 
 bool l_es_llena(Lista lista){
-    return lista->libre==TAMANIO_MAXIMO;
+    return lista->libre==TAMANIO_MAXIMO_LISTAS;
 }
 
 int l_longitud(Lista lista){
@@ -67,16 +67,16 @@ TipoElemento l_recuperar(Lista lista, int pos){
 
 Lista l_crear () {
     Lista nueva_lista = (Lista) malloc(sizeof(struct ListaRep));
-    nueva_lista->cursor = (struct Nodo*)calloc(TAMANIO_MAXIMO, sizeof(struct Nodo));
+    nueva_lista->cursor = (struct Nodo*)calloc(TAMANIO_MAXIMO_LISTAS, sizeof(struct Nodo));
     nueva_lista->cantidad = 0;
     nueva_lista->inicio = NULO;
     // Encadeno todos los libres
-    for (int i = 0; i < TAMANIO_MAXIMO-2; i++) {
+    for (int i = 0; i < TAMANIO_MAXIMO_LISTAS-2; i++) {
     nueva_lista->cursor[i].siguiente = i + 1;
     }
     nueva_lista->libre = 0; //Toma todos los nodos como libres
     nueva_lista->inicio = NULO;
-    nueva_lista->cursor[TAMANIO_MAXIMO-1].siguiente = NULO;
+    nueva_lista->cursor[TAMANIO_MAXIMO_LISTAS-1].siguiente = NULO;
     // retorno la lista creada
     return nueva_lista;
 }

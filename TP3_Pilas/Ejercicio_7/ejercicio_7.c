@@ -17,8 +17,8 @@ Pila elemEnComun(Pila P1,Pila P2){
     TipoElemento ElemP2;
     Pila Pila_Aux_P1=p_crear();
     Pila Pila_Aux_P2=p_crear();
-    int vector[TAMANIO_MAXIMO];
-    memset(vector, 0, TAMANIO_MAXIMO*sizeof(int));
+    int vector[TAMANIO_MAXIMO_PILAS];
+    memset(vector, 0, TAMANIO_MAXIMO_PILAS*sizeof(int));
     int k=0;
 
     while (p_es_vacia(P1)!=true){

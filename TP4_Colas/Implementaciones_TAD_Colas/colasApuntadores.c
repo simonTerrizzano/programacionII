@@ -67,7 +67,7 @@ bool c_es_vacia(Cola cola){
 }
 
 bool c_es_llena(Cola cola){
-    return longitud(cola)==TAMANIO_MAXIMO;
+    return longitud(cola)==TAMANIO_MAXIMO_COLAS;
 }
 
 void c_mostrar(Cola cola){

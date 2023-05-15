@@ -4,8 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "C:\Users\PC\Documents\ProgramacionII\programacionII\programacionII\TP3_Pilas\Implementaciones_TAD_Pilas\pilas.h"
-#include "C:\Users\PC\Documents\ProgramacionII\programacionII\programacionII\TP3_Pilas\Implementaciones_TAD_Pilas\tipo_elemento.h"
+#include "pilas.h"
 
 // p_devolver: desapila todo lo que este en p_src y lo apila en p_dest
 void p_devolver(Pila p_dest, Pila p_src);

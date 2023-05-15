@@ -65,7 +65,7 @@ int longitud(Pila pila){
 }
 
 bool p_es_llena(Pila pila){
-    return (longitud(pila)==TAMANIO_MAXIMO);
+    return (longitud(pila)==TAMANIO_MAXIMO_PILAS);
 }
 bool p_es_vacia (Pila pila) {
     return pila->tope == NULL;

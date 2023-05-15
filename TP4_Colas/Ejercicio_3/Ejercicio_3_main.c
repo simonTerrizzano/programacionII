@@ -21,7 +21,7 @@ int main(void)
     if (eleccion == 1)
     {
         srand(time(0));
-        for (int i = 1; i <= TAMANIO_MAXIMO/2; i++)
+        for (int i = 1; i <= TAMANIO_MAXIMO_COLAS/2; i++)
         {
             x = te_crear(rand()%100);
             c_encolar(C1,x);
@@ -32,7 +32,7 @@ int main(void)
     else
     {
         printf("Ingrese cantidad de elementos para cargar en la 1ra cola.\n");
-        cantidad = ingreso_normalizado_enteros(0,   TAMANIO_MAXIMO/2);
+        cantidad = ingreso_normalizado_enteros(0,   TAMANIO_MAXIMO_COLAS/2);
 
         for (i = 0; i < cantidad; i++)
         {
@@ -42,7 +42,7 @@ int main(void)
             c_encolar(C1, x);
         }
         printf("Ingrese cantidad de elementos para cargar en la 2da cola.\n");
-        cantidad = ingreso_normalizado_enteros(0,   TAMANIO_MAXIMO/2);
+        cantidad = ingreso_normalizado_enteros(0,   TAMANIO_MAXIMO_COLAS/2);
 
         for (i = 0; i < cantidad; i++)
         {

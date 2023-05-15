@@ -10,8 +10,8 @@ Cola c_noRepetidos(Cola cola){
     Cola cBusqueda=c_crear();
     TipoElemento elemento;
     TipoElemento elemento_a_contar;
-    int arreglo[TAMANIO_MAXIMO];
-    memset(arreglo, 0, TAMANIO_MAXIMO*sizeof(int));
+    int arreglo[TAMANIO_MAXIMO_COLAS];
+    memset(arreglo, 0, TAMANIO_MAXIMO_COLAS*sizeof(int));
     int k=0;
     int contador;
     int j=0;
