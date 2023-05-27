@@ -1,6 +1,6 @@
 #include "ejercicio_6.h"
 
-Lista comunPilaCola(Cola cola, Pila pila){
+Lista comunPilaCola(Cola cola, Pila pila){//si la cola o la pila están vacias que retorne una lista vacia
     if (c_es_vacia(cola)||p_es_vacia(pila))
     {
         return NULL;
@@ -48,12 +48,13 @@ Lista comunPilaCola(Cola cola, Pila pila){
         elemento_a_buscar=c_desencolar(CBusqueda);
         contadorCola++;
         contadorPila=0;
-        while (!p_es_vacia(pila))
+        while (!p_es_vacia(pila))//hace una vuelta a la pila por cada elemento de la cola
         {
             contadorPila++;
             elemento=p_desapilar(pila);
             p_apilar(Paux,elemento);
-            if (elemento_a_buscar->clave==elemento->clave)
+            if (elemento_a_buscar->clave==elemento->clave)//si coiciden las claves castea las posiciones a string
+                                                          //y los concatena con un ':' para darle el formato a mostrar
             {
                 char posiciones[20];
                 sprintf(posPila,"%d", contadorPila);
@@ -62,13 +63,14 @@ Lista comunPilaCola(Cola cola, Pila pila){
                 strcat(strcpy(posiciones, posiciones), posCola);
                 for (int i = 0;i < strlen(posiciones)-1; i++)
                 {
-                    arrpos[indice][i]=posiciones[i];
+                    arrpos[indice][i]=posiciones[i];//copia las posiciones a un arreglo que contiene todas las posiciones
+                                                    //de los elementos que que coincidieron
                 }
                 
-                elemento_a_guardar=te_crear_con_valor(elemento->clave, &arrpos[indice]);
+                elemento_a_guardar=te_crear_con_valor(elemento->clave, &arrpos[indice]);//guarda clave y posiciones
                 indice++;
 
-                l_agregar(LR,elemento_a_guardar);
+                l_agregar(LR,elemento_a_guardar);//agregamos el elemento a la lista resuultado
             }
         }
 
@@ -78,10 +80,10 @@ Lista comunPilaCola(Cola cola, Pila pila){
         {
             elemento=p_desapilar(Paux);
             p_apilar(pila,elemento);
-        }
+        }//devolvemos la pila
         
     }
-    return LR;
+    return LR;//retornamos la lista resultado
     
 }
 

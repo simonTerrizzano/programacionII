@@ -30,20 +30,21 @@ Cola c_noRepetidos(Cola cola){
         elemento=c_desencolar(cBusqueda);
         elemento_a_contar=te_crear(elemento->clave);
         
-        while (c_es_vacia(cAux)!=true && numeroyaencontrado(elemento_a_contar->clave,arreglo,k)!=true)
+        while (c_es_vacia(cAux)!=true && numeroyaencontrado(elemento_a_contar->clave,arreglo,k)!=true)//por cada elemento de la 
+        de la cola recorre la cola entera a excepción de los elementos la buscados//
         {
             elemento=c_desencolar(cAux);
             c_encolar(cola,elemento);
             if (elemento->clave==elemento_a_contar->clave)
             {
-                contador++;
+                contador++;//cuenta las veces que se repite el elemento en la cola
             }
             
         }
-        if (contador==1)
+        if (contador==1)//si el elemento se contó solo una vez se encola
         {
             c_encolar(CR,elemento_a_contar); 
-        }else{
+        }else{//si se contó más de una vez se agrega al arreglo para que no lo vuelva a contar
             arreglo[k]=elemento_a_contar->clave; 
             k++;
         }
@@ -51,19 +52,19 @@ Cola c_noRepetidos(Cola cola){
         while (c_es_vacia(cola)!=true)
         {
             elemento=c_desencolar(cola);
-            c_encolar(cAux,elemento);
+            c_encolar(cAux,elemento);//devulvemos la cola para volver a buscar
         }
 
     }
     while (c_es_vacia(cAux)!=true)
     {
         elemento=c_desencolar(cAux);
-        c_encolar(cola,elemento);
+        c_encolar(cola,elemento);//recuperamos la cola
     }
     
     
     
-    return CR;
+    return CR;//retornamos la cola sin repeticiones
 }
 
 /*
