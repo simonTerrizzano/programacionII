@@ -17,9 +17,12 @@ void cargaenbucle(int cant_elem, int max_rango, int rep){
         abb_a_avl(abb_raiz(a),&Aavl);
         altint(abb_raiz(a),&altura_abb,0);
         altint(avl_raiz(Aavl),&altura_avl,0);
+        printf("\n La altura del Arbol Binario de Búqueda es de %i\n",altura_abb);
         elemento=te_crear(altura_abb);
         l_agregar(LRabb,elemento);
+        printf("\n La altura del Arbol Binario de Búqueda Auto-Balanciado es de %i\n",altura_avl);
         elemento=te_crear(altura_avl);
+        
         l_agregar(LRavl,elemento);
         cont_rep++;
     }
