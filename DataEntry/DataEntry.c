@@ -211,16 +211,25 @@ void Cargar_Arbol(ArbolBinarioBusqueda A, int cant, int rango){
     int arreglo[200];
     memset(arreglo, 0, 200*sizeof(int));
     int i=0;
+    bool div=true;
     while(cont<cant){
         srand(time(NULL)); 
-	    n=rand() % rango;
+	n=rand() % rango;
         X= te_crear(n);
         cant_elem = abb_cantidad_elementos(A);
         cant_elem_act=cant_elem;
         if (!numeroyaencontrado(n,arreglo,i))
         {
+	    if(div==true){
+	    X->clave=X->clave/2;
             abb_insertar(A,X);
             arreglo[i]=n;
+	    div=false;
+	    }else{
+	    abb_insertar(A,X);
+            arreglo[i]=n;
+	    div=true;
+
             i++;
         }
         
