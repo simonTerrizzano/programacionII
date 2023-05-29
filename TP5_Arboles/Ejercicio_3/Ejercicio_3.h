@@ -1,7 +1,6 @@
 #ifndef Ejercicio_3
 #define Ejercicio_3
 
-#include "C:\Users\PC\Documents\ProgramacionII\programacionII\TP5_Arboles\Implementaciones_TAD_Arboles\nodo.h"
 #include "C:\Users\PC\Documents\ProgramacionII\programacionII\TP5_Arboles\Implementaciones_TAD_Arboles\arbol-binario-busqueda.h"
 #include <stdbool.h>
 

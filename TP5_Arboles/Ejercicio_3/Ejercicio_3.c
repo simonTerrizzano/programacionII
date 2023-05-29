@@ -2,7 +2,7 @@
 
 void a_padre_nodo(NodoArbol NA, NodoArbol* NP, TipoElemento te){
 
-    if (N==NULL){
+    if (NA==NULL){
     }
     else{
         if (NA->hd->datos->clave==te->clave || NA->hi->datos->clave-==te->clave)

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-static const int TAMANIO_MAXIMO_LISTAS = 10;
+static const int TAMANIO_MAXIMO_LISTAS = 200;
 
 struct ListaRep {
     TipoElemento *valores;

@@ -39,7 +39,10 @@
     "pilas.h": "c",
     "dataentry.h": "c",
     "tipo_elemento.h": "c",
-    "funcionalidades_extra_pila.c": "cpp"
+    "funcionalidades_extra_pila.c": "cpp",
+    "ejercicio_9.h": "c",
+    "arbol-binario-busqueda.h": "c",
+    "arbol-binario.h": "c"
   },
   "C_Cpp.dimInactiveRegions": false,
   "C_Cpp.errorSquiggles": "disabled"

@@ -2,12 +2,12 @@
 
 
 NodoArbol n_hijoizquierdo(NodoArbol N){
-    return N->hi->datos;
+    return N->hi;
 }
 
 
 NodoArbol n_hijoderecho(NodoArbol N){
-    return N->hd->datos;
+    return N->hd;
 }
 
 
@@ -17,6 +17,7 @@ NodoArbol n_crear(TipoElemento te){
     nuevo_nodo->hd = NULL;
     nuevo_nodo->hi = NULL;
     nuevo_nodo->FE=0;
+    return nuevo_nodo;
 }
 
 

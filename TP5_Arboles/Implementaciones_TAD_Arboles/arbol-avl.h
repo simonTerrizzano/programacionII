@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "D:\Mario\Prog_2_2009\2023\TADs\Arboles\nodo.h"
+#include "nodo.h"
 
 struct ArbolAVLRep {
     NodoArbol raiz;

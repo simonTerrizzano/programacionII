@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "C:\Users\PC\Documents\ProgramacionII\programacionII\TP5_Arboles\TAD_Arboles\nodo.h"
+#include "nodo.h"
 #include "C:\Users\PC\Documents\ProgramacionII\programacionII\TipoElemento\tipo_elemento.h"
 
 struct ArbolBinarioBusquedaRep;

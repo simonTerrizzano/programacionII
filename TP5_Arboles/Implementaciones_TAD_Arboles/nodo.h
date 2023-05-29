@@ -1,5 +1,6 @@
 #ifndef NODO_H
 #define NODO_H
+#include <stdlib.h>
 #include "C:\Users\PC\Documents\ProgramacionII\programacionII\TipoElemento\tipo_elemento.h"
 
 struct NodoArbolRep {

@@ -1,5 +1,5 @@
 #include "arbol-binario-busqueda.h"
-static const int TAMANIO_MAXIMO = 100;
+static const int TAMANIO_MAXIMO = 2000;
 
 
 struct ArbolBinarioBusquedaRep {
@@ -81,8 +81,6 @@ void abb_insertar(ArbolBinarioBusqueda a, TipoElemento te) {
             printf("Clave Duplicada: %d \n", te->clave);
         }
     }
-
-//    abb_insertar_recursivo(a, abb_raiz(a), te);
 }
 
 NodoArbol abb_buscar_minimo(NodoArbol nodoArbol) {

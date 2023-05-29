@@ -200,5 +200,89 @@ bool esFlotante(char* cadena){
         res=true;
     }
     
+}
 
+void Cargar_Arbol(ArbolBinarioBusqueda A, int cant, int rango){
+    TipoElemento X;
+    int n;
+    int cont=0;
+    int cant_elem;
+    int cant_elem_act;
+    int arreglo[200];
+    memset(arreglo, 0, 200*sizeof(int));
+    int i=0;
+    while(cont<cant){
+        srand(time(NULL)); 
+	    n=rand() % rango;
+        X= te_crear(n);
+        cant_elem = abb_cantidad_elementos(A);
+        cant_elem_act=cant_elem;
+        if (!numeroyaencontrado(n,arreglo,i))
+        {
+            abb_insertar(A,X);
+            arreglo[i]=n;
+            i++;
+        }
+        
+        cant_elem = abb_cantidad_elementos(A);
+        if (cant_elem_act==cant_elem)
+        {
+            cont--;
+        }
+        
+        cont++;
+    }    
+}
+
+
+void pre_orden(NodoArbol N){
+    TipoElemento x;
+    if (N == NULL) {
+        printf(".");
+    }
+    else {
+        x = n_recuperar(N);
+        printf(" %d", x->clave);
+        pre_orden(n_hijoizquierdo(N));
+        pre_orden(n_hijoderecho(N));
+    }
+}
+
+//Muestra el arbol a partir de un nodo (de ahi hacia abajo)
+void in_orden(NodoArbol N){
+    TipoElemento x;
+    if (N == NULL) {
+        printf(".");
+    }
+    else {
+        in_orden(n_hijoizquierdo(N));
+        x = n_recuperar(N);
+        printf(" %d", x->clave);
+        in_orden(n_hijoderecho(N));
+    }
+}
+
+//Muestra el arbol a partir de un nodo (de ahi hacia abajo)
+void post_orden(NodoArbol N){
+    TipoElemento x;
+    if (N == NULL) {
+        printf(".");
+    }
+    else {
+        post_orden(n_hijoizquierdo(N));
+        post_orden(n_hijoderecho(N));
+        x = n_recuperar(N);
+        printf(" %d", x->clave);
+    }
+}
+
+bool numeroyaencontrado(int numero,int *arreglo,int n){
+    for (int i = 0; i < n; i++)
+    {
+        if (numero==arreglo[i])
+        {
+            return true;
+        }
+    }
+    return false;
 }

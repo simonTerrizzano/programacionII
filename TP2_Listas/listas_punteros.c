@@ -1,7 +1,7 @@
 #include "listas.h"
 #include <stdlib.h>
 #include <stdio.h>
-static const int TAMANIO_MAXIMO_LISTAS = 100;
+static const int TAMANIO_MAXIMO_LISTAS = 200;
 struct Nodo { // Se agrega el concepto de Nodo
     TipoElemento datos;
     struct Nodo *siguiente;
