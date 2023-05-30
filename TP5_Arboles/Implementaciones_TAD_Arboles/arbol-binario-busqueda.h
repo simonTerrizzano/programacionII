@@ -23,6 +23,8 @@ int abb_cantidad_elementos(ArbolBinarioBusqueda a);
 
 void abb_insertar(ArbolBinarioBusqueda a, TipoElemento te);
 
+NodoArbol abb_insertar_recursivo(ArbolBinarioBusqueda a, NodoArbol pa, TipoElemento te);
+
 void abb_eliminar(ArbolBinarioBusqueda a, int claveABorrar);
 
 TipoElemento abb_buscar(ArbolBinarioBusqueda a, int clave);

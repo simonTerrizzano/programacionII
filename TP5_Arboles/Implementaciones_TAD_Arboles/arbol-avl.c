@@ -1,6 +1,7 @@
+#include "nodo.h"
 #include "arbol-avl.h"
 
-static const int TAMANIO_MAXIMO = 100;
+static const int TAMANIO_MAXIMO = 2000;
 
 NodoArbol avl_rotar_derecha(NodoArbol nodo);
 
@@ -52,7 +53,7 @@ NodoArbol avl_crear_nodo(TipoElemento te) {
     na->datos = te;
     na->hi = NULL;
     na->hd = NULL;
-
+    na->FE = 0;
     return na;
 }
 

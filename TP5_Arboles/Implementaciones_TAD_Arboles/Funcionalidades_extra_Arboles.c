@@ -136,8 +136,8 @@ void altint(NodoArbol Q, int *h, int c){
         }
     }
     else {
-        altint(n_hijoizquierdo(Q), h, c++);
-        altint(n_hijoderecho(Q), h, c++);
+        altint(n_hijoizquierdo(Q), h, c+1);
+        altint(n_hijoderecho(Q), h, c+1);
     }
 }
 

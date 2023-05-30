@@ -4,59 +4,57 @@ void cargaenbucle(int cant_elem, int max_rango, int rep){
     int cont_rep=0;
     int altura_abb=0;
     int altura_avl=0;
+    int cont_lista=0;
+    int max_abb=-1;
+    int max_avl=-1;
+    int min_abb=201;
+    int min_avl=201;
+    int suma_abb=0;
+    int suma_avl=0;
+    float promedio_abb;
+    float promedio_avl;
 
-    Lista LRabb = l_crear();
-    Lista LRavl = l_crear();
     TipoElemento elemento;
 
     while (cont_rep<rep)
     {
         ArbolBinarioBusqueda a=abb_crear();
-        ArbolAVL Aavl;
+        ArbolAVL Aavl=avl_crear();
         Cargar_Arbol(a,cant_elem,max_rango);
         abb_a_avl(abb_raiz(a),&Aavl);
         altint(abb_raiz(a),&altura_abb,0);
         altint(avl_raiz(Aavl),&altura_avl,0);
         elemento=te_crear(altura_abb);
-        l_agregar(LRabb,elemento);
+        max_abb = maximo(max_abb,elemento->clave);
+        min_abb = minimo(min_abb,elemento->clave);
+        suma_abb = suma_abb + altura_abb;
         elemento=te_crear(altura_avl);
-        l_agregar(LRavl,elemento);
+        max_avl = maximo(max_avl,elemento->clave);
+        min_avl = minimo(min_avl,elemento->clave);
+        suma_avl = suma_avl + altura_avl;
+        free(a);
+        free(Aavl);
+        printf("Altura del Arbol Binario de Búsqueda es %i \n",altura_abb);
+        printf("Altura del Arbol Binario de Búsqueda Auto-Balanceado es %i \n",altura_avl);
+
         cont_rep++;
     }
+
+    promedio_abb=suma_abb/rep;  
+    promedio_avl=suma_avl/rep;
 
     printf("\nAnalisis de los datos del Arbol Binario de Búsqueda\n");
     printf("---------------------------------------------------");
 
-    analisisDatos(LRabb);
+    printf("\nAltura máxima %i \n",max_abb);
+    printf("Altura mínima %i \n",min_abb);
+    printf("\n Promedio de Alturas %.1f \n\n",promedio_abb);
 
     printf("Analisis de los datos del Arbol Binario de Búsqueda Auto-Balanceado\n");
     printf("-------------------------------------------------------------------");
-    analisisDatos(LRavl);
-}
 
-void analisisDatos(Lista lista){
+    printf("\nAltura máxima %i \n",max_avl);
+    printf("Altura mínima %i \n",min_avl);
+    printf("\n Promedio de Alturas %.1f \n\n",promedio_avl);
 
-    int cont_lista=0;
-    int max=-1;
-    int min=200;
-    int suma=0;
-    float promedio;
-
-    TipoElemento elemento;
-    
-
-    while (cont_lista<l_longitud(lista))
-    {
-        cont_lista++;
-        elemento = l_recuperar(lista,cont_lista);
-        suma = suma + elemento->clave;
-        max = maximo(max,elemento->clave);
-        min = minimo(min,elemento->clave);
-    }
-
-    promedio=suma/l_longitud(lista);   
-    
-    printf("\nAltura máxima %i \n",max);
-    printf("Altura mínima %i \n",min);
-    printf("\n Promedio de Alturas %.1f \n\n",promedio);
 }

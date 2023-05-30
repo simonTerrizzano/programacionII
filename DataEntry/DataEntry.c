@@ -208,23 +208,17 @@ void Cargar_Arbol(ArbolBinarioBusqueda A, int cant, int rango){
     int cont=0;
     int cant_elem;
     int cant_elem_act;
-    int arreglo[200];
-    memset(arreglo, 0, 200*sizeof(int));
-    int i=0;
     while(cont<cant){
         srand(time(NULL)); 
 	    n=rand() % rango;
         X= te_crear(n);
-        cant_elem = abb_cantidad_elementos(A);
-        cant_elem_act=cant_elem;
-        if (!numeroyaencontrado(n,arreglo,i))
-        {
-            abb_insertar(A,X);
-            arreglo[i]=n;
-            i++;
-        }
-        
-        cant_elem = abb_cantidad_elementos(A);
+
+        cant_elem_act = abb_cantidad_elementos(A);
+        cant_elem=cant_elem_act;
+
+        abb_insertar_recursivo(A,abb_raiz(A),X);
+      
+        cant_elem_act = abb_cantidad_elementos(A);
         if (cant_elem_act==cant_elem)
         {
             cont--;
@@ -233,7 +227,6 @@ void Cargar_Arbol(ArbolBinarioBusqueda A, int cant, int rango){
         cont++;
     }    
 }
-
 
 void pre_orden(NodoArbol N){
     TipoElemento x;
