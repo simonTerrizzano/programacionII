@@ -208,9 +208,10 @@ void Cargar_Arbol(ArbolBinarioBusqueda A, int cant, int rango){
     int cont=0;
     int cant_elem;
     int cant_elem_act;
+
     while(cont<cant){
         srand(time(NULL)); 
-	    n=rand() % rango;
+	n=rand() % rango;
         X= te_crear(n);
 
         cant_elem_act = abb_cantidad_elementos(A);

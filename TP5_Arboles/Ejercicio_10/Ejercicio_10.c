@@ -24,6 +24,7 @@ void cargaenbucle(int cant_elem, int max_rango, int rep){
         abb_a_avl(abb_raiz(a),&Aavl);
         altint(abb_raiz(a),&altura_abb,0);
         altint(avl_raiz(Aavl),&altura_avl,0);
+        printf("\n La altura del Arbol Binario de Búqueda es de %i\n",altura_abb);
         elemento=te_crear(altura_abb);
         max_abb = maximo(max_abb,elemento->clave);
         min_abb = minimo(min_abb,elemento->clave);
@@ -58,3 +59,4 @@ void cargaenbucle(int cant_elem, int max_rango, int rep){
     printf("\n Promedio de Alturas %.1f \n\n",promedio_avl);
 
 }
+
