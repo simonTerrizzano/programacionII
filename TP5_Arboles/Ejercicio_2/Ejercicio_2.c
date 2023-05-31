@@ -1,6 +1,6 @@
 #include "ejercicio_2.h"
 
-Lista hojainterfaz(ArbolBinarioBusqueda){
+Lista hoja_interfaz(ArbolBinarioBusqueda a){
     Lista LR = l_crear();
     a_retornar_hojas(abb_raiz(a),LR);
 
@@ -18,8 +18,8 @@ void a_retornar_hojas(NodoArbol N, Lista LR){
             elemento = n_recuperar(N);
             l_agregar(LR,elemento);
         }
-        a_retornar_hojas(n_hijoizquierdo(N));
-        a_retornar_hojas(n_hijoderecho(N));
+        a_retornar_hojas(n_hijoizquierdo(N),LR);
+        a_retornar_hojas(n_hijoderecho(N),LR);
     }
 
 }
@@ -44,8 +44,8 @@ void a_retornar_interiores(NodoArbol N, Lista LR){
             elemento = n_recuperar(N);
             l_agregar(LR,elemento);
         }
-        interior_interfaz(n_hijoizquierdo(N));
-        interior_interfaz(n_hijoderecho(N));
+        a_retornar_interiores(n_hijoizquierdo(N),LR);
+        a_retornar_interiores(n_hijoderecho(N),LR);
     }
 
 }
@@ -69,7 +69,7 @@ void a_retornar_ocurrencias(NodoArbol N, Lista LR,TipoElemento elemento_buscado)
             elemento = n_recuperar(N);
             l_agregar(LR,elemento);
         }
-        a_retornar_ocurrencias(n_hijoizquierdo(N));
-        a_retornar_ocurrencias(n_hijoderecho(N));
+        a_retornar_ocurrencias(n_hijoizquierdo(N),LR,elemento_buscado);
+        a_retornar_ocurrencias(n_hijoderecho(N),LR,elemento_buscado);
     }
 }
