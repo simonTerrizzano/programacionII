@@ -12,7 +12,7 @@ int main(void)
     A1= abb_crear();
     Cargar_Arbol(A1,cant);
     A2 = abb_a_avl_interfaz(A1);
-
+    printf("Arbol Binario de Búsqueda\n");
     printf("-----------------------------------------------------\n");
     printf("Pre-Orden Desde la raiz\n");
     pre_orden(abb_raiz(A1));
@@ -25,7 +25,8 @@ int main(void)
     printf("Post-Orden Desde la raiz\n");
     post_orden(abb_raiz(A1));
     printf("\n");
-
+    
+    printf("Arbol AVL\n");
     printf("-----------------------------------------------------\n");
     printf("Pre-Orden Desde la raiz\n");
     pre_orden(avl_raiz(A2));
@@ -44,8 +45,9 @@ int main(void)
 
     
     printf("La altura del Arbol Binario de Busqueda es de %i\n", altura_abb);
-    printf("La altura del Arbol Binario de Busqueda Auto-Balanceado es de %i", altura_avl);
+    printf("La altura del Arbol Binario de Busqueda Auto-Balanceado es de %i \n\n", altura_avl);
 
+    printf("Determinamos que la Complejidad Algoritmica de este ejercicio es de O(n) siendo n la cantidad de elementos que esten cargados en el Arbol Binario de Búsqueda\n");
 
     return 0;
 }
