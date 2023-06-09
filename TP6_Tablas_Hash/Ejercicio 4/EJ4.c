@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "listas.h" //importar la TAD de listas
-#include "tabla_hash.h" //importar la TAD de tabla hash
+#include "listas.h"
+#include "tabla_hash.h"
 
 
 //            FUNCIONES DE VALIDACION
@@ -130,37 +130,37 @@ void Alta_Alumno(TablaHash th)
             switch (i)
             {
             case 1:
-                if (validarEntero(input) && strlen(input) == 6)
+                if (validarEntero(input) && strlen(input) == 6 && strtol(input,NULL,10) > 0) 
                 {
-                    l_agregar(alumno,te_crear_con_valor(i,input));
+                    l_agregar(alumno,te_crearConValor(i,input));
                     esValido = true;
                 }
                 break;
             case 2:
                 if (validarLetras(input) && input[0] != ' ')
                 {
-                    l_agregar(alumno,te_crear_con_valor(i,input));
+                    l_agregar(alumno,te_crearConValor(i,input));
                     esValido = true;
                 }
                 break;
             case 3:
                 if (validarLetras(input) && input[0] != ' ')
                 {
-                    l_agregar(alumno,te_crear_con_valor(i,input));
+                    l_agregar(alumno,te_crearConValor(i,input));
                     esValido = true;
                 }
                 break;
             case 4:
                 if (validarLetrasYNumeros(input) && input[0] != ' ')
                 {
-                    l_agregar(alumno,te_crear_con_valor(i,input));
+                    l_agregar(alumno,te_crearConValor(i,input));
                     esValido = true;
                 }
                 break;
             case 5:
-                if (validarEntero(input) && input[0] != ' ')
+                if (validarEntero(input) && input[0] != ' ' && strtol(input,NULL,10) > 0)
                 {
-                    l_agregar(alumno,te_crear_con_valor(i,input));
+                    l_agregar(alumno,te_crearConValor(i,input));
                     esValido = true;
                 }
                 break;
@@ -179,7 +179,7 @@ void Alta_Alumno(TablaHash th)
     //Cargo el alumno a la tabla hash
     char* legajo_char = (char*) l_recuperar(alumno,1)->valor;
     int legajo = strtol(legajo_char,NULL,10);
-    TipoElemento x = te_crear_con_valor(legajo,alumno);
+    TipoElemento x = te_crearConValor(legajo,alumno);
     th_insertar(th,x);
 
     printf("Alumno cargado con exito\n");
@@ -217,11 +217,11 @@ void Modificar_Alumno(TablaHash th, int legajo)
         int i = 1;
         bool Esvalido;
         
-        l_agregar(alumno_mod,te_crear_con_valor(0,l_recuperar(alumno,1)->valor));
-        l_agregar(alumno_mod,te_crear_con_valor(0,l_recuperar(alumno,2)->valor));
-        l_agregar(alumno_mod,te_crear_con_valor(0,l_recuperar(alumno,3)->valor));
-        l_agregar(alumno_mod,te_crear_con_valor(0,l_recuperar(alumno,4)->valor));
-        l_agregar(alumno_mod,te_crear_con_valor(0,l_recuperar(alumno,5)->valor));
+        l_agregar(alumno_mod,te_crearConValor(0,l_recuperar(alumno,1)->valor));
+        l_agregar(alumno_mod,te_crearConValor(0,l_recuperar(alumno,2)->valor));
+        l_agregar(alumno_mod,te_crearConValor(0,l_recuperar(alumno,3)->valor));
+        l_agregar(alumno_mod,te_crearConValor(0,l_recuperar(alumno,4)->valor));
+        l_agregar(alumno_mod,te_crearConValor(0,l_recuperar(alumno,5)->valor));
 
         printf("Datos actuales del legajo %s:\n", l_recuperar(alumno,1)->valor);
         printf("=============================================\n");
@@ -243,10 +243,10 @@ void Modificar_Alumno(TablaHash th, int legajo)
                 printf("Ingrese nuevo %s: ", textos[i]);
                 gets(opcion); 
 
-                if ((validarLetras(opcion) || (validarEntero(opcion) && i == 4) || (validarLetrasYNumeros(opcion) && i == 3)))
+                if ((validarLetras(opcion) && i < 3 || (validarEntero(opcion) && i == 4 && strtol(opcion,NULL,10) > 0) || (validarLetrasYNumeros(opcion) && i == 3)))
                 {
                     l_eliminar(alumno_mod,i+1);
-                    l_insertar(alumno_mod,te_crear_con_valor(0,opcion),i+1);
+                    l_insertar(alumno_mod,te_crearConValor(0,opcion),i+1);
                     Esvalido = true;
                 }
                 else 
@@ -260,7 +260,7 @@ void Modificar_Alumno(TablaHash th, int legajo)
             i++;
         }
 
-        datos = te_crear_con_valor(legajo,alumno_mod);
+        datos = te_crearConValor(legajo,alumno_mod);
         th_eliminar(th,legajo);
         th_insertar(th,datos);
         printf("ALUMNO MODIFICADO CON EXITO.\n");
