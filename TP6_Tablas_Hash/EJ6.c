@@ -1,32 +1,175 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "ingreso_fecha.c"
-#include "tabla_hash_lista_colisiones.c"
 
+#include "tabla_hash_lista_colisiones.c"
+#include "listas.h"
 
 //            FUNCIONES DE VALIDACION
 //=================================================
+struct Fecha
+{
+    int dia,mes,anio;
+};
+bool verificarFecha(struct Fecha fecha)
+{
 
-int convertirFechaAInt(const char* fechaI) {
-    char fecha[9];  // Considera el tamaño adecuado para la cadena de fecha
-    strncpy(fecha, fechaI, sizeof(fecha)-1);
-    fecha[sizeof(fecha)-1] = '\0';
+    if (fecha.dia > 31 || fecha.dia < 1) return false;
 
-    char *dia_str, *mes_str, *anio_str;
-    int dia, mes, anio, fecha_num;
+    if (fecha.mes > 12 || fecha.mes < 1) return false;
 
-    dia_str = strtok(fecha, "/");
-    mes_str = strtok(NULL, "/");
-    anio_str = strtok(NULL, "/");
+    //Calculo si el anio es bisiesto o no
+    double x = fecha.anio % 4;
+    double y = fecha.anio % 100;
+    double z = fecha.anio % 400;
+    if (((fecha.anio % 4 == 0 && fecha.anio % 100 != 0) || (fecha.anio % 400 == 0)))
+    {
+        //printf("ANIO BISIESTO\n");
+        //el año es bisiesto
+        if (fecha.dia <= 29 && fecha.mes == 2)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    else
+    {
+        //printf("ANIO NO BISIESTO\n");
+        //No es bisiesto.
+        //printf("El anio no es bisiesto.\n");
 
-    dia = strtol(dia_str, NULL, 10);
-    mes = strtol(mes_str, NULL, 10);
-    anio = strtol(anio_str, NULL, 10);
+        //Como el año no es bisiesto el 29 de febrero no existe.
+        if (fecha.dia > 28 && fecha.mes == 2){
+            return false;
+        }else{
+            return true;
+        }
+    }
 
-    fecha_num = anio * 10000 + mes * 100 + dia;
+    //Ahora analizo el resto de las fechas
+    //MESES CON 31 DIAS
+    switch (fecha.mes)
+    {
+    case 1:
+    case 3:
+    case 5:
+    case 7:
+    case 8:
+    case 10:
+    case 12:
 
-    return fecha_num;
+        if (fecha.dia <= 31)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }  
+    default:
+        break;
+    }
+
+
+    //MESES CON 30 DIAS
+    switch (fecha.mes)
+    {
+    case 4:
+    case 6:
+    case 9:
+    case 11:
+        if (fecha.dia <= 30)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }  
+    default:
+        break;
+    }
+}
+
+bool validarLetrasYNumeros(char* cadena)
+{
+
+    int i;
+    bool esValido = false;
+
+    for (i = 0; i < strlen(cadena); i++)
+    {
+
+        int codigoAscii = cadena[i];
+        if ((codigoAscii>= 48 && codigoAscii <= 57) || (codigoAscii>= 97 && codigoAscii <= 122) || (codigoAscii >= 65 && codigoAscii <= 90) || codigoAscii == 32)
+        {
+            esValido = true;
+        }
+        else
+        {   
+            //Si al menos 1 digito no es una letra retorna input invalido
+            return false;
+        }
+
+    }
+
+        return esValido;
+
+
+}
+
+bool validarLetras(char* cadena)
+{
+
+    int i;
+    bool esValido = false;
+
+    for (i = 0; i < strlen(cadena); i++)
+    {
+
+        int codigoAscii = cadena[i];
+        if ((codigoAscii>= 65 && codigoAscii <= 90) || (codigoAscii>= 97 && codigoAscii <= 122) || codigoAscii == 32)
+        {
+            esValido = true;
+        }
+        else
+        {   
+            //Si al menos 1 digito no es una letra retorna input invalido
+            return false;
+        }
+
+    }
+
+        return esValido;
+
+
+}
+
+bool validarEntero(char* cadena)
+{
+    int i;
+    bool esNumero = false;
+    int longitud = strlen(cadena);
+
+    if (cadena[0] == '-') i = 1;
+    else i = 0;
+
+    for (i; i < longitud; i++)
+    {
+        //Valido que el input sea un NUMERO
+        if (cadena[i] >= 48 && cadena[i] <=57)
+        {
+            if (cadena[i] != ' ') esNumero = true;
+            else return false;
+            
+        }
+        else return false;
+    }
+
+    return esNumero;
 }
 
 //=================================================
@@ -38,10 +181,101 @@ persona se guarda básicamente el DNI, Apellido y Nombre. Se debe además hacer 
 pantalla de carga donde se pueda especificar la fecha y los datos de las personas que
 se vacunaron en esa fecha.  */
 
-int functionHashFecha(int fecha)
+static const int TAMANIO_TH = 30003;
+
+int functionHash(int fecha)
 {
-    return fecha % 30003;
+    return fecha % TAMANIO_TH;
 }
+
+int pedirFecha()
+{
+    char input[4];
+    char f_ddmmyyyy[8];
+    bool esvalido;
+    int i = 0;
+    struct Fecha fecha;
+    int aux, fecha_int;
+
+    f_ddmmyyyy[0] = 0;
+
+    while (true)
+    {
+        printf("EL FORMATO DEBE SER DD/MM/YYYY.\nPor ejemplo:\ndia: 20\nmes: 03\nanio: 2023\n");
+        //pido anio
+        while (!esvalido)
+        {
+            printf("Ingrese el anio: ");
+            gets(input);
+
+            if (validarEntero(input) && strlen(input) == 4 && input[0] != ' ')
+            {
+                aux = strtol(input,NULL,10);
+                if (aux > 0 && aux <= 2023)
+                {
+                    fecha.anio = aux;
+                    strcat(f_ddmmyyyy, input);
+                    break;
+                }    
+            }
+        }
+
+        //pido mes
+        while (true)
+        {
+            printf("Ingrese el mes: ");
+            gets(input);
+
+            if (validarEntero(input) && strlen(input) == 2 && input[0] != ' ')
+            {
+                aux = strtol(input,NULL,10);
+                if (aux > 0 && aux < 13)
+                {
+                    fecha.mes = aux;
+                    strcat(f_ddmmyyyy, input);
+                    break;
+                }    
+            }
+        }
+
+        //Pido dia
+        while (true)
+        {
+            printf("Ingrese el dia: ");
+            gets(input);
+
+            if (validarEntero(input) && strlen(input) == 2 && input[0] != ' ')
+            {
+                aux = strtol(input,NULL,10);
+                if (aux > 0 && aux < 32)
+                {
+                    fecha.dia = aux;
+                    strcat(f_ddmmyyyy, input);
+                    break;
+                }    
+            }
+        }
+    
+
+
+
+        break;
+    
+    }
+
+    if (verificarFecha(fecha))
+    {
+        //Si la fecha es valida la paso a entero
+        fecha_int = strtol(f_ddmmyyyy, NULL, 10);
+        return fecha_int;
+    }
+
+    //Si la fecha es incorrecta retorna -1
+    return -1;
+
+}
+
+
 
 void Alta_Persona(TablaHash th)
 {
@@ -60,22 +294,18 @@ void Alta_Persona(TablaHash th)
         while (esValido != true)
         {
             char* input = malloc(20*sizeof(char));
-            printf("Ingrese %s de la persona: ", datos[i-1]);
-            if (i==1)
+            if (i > 1)
             {
-                fecha_i = pedirFecha();
-            }
-            else{
+                printf("Ingrese %s de la persona: ", datos[i-1]);
                 gets(input);
             }
-            
-            
-            //printf("%s , %d",input,convertirFechaAInt(input));
-            
+
+
             switch (i)
             {
             case 1:
-                l_agregar(persona,te_crearConValor(i,(void*)fecha_i));
+                fecha_i = pedirFecha();
+                l_agregar(persona,te_crearConValor(i,(int*) fecha_i));
                 esValido = true;
                 break;
             case 2:
@@ -103,21 +333,16 @@ void Alta_Persona(TablaHash th)
                 break;
             }
             if (!esValido) printf("[ERROR] El dato ingresado no es valido.\n");
-            free(input);
+            
         }
         i++;
     }
 
-    
     //Cargo la persona a la tabla hash
-    int fecha_int = (int) l_recuperar(persona,1)->valor;
-    system("PAUSE");
-    printf("\n\nFecha ingresada en int : %d\n\n",fecha_int);
-    system("PAUSE");
-    TipoElemento x = te_crearConValor(fecha_int,(void*)persona);
+    TipoElemento x = te_crearConValor(fecha_i,persona);
     th_insertar(th,x);
-
     printf("Persona cargada con exito\n");
+
 }
 
 void Baja_PersonasEnFecha (TablaHash th, int fecha)
@@ -135,48 +360,45 @@ void Baja_PersonasEnFecha (TablaHash th, int fecha)
     
 }
 
-void imprimirListaPersonas(Lista personas)
+void imprimirListaPersonas(TablaHash th, int fecha)
 {
+    // Busco la lista
+    TipoElemento x = th_recuperar(th, fecha);
+
+    if (x == NULL)
+    {
+        printf("No hay datos de vacunacion en esa fecha.\n");
+        return;
+    }
+
+    Lista personas = (Lista)x->valor;
+
     if (l_es_vacia(personas))
     {
         printf("La lista de personas está vacía.\n");
         return;
     }
-    
+
     Iterador iter = iterador(personas);
+
     while (hay_siguiente(iter))
     {
-        TipoElemento dato = siguiente(iter);
-        printf("Fecha: %d\n", (int)dato->valor);
-        printf("DNI: %s\n", (char*)dato->valor);
-        printf("Nombre: %s\n", (char*)dato->valor);
-        printf("Apellido: %s\n", (char*)dato->valor);
+        TipoElemento persona = siguiente(iter);
+        printf("Fecha: %d\n",(int*) persona->valor);
+        printf("DNI: %s\n", (char*)persona->valor);
+        printf("Nombre: %s\n", (char*)persona->valor);
+        printf("Apellido: %s\n", (char*)persona->valor);
         printf("---------------------------\n");
     }
+
+    free(iter);
 }
 
-Lista Buscar_Personas(TablaHash th, int fecha)
-{
-    Lista personas = l_crear();
-    TipoElemento datos = th_recuperar(th, fecha);
-    
-    if (datos != NULL)
-    {
-        personas = (Lista)datos->valor;
-        imprimirListaPersonas(personas);
-    }
-    else
-    {
-        printf("No hay datos de personas atendidas en esa fecha.\n");
-    }
-    
-    return personas;
-}
 
 int main()
 {
 
-    TablaHash th = th_crear(3003, &functionHash);
+    TablaHash th = th_crear(TAMANIO_TH, &functionHash);
     char* opcion = malloc(sizeof(char));
     bool salir = false;
     int fecha;
@@ -204,15 +426,8 @@ int main()
                 case '2':
                     printf("Ingrese la fecha de las personas atendidas a buscar\n");
                     fecha = pedirFecha();
-                    printf("\n\nFecha ingresada en int : %d\n\n",fecha);
-                    system("PAUSE");
-                    Lista personas = Buscar_Personas(th,fecha);
-                    system("PAUSE");
-                    if (personas != NULL) {
-                        imprimirListaPersonas(personas);
-                    } else {
-                        printf("No hay personas atendidas en esa fecha.\n");
-                    }
+                    imprimirListaPersonas(th,fecha);
+                    
                     break;
                 case '3':
                     salir = true;
