@@ -10,11 +10,11 @@ Pila elementosRepetidos(Pila pila){
     Pila pBusqueda=p_crear();
     TipoElemento elemento;
     TipoElemento elemento_a_contar;
-    int arreglo[TAMANIO_MAXIMO_PILAS];
-    memset(arreglo, 0, TAMANIO_MAXIMO_PILAS*sizeof(int));
+    int arreglo[TAMANIO_MAXIMO];
+    memset(arreglo, 0, TAMANIO_MAXIMO*sizeof(int));
     int k=0;
     int contador;
-    int *pcont=calloc((TAMANIO_MAXIMO_PILAS+1), sizeof(int));
+    int *pcont=calloc((TAMANIO_MAXIMO+1), sizeof(int));
     int j=0;
 
     while (p_es_vacia(pila)!=true)

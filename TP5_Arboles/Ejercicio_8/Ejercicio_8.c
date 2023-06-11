@@ -1,5 +1,14 @@
 #include "funciones_arboles_binarios.c"
 
+bool hojasAlmismoNivelAux(NodoArbol nodo, int nivel_actual, int *nivel_hojas);
+int alturaArbolN(ArbolBinarioBusqueda arbol);
+void alturaArbolNaux(NodoArbol nodo, int *altura, int contador);
+int nivelNodo(ArbolBinarioBusqueda arbol, NodoArbol nodoObj);
+void nivelNodoAux(NodoArbol nodo, NodoArbol nodoObj, int *nivel);
+Lista nodosInternosN(ArbolBinarioBusqueda arbol);
+void nodosInternosNaux(NodoArbol nodo, Lista lista);
+bool hojasAlmismoNivel(ArbolBinarioBusqueda arbol);
+bool hojasAlmismoNivelAux(NodoArbol nodo, int nivel_actual, int *nivel_hojas);
 
 int alturaArbolN(ArbolBinarioBusqueda arbol) {
     int altura = 0;
@@ -30,6 +39,7 @@ void nivelNodoAux(NodoArbol nodo, NodoArbol nodoObj, int *nivel) {
     }
 
     if (nodo == nodoObj) {
+        (*nivel)++;
         return;
     }
 
@@ -86,6 +96,20 @@ bool hojasAlmismoNivelAux(NodoArbol nodo, int nivel_actual, int *nivel_hojas) {
 int main(int argc, char const *argv[])
 {
     ArbolBinarioBusqueda arbol= crearArbol();
+    bool * correcto;
     printf("La altura del arbol es : %d\n",alturaArbolN(arbol));
-
+    printf("Ingrese clave del nodo nodo: ");
+    NodoArbol nodo = n_crear(te_crear(ingreso_normalizado_enteros(-1000,1000,correcto)));
+    printf("El nivel del nodo es: %d \n",nivelNodo(arbol,nodo));
+    Lista lista = nodosInternosN(arbol);
+    printf("Nodos internos: \n");
+    l_mostrarLista(lista);
+    if(hojasAlmismoNivel(arbol)){
+        printf("Las hojas estan al mismo nivel");
+    }
+    else{
+        printf("Las hojas no estan al mismo nivel");
+    }
+    system("PAUSE");
+    return 0;
 }

@@ -15,10 +15,10 @@ int main(void)
 
     TipoElemento elemento;
 
-    printf("Ingrese la cantidad de elementos de la 1ra Pila entre 0 y %i",TAMANIO_MAXIMO_PILAS);
+    printf("Ingrese la cantidad de elementos de la 1ra Pila entre 0 y %i",TAMANIO_MAXIMO);
     cantingresoP1 = ingreso_normalizado_enteros(0,10);
 
-    printf("Ingrese la cantidad de elementos de la 2da Pila entre 0 y %i",TAMANIO_MAXIMO_PILAS);
+    printf("Ingrese la cantidad de elementos de la 2da Pila entre 0 y %i",TAMANIO_MAXIMO);
     cantingresoP2 = ingreso_normalizado_enteros(0,10);
 
     if (cantingresoP2>0)

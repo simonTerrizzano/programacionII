@@ -5,12 +5,12 @@
 #include <stdbool.h>
 
 void a_padre_nodo(NodoArbol NA, NodoArbol* NP, TipoElemento te);
-NodoArbol padre_interfaz(ArbolBinarioBusqueda a);
+NodoArbol padre_interfaz(ArbolBinarioBusqueda a, NodoArbol N);
 void a_hijos_nodo(NodoArbol N);
-int nivel_nodo_interfaz(ArbolBinarioBusqueda A, NodoArbol N);
+void nodos_mismo_nivel_interfaz(ArbolBinarioBusqueda a, NodoArbol N);
 void a_hermanos_nodo(ArbolBinarioBusqueda a, NodoArbol N);
 int altura_sub_arbol_interfaz(ArbolBinarioBusqueda a, NodoArbol N);
-void alttura_sub_arbol(NodoArbol Q, int *h, int c);
+int nivel_nodo(ArbolBinarioBusqueda A, NodoArbol N);
 void a_nodos_mismo_nivel(ArbolBinarioBusqueda a, NodoArbol NA, int alturaBuscada, int claveHermano);
 void nodos_mismo_nivel_interfaz(ArbolBinarioBusqueda a, NodoArbol N);
 

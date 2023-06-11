@@ -1,5 +1,4 @@
 #include "DataEntry.h"
-
 void ingreso_normalizado_string(char cadena[100], int limite_superior){
     /*Función que recibe una cadena a modificar 
     por ingreso de teclado y un limite en el largo que se quiere procesar*/
@@ -25,13 +24,15 @@ void ingreso_normalizado_string(char cadena[100], int limite_superior){
 }
 
 
-int ingreso_normalizado_enteros(int limite_inferior, int limite_superior){
+// ptr_salida -> pone en 1 el contenido de ptr_salida si se detecta que se ha ingresado como string <<exit>>
+int ingreso_normalizado_enteros(int limite_inferior, int limite_superior, bool *ptr_salida){
     /*Esta función recibe un limite inferior y un limite superior 
     y devuelve el ingreso realizado solo si está entre esos limites*/
     char ingreso[11];
     int ingreso_normalizado;
     bool fin = false;
     char * ptr;
+
     while (!fin)
     {   
         if (limite_inferior<0)
@@ -46,12 +47,20 @@ int ingreso_normalizado_enteros(int limite_inferior, int limite_superior){
         fflush(stdin);
         quitasalto(ingreso);
 
-        ingreso_normalizado=strtol(ingreso, &ptr, 10);//Convierte el ingreso en char a un int en base 10
+	if(!(strcmp(ingreso,"exit")))
+	{
+	    *ptr_salida = true;
+	    return -1;
+	    
+	}
+	else
+	{
+	    ingreso_normalizado=strtol(ingreso, &ptr, 10);//Convierte el ingreso en char a un int en base 10
 
-        if (limite_inferior<0)
-        {
-            if (esNeg(ingreso)==true)
-            {
+	    if (limite_inferior<0)
+	    {
+		if (esNeg(ingreso)==true)
+		{
                 ingreso_normalizado=atoi(ingreso);
                 if (ingreso_normalizado<limite_inferior){//Comprueba limite inferior
                     printf("\nError: Ingrese un numero mayor o igual que %i.\n",limite_inferior);
@@ -62,7 +71,7 @@ int ingreso_normalizado_enteros(int limite_inferior, int limite_superior){
                 }
             }else{
                 if (cadenatododigito(ingreso)!=1){//Comprueba si el ingreso es un digito
-                printf("\nError: Por favor solo ingrese números enteros positivos.\n");
+		    printf("\nError: Por favor solo ingrese números enteros positivos.\n");
                 }
                 else if (ingreso_normalizado>limite_superior)//Comprueba limite superior
                 {
@@ -92,11 +101,36 @@ int ingreso_normalizado_enteros(int limite_inferior, int limite_superior){
                 fin=true;
             }
         }
+	}
+	printf("\n");
+	return ingreso_normalizado;
     }
-    printf("\n");
-    return ingreso_normalizado;
+    
 }
 
+bool ingreso_normalizado_onda_digital(char* onda){
+
+    bool res;
+    int cont=0;
+    mayus(onda);
+
+    for (int i = 0; onda[i]; i++)
+    {
+        if(onda[i]!='L' && onda[i]!='H'){
+            cont++;
+        }
+    }
+    if (cont>=1)
+    {
+        res=false;
+    }else
+    {
+        res=true;
+    }
+    return res;
+    
+    
+}
 
 
 void quitaespacios(char* cadena){
@@ -202,3 +236,80 @@ bool esFlotante(char* cadena){
     
 
 }
+
+/*
+
+>>Controlar que al leer la cadena siempre haya operadores entre términos, esto es, por ejemplo:
+4x^2 3x no debe estar permitido. Lo correcto es 4x^2 ∗ 3x
+
+>>Se restringirá el polinomio a una variable, por lo tanto, se deberá comprobar que en el
+polinomio se encontró uno y solo un símbolo no numérico que represente a la variable. En
+este caso restringiremos para que la variable sea representada por una letra del alfabeto.
+
+>>Los exponentes solamente pueden ser números reales positivos. Sin embargo, se restringira a
+solamente números naturales.
+
+>> El grado maximo será 9
+ */
+int comprobar_polinomio(char *actual)
+{
+    bool buscando_operando;
+    bool space;
+    bool ultimo_leido_numero;
+    buscando_operando = false;
+    ultimo_leido_numero = false;
+    unsigned char variable;
+    variable = '\0'; // Se inicializa con un NULL para establecer que todavia no se ha encontrado variable.
+   
+    while(*(actual) != '\0')
+    {
+	if((*(actual)) == '+' || (*(actual)) == '-' || (*(actual) == '*') || (*(actual))
+	   == '/')
+	{
+	    if(buscando_operando){return -1;}
+	    else
+	    {
+		ultimo_leido_numero = false;
+		buscando_operando = true;
+	    }
+	    
+	}
+	    
+	//si lo leido es un número o una letra entonces, moviliza el puntero hasta que lo
+	//leido sea un
+	//espacio o un operador
+	while(isalnum(actual))
+	{
+	    printf("\n%c es alphanumerico\n", *(actual));
+	    if(ultimo_leido_numero == true)
+		return -1;
+
+	    if(*(actual) == '^')
+	    {
+		if(!isdigit(actual+1))
+		{
+		    return -1;
+		}
+	    }
+   
+	    if(isalpha(actual) && variable == '\0')
+	    {
+		variable = *(actual);
+	    }
+	    else if(isalpha(actual) && (*(actual) != variable))
+	    {
+		return -1;
+		    
+	    }
+	    	    
+	    actual = actual+1;	
+	    
+	}
+	
+	ultimo_leido_numero = true;
+	
+	actual = actual +1;
+
+    }
+}
+

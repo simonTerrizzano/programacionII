@@ -5,14 +5,14 @@ void a_padre_nodo(NodoArbol NA, NodoArbol* NP, TipoElemento te){
     if (NA==NULL){
     }
     else{
-        if (NA->hd->datos->clave==te->clave || NA->hi->datos->clave-==te->clave)
+        if (NA->hd->datos->clave==te->clave || NA->hi->datos->clave==te->clave)
         {
             *NP=NA;
         }
         else
         {
-            a_padre_nodo(n_hijoizquierdo(NA),&NP,te);
-            a_padre_nodo(n_hijoderecho(NA),&NP,te);
+            a_padre_nodo(n_hijoizquierdo(NA),NP,te);
+            a_padre_nodo(n_hijoderecho(NA),NP,te);
         }
     }
 }
@@ -46,13 +46,13 @@ void a_hermanos_nodo(ArbolBinarioBusqueda a, NodoArbol N){
     NodoArbol padreN;
     TipoElemento elemento;
     elemento = n_recuperar(N);
-    padre=padre_interfaz(a,N);
-    if (padre->hi->datos->clave!=elemento->clave)
+    padreN=padre_interfaz(a,N);
+    if (padreN->hi->datos->clave!=elemento->clave)
     {
-        printf("El hermano de %i es %i ",elemento->clave, padre->hi->datos->clave);
+        printf("El hermano de %i es %i ",elemento->clave, padreN->hi->datos->clave);
     }
     else{
-        printf("El hermano de %i es %i ",elemento->clave, padre->hd->datos->clave);
+        printf("El hermano de %i es %i ",elemento->clave, padreN->hd->datos->clave);
     }
 }
 
@@ -61,14 +61,14 @@ void a_nodos_mismo_nivel(ArbolBinarioBusqueda a, NodoArbol NA, int alturaBuscada
     if (NA==NULL){
     }
     else{
-        if (nivel_nodo_interfaz(a,NA)==alturaBuscada && NA->datos->clave!=claveHermano)
+        if (nivel_nodo(a,NA)==alturaBuscada && NA->datos->clave!=claveHermano)
         {
             printf("%i ",NA->datos->clave);
         }
         else
         {
-            a_hermanos_nodo(n_hijoizquierdo(NA));
-            a_hermanos_nodo(n_hijoderecho(NA));
+            a_hermanos_nodo(a,n_hijoizquierdo(NA));
+            a_hermanos_nodo(a,n_hijoderecho(NA));
         }
     }
 }
@@ -76,11 +76,11 @@ void nodos_mismo_nivel_interfaz(ArbolBinarioBusqueda a, NodoArbol N){
     TipoElemento elemento;
     elemento = n_recuperar(N);
     int alturaBuscada;
-    alturaBuscada=nivel_nodo_interfaz(a,N);
+    alturaBuscada=nivel_nodo(a,N);
     if (alturaBuscada!=-1)
     {
         printf("Nodos que están al mismo nivel que %i : ",elemento->clave);
-        a_nodos_mismo_nivel(abb_raiz(a),alturaBuscada,elemento->clave);
+        a_nodos_mismo_nivel(a,abb_raiz(a),alturaBuscada,elemento->clave);
     }
     else
     {
@@ -115,8 +115,8 @@ void altint(NodoArbol Q, int *h, int c){
         }
     }
     else {
-        altint(n_hijoizquierdo(Q), h, c++);
-        altint(n_hijoderecho(Q), h, c++);
+        altint(n_hijoizquierdo(Q), h, c+1);
+        altint(n_hijoderecho(Q), h, c+1);
     }
 }
 

@@ -1,0 +1,7 @@
+/.vscode/
+/pruebas/
+/pruebasTAD/
+*.exe
+*.gch
+*.o
+*.code-workspace

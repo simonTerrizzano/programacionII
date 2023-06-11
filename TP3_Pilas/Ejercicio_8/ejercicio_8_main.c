@@ -8,10 +8,12 @@ int main(void)
     Pila P1=p_crear();
 
     Pila PR=p_crear();
-
+    
+  
+    
     TipoElemento elemento;
 
-    printf("Ingrese la cantidad de elementos de la Pila entre 0 y %i",TAMANIO_MAXIMO_PILAS);
+    printf("Ingrese la cantidad de elementos de la Pila entre 0 y %i",TAMANIO_MAXIMO);
     cantingresoP1 = ingreso_normalizado_enteros(0,10);
 
 
@@ -58,7 +60,7 @@ int main(void)
         printf("\nLa pila está vacia, no hay elementos repetidos que mostrar");
     }
     
-    
+    printf("\nLa complejidad algoritmica de la funcion es de O(n^2)\n");
 
     return 0;
 }
