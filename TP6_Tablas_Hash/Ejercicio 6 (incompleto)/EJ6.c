@@ -38,30 +38,6 @@ persona se guarda básicamente el DNI, Apellido y Nombre. Se debe además hacer 
 pantalla de carga donde se pueda especificar la fecha y los datos de las personas que
 se vacunaron en esa fecha.  */
 
-void Imprimir_Personas(Lista personas)
-{
-    if (l_longitud(personas) == 0)
-    {
-        printf("No hay personas para mostrar.\n");
-        return;
-    }
-
-    printf("Personas encontradas:\n");
-
-    for (int i = 0; i < l_longitud(personas); i++)
-    {
-        TipoElemento persona = l_recuperar(personas, i);
-        Lista datosPersona = (Lista)persona->valor;
-
-        printf("Persona %d:\n", i + 1);
-        printf("Fecha: %d\n", (int)l_recuperar(datosPersona, 1)->valor);
-        printf("DNI: %s\n", (char*)l_recuperar(datosPersona, 2)->valor);
-        printf("Nombre: %s\n", (char*)l_recuperar(datosPersona, 3)->valor);
-        printf("Apellido: %s\n", (char*)l_recuperar(datosPersona, 4)->valor);
-
-        printf("\n");
-    }
-}
 int functionHashFecha(int fecha)
 {
     return fecha % 30003;
@@ -70,7 +46,7 @@ int functionHashFecha(int fecha)
 void Alta_Persona(TablaHash th)
 {
     Lista persona = l_crear();
-    char datos[4][10] = {"fecha","dni", "nombre", "apellido"};
+    char datos[4][20] = {"fecha","dni", "nombre", "apellido"};
     int i = 1;
     bool esValido;
     int fecha_i;
@@ -135,9 +111,10 @@ void Alta_Persona(TablaHash th)
     
     //Cargo la persona a la tabla hash
     int fecha_int = (int) l_recuperar(persona,1)->valor;
+    system("PAUSE");
     printf("\n\nFecha ingresada en int : %d\n\n",fecha_int);
     system("PAUSE");
-    TipoElemento x = te_crearConValor(fecha_int,persona);
+    TipoElemento x = te_crearConValor(fecha_int,(void*)persona);
     th_insertar(th,x);
 
     printf("Persona cargada con exito\n");
@@ -158,17 +135,41 @@ void Baja_PersonasEnFecha (TablaHash th, int fecha)
     
 }
 
+void imprimirListaPersonas(Lista personas)
+{
+    if (l_es_vacia(personas))
+    {
+        printf("La lista de personas está vacía.\n");
+        return;
+    }
+    
+    Iterador iter = iterador(personas);
+    while (hay_siguiente(iter))
+    {
+        TipoElemento dato = siguiente(iter);
+        printf("Fecha: %d\n", (int)dato->valor);
+        printf("DNI: %s\n", (char*)dato->valor);
+        printf("Nombre: %s\n", (char*)dato->valor);
+        printf("Apellido: %s\n", (char*)dato->valor);
+        printf("---------------------------\n");
+    }
+}
+
 Lista Buscar_Personas(TablaHash th, int fecha)
 {
     Lista personas = l_crear();
-    TipoElemento datos = th_recuperar(th,fecha);
+    TipoElemento datos = th_recuperar(th, fecha);
+    
     if (datos != NULL)
     {
-        personas = (Lista) datos->valor;  
+        personas = (Lista)datos->valor;
+        imprimirListaPersonas(personas);
     }
-    else{
-        printf("No hay datos de personas atendidas esa fecha\n");
+    else
+    {
+        printf("No hay datos de personas atendidas en esa fecha.\n");
     }
+    
     return personas;
 }
 
@@ -208,7 +209,7 @@ int main()
                     Lista personas = Buscar_Personas(th,fecha);
                     system("PAUSE");
                     if (personas != NULL) {
-                        Imprimir_Personas(personas);
+                        imprimirListaPersonas(personas);
                     } else {
                         printf("No hay personas atendidas en esa fecha.\n");
                     }
