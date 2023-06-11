@@ -280,49 +280,51 @@ int pedirFecha()
 void Alta_Persona(TablaHash th)
 {
     Lista persona = l_crear();
-    char datos[4][20] = {"fecha","dni", "nombre", "apellido"};
+    char datos[4][20] = {"dni", "nombre", "apellido"};
     int i = 1;
-    bool esValido;
+    bool esValido, fecha_existe;
     int fecha_i;
+
 
     printf("=======================\n");
     printf("ALTA DE PERSONA\n");
     printf("=======================\n");
-    while (i <= 4)
+
+
+    //Pido la fecha
+    fecha_i = pedirFecha();
+    
+    //Me fijo si la fecha ya existe en la tabla hash
+    if (th_recuperar(th,fecha_i) != NULL) fecha_existe = true;
+    else fecha_existe = false;
+
+    while (i <= 3)
     {
         esValido = false;
         while (esValido != true)
         {
             char* input = malloc(20*sizeof(char));
-            if (i > 1)
-            {
-                printf("Ingrese %s de la persona: ", datos[i-1]);
-                gets(input);
-            }
-
+            printf("Ingrese %s de la persona: ", datos[i-1]);
+            gets(input);
+            
 
             switch (i)
             {
             case 1:
-                fecha_i = pedirFecha();
-                l_agregar(persona,te_crearConValor(i,(int*) fecha_i));
-                esValido = true;
-                break;
-            case 2:
                 if (validarEntero(input) && input[0] != ' ')
                 {
                     l_agregar(persona,te_crearConValor(i,input));
                     esValido = true;
                 }
                 break;
-            case 3:
+            case 2:
                 if (validarLetras(input) && input[0] != ' ')
                 {
                     l_agregar(persona,te_crearConValor(i,input));
                     esValido = true;
                 }
                 break;
-            case 4:
+            case 3:
                 if (validarLetras(input) && input[0] != ' ')
                 {
                     l_agregar(persona,te_crearConValor(i,input));
@@ -338,10 +340,33 @@ void Alta_Persona(TablaHash th)
         i++;
     }
 
-    //Cargo la persona a la tabla hash
-    TipoElemento x = te_crearConValor(fecha_i,persona);
-    th_insertar(th,x);
-    printf("Persona cargada con exito\n");
+    if (fecha_existe == false)
+    {
+        Lista l_general = l_crear();
+        //Cargo la persona a la tabla hash
+        TipoElemento x = te_crearConValor(fecha_i,persona);
+        l_agregar(l_general,x);
+        x = te_crearConValor(fecha_i,l_general);
+        th_insertar(th,x);
+        printf("Persona cargada con exito\n");
+        return;
+    }
+    else
+    {
+        TipoElemento x = th_recuperar(th,fecha_i);
+
+        Lista l_general = (Lista) x->valor;
+        
+        x = te_crearConValor(fecha_i,persona);
+        l_agregar(l_general,x);
+        x = te_crearConValor(fecha_i,l_general);
+        th_eliminar(th,fecha_i);
+        th_insertar(th,x);
+        printf("Persona cargada con exito\n");
+        return;
+    }
+
+
 
 }
 
@@ -362,7 +387,7 @@ void Baja_PersonasEnFecha (TablaHash th, int fecha)
 
 void imprimirListaPersonas(TablaHash th, int fecha)
 {
-
+    int i;
     //Busco la lista
     TipoElemento x = th_recuperar(th,fecha);
 
@@ -372,20 +397,24 @@ void imprimirListaPersonas(TablaHash th, int fecha)
         return;
     }
 
-    
+    //Lista general (lista de listas)
     Lista personas = (Lista) x->valor;
 
-    if (l_es_vacia(personas))
-    {
-        printf("La lista de personas está vacía.\n");
-        return;
-    }
+   
+    int longitud = l_longitud(personas);
 
-    printf("Fecha: %d\n", l_recuperar(personas,1)->valor);
-    printf("DNI: %s\n", l_recuperar(personas,2)->valor);
-    printf("Nombre: %s\n", l_recuperar(personas,3)->valor);
-    printf("Apellido: %s\n", l_recuperar(personas,4)->valor);
-    printf("---------------------------\n");
+    for (i = 1; i <= longitud; i++)
+    {
+        printf("\n");
+        //Lista con datos de cada persona en particular
+        Lista temp = (Lista) l_recuperar(personas,i)->valor;
+        printf("DNI: %s\n", l_recuperar(temp,1)->valor);
+        printf("Nombre: %s\n", l_recuperar(temp,2)->valor);
+        printf("Apellido: %s\n", l_recuperar(temp,3)->valor);
+        printf("==============================\n");
+    }
+    
+
 
 }
 
