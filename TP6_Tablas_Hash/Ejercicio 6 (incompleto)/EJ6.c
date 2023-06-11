@@ -86,20 +86,16 @@ bool validarEntero(char* cadena)
 }
 
 int convertirFechaAInt(const char* fechaI) {
-    char fecha[9];  // Considera el tamaño adecuado para la cadena de fecha (8 caracteres + '\0')
-    strcpy(fecha, fechaI);
-    
+    char fecha[9];  // Considera el tamaño adecuado para la cadena de fecha
+    strncpy(fecha, fechaI, sizeof(fecha)-1);
+    fecha[sizeof(fecha)-1] = '\0';
+
     char *dia_str, *mes_str, *anio_str;
     int dia, mes, anio, fecha_num;
 
     dia_str = strtok(fecha, "/");
     mes_str = strtok(NULL, "/");
     anio_str = strtok(NULL, "/");
-
-    if (dia_str == NULL || mes_str == NULL || anio_str == NULL) {
-        // Manejar el caso de que la cadena de fecha no tenga el formato esperado
-        return -1;  // Valor de retorno inválido para indicar un error
-    }
 
     dia = strtol(dia_str, NULL, 10);
     mes = strtol(mes_str, NULL, 10);
@@ -109,7 +105,6 @@ int convertirFechaAInt(const char* fechaI) {
 
     return fecha_num;
 }
-
 
 //=================================================
 
@@ -146,12 +141,14 @@ void Alta_Persona(TablaHash th)
             char* input = malloc(20*sizeof(char));
             printf("Ingrese %s de la persona: ", datos[i-1]);
             gets(input);
+            //printf("%s , %d",input,convertirFechaAInt(input));
+            
             switch (i)
             {
             case 1:
-                if (strlen(input) == 8 && strtol(input,NULL,10) > 0) 
+                if (strlen(input) == 8 && convertirFechaAInt(input) != -1) 
                 {
-                    l_agregar(persona,te_crearConValor(i,input));
+                    l_agregar(persona,te_crearConValor(i,convertirFechaAInt(input)));
                     esValido = true;
                 }
                 break;
@@ -187,9 +184,9 @@ void Alta_Persona(TablaHash th)
 
     
     //Cargo la persona a la tabla hash
-    char* fecha_char = (char*) l_recuperar(persona,1)->valor;
-    int fecha = convertirFechaAInt(fecha_char);
-    TipoElemento x = te_crearConValor(fecha,persona);
+    int fecha_int = (int) l_recuperar(persona,1)->valor;
+    printf("\n\nFecha ingresada en int : %d\n\n",fecha_int);
+    TipoElemento x = te_crearConValor(fecha_int,persona);
     th_insertar(th,x);
 
     printf("Persona cargada con exito\n");
@@ -273,6 +270,7 @@ int main()
                     if (strlen(opcion) == 8) 
                     {
                         fecha = convertirFechaAInt(opcion);
+                        printf("\n\nFecha ingresada en int : %d\n\n",fecha);
                         Lista personas = Buscar_Personas(th,fecha);
                         if (personas != NULL) {
                             l_mostrarLista(personas);
