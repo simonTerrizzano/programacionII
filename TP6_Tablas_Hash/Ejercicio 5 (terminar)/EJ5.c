@@ -4,8 +4,8 @@
 #include <sys/time.h>
 #include <math.h>
 
-#include "tabla_hash.h" //Incluir TAD tabla hash
-#include "arbol_avl.h" //Incluir TAD arbol AVL
+#include "tabla_hash_lista_colisiones.c" //Incluir TAD tabla hash
+#include "arbol_avl.c" //Incluir TAD arbol AVL
 
 
 //=======================================
@@ -79,30 +79,45 @@ ArbolAVL CargarAVL(int min, int max, int repeticiones)
     return avl;
 }
 
+#include <stdio.h>
+#include <time.h>
 
-void Tiempo_Busqueda(TablaHash th, ArbolAVL avl, int clave)
+void Tiempo_Busqueda(TablaHash th, ArbolAVL avl, int repeticiones, int max, int min)
 {
-    int i;
-    struct timeval comienzo_th,final_th;
-    struct timeval comienzo_avl,final_avl;
-
+    clock_t comienzo_th, final_th;
+    clock_t comienzo_avl, final_avl;
+    double tiempo_total;
+    int clave;
     printf("===============================\n");
 
-    //Comienzo el contador
-    gettimeofday(&comienzo_th,NULL);
-    th_recuperar(th,clave);
-    gettimeofday(&final_th,NULL);
-    long microsegundos_th = final_th.tv_usec - comienzo_th.tv_usec;
-    printf("Tiempo tabla hash (microsegundos) = %Lf\n", (double) microsegundos_th*1e-6);
+    // Comienzo el contador para la tabla hash
+    comienzo_th = clock();
+    for (int i = 0; i < repeticiones; i++)
+    {
+        clave = rand() % ((max+1)- min) + min;
+        th_recuperar(th, clave);
+    }
+    final_th = clock();
+    // Calculo el tiempo total en segundos utilizando difftime
+    tiempo_total = difftime(final_th, comienzo_th) / CLOCKS_PER_SEC;
+    printf("Tiempo de ejecución (Tabla Hash): %.4f segundos\n", tiempo_total);
 
+    // Comienzo el contador para el árbol AVL
+    comienzo_avl = clock();
+    for (int j = 0; j < repeticiones; j++)
+    {
+        clave = rand() % ((max+1)- min) + min;
+        avl_buscar(avl, clave);
+    }
+    final_avl = clock();
 
-    gettimeofday(&comienzo_avl,NULL);
-    avl_buscar(avl,clave);
-    gettimeofday(&final_avl,NULL);
-    long microsegundos_avl = final_avl.tv_usec - comienzo_avl.tv_usec;
-    printf("Tiempo arbol AVL (microsegundos) = %Lf\n", (double) microsegundos_avl*1e-6);
-    
+    // Calculo el tiempo total en segundos utilizando difftime
+    tiempo_total = difftime(final_avl, comienzo_avl) / CLOCKS_PER_SEC;
+    printf("Tiempo de ejecución (Árbol AVL): %.4f segundos\n", tiempo_total);
 }
+
+
+
 
 
 int main()
@@ -175,12 +190,7 @@ int main()
 
         th = CargarTH(min,max,repeticiones);
         avl = CargarAVL(min,max,repeticiones);
-
-        for (i = 0; i < repeticiones; i++)
-        {
-            clave = rand() % ((max+1)- min) + min;
-            Tiempo_Busqueda(th,avl,clave);
-        }
+        Tiempo_Busqueda(th,avl,repeticiones,max,min);
 
         //Consulo si quiere salir del programa
         printf("\nIngrese X si quiere salir o enter para continuar...\n");
