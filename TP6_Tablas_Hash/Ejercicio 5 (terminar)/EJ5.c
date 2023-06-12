@@ -4,8 +4,8 @@
 #include <sys/time.h>
 #include <math.h>
 
-#include "tabla_hash_lista_colisiones.c" //Incluir TAD tabla hash
-#include "arbol_avl.c" //Incluir TAD arbol AVL
+#include "tabla_hash.h" //Incluir TAD tabla hash
+#include "arbol_avl.h" //Incluir TAD arbol AVL
 
 
 //=======================================
@@ -79,44 +79,52 @@ ArbolAVL CargarAVL(int min, int max, int repeticiones)
     return avl;
 }
 
-#include <stdio.h>
-#include <time.h>
 
-void Tiempo_Busqueda(TablaHash th, ArbolAVL avl, int repeticiones, int max, int min)
+double Tiempo_Busqueda_hash(TablaHash th, int repeticiones, int max, int min)
 {
-    clock_t comienzo_th, final_th;
-    clock_t comienzo_avl, final_avl;
-    double tiempo_total;
-    int clave;
-    printf("===============================\n");
+    struct timeval comienzo, final;
+    int clave,i;
 
     // Comienzo el contador para la tabla hash
-    comienzo_th = clock();
-    for (int i = 0; i < repeticiones; i++)
+    gettimeofday(&comienzo,0);
+    for (i = 0; i < repeticiones; i++)
     {
         clave = rand() % ((max+1)- min) + min;
         th_recuperar(th, clave);
     }
-    final_th = clock();
-    // Calculo el tiempo total en segundos utilizando difftime
-    tiempo_total = difftime(final_th, comienzo_th) / CLOCKS_PER_SEC;
-    printf("Tiempo de ejecución (Tabla Hash): %.4f segundos\n", tiempo_total);
+    //Freno el contador de tiempo
+    gettimeofday(&final,0);
+    //Calculo los segundos
+    long seconds = final.tv_sec - comienzo.tv_sec;
+    //Calculo los microsegundos
+    long microseconds = final.tv_usec - comienzo.tv_usec;
+    double tiempo_total = seconds + microseconds*1e-6;
+    printf("Tiempo tabla hash: %.5f segundos\n", tiempo_total);
+    return tiempo_total;
 
-    // Comienzo el contador para el árbol AVL
-    comienzo_avl = clock();
-    for (int j = 0; j < repeticiones; j++)
-    {
-        clave = rand() % ((max+1)- min) + min;
-        avl_buscar(avl, clave);
-    }
-    final_avl = clock();
-
-    // Calculo el tiempo total en segundos utilizando difftime
-    tiempo_total = difftime(final_avl, comienzo_avl) / CLOCKS_PER_SEC;
-    printf("Tiempo de ejecución (Árbol AVL): %.4f segundos\n", tiempo_total);
 }
 
+double Tiempo_Busqueda_avl(ArbolAVL avl, int repeticiones, int max, int min)
+{
+    struct timeval comienzo, final;
+    int clave,i;
 
+    // Comienzo el contador para la tabla hash
+    gettimeofday(&comienzo,0);
+    for (i = 0; i < repeticiones; i++)
+    {
+        clave = rand() % ((max+1)- min) + min;
+        TipoElemento x = te_crear(clave);
+        avl_buscar(avl,x->clave);
+    }
+    gettimeofday(&final,0);
+    long seconds = final.tv_sec - comienzo.tv_sec;
+    long microseconds = final.tv_usec - comienzo.tv_usec;
+    double tiempo_total = seconds + microseconds*1e-6;
+    printf("Tiempo arbol AVL: %Lf segundos\n", tiempo_total);
+    return tiempo_total;
+
+}
 
 
 
@@ -126,8 +134,10 @@ int main()
     TablaHash th;
     ArbolAVL avl;
     bool salir = false;
-    int cantidad_claves, min,max, repeticiones,clave,i;
+    int cantidad_claves, min,max, repeticiones, repeticiones_busqueda,clave,i;
     char* input = malloc(sizeof(char));
+    double tiempo_AVL = 0;
+    double tiempo_HASH = 0;
 
     srand(time(NULL));
 
@@ -142,7 +152,7 @@ int main()
             if (validarEntero(input))
             {
                 cantidad_claves = strtol(input,NULL,10);
-                if (cantidad_claves >= 1 && cantidad_claves <= 2000) input[0] = '\0'; break;     
+                if (cantidad_claves >= 1 && cantidad_claves <= 2000) {input[0] = '\0'; break;}     
             }
 
             printf("Se ingreso un dato incorrecto. Vuelva a intentarlo\n");
@@ -156,7 +166,7 @@ int main()
             if (validarEntero(input))
             {
                 min = strtol(input,NULL,10);
-                if (min > 0 && min <= 2000) input[0]; break;
+                if (min > 0 && min <= 2000) {input[0]; break;}
             }
             printf("Se ingreso un dato incorrecto. Vuelva a intentarlo\n");
         }
@@ -169,10 +179,24 @@ int main()
             if (validarEntero(input))
             {
                 max = strtol(input,NULL,10);
-                if (max > min && max <= 2000) input[0]; break;
+                if (max > min && max <= 2000) {input[0]; break;}
             }
             printf("Se ingreso un dato incorrecto. Vuelva a intentarlo\n");
         }
+
+        //Pido cantidad de numeros a buscae
+        while (true)
+        {
+            printf("Ingrese la cantidad de numeros a buscar (1 a 5000000):");
+            gets(input);
+            if (validarEntero(input))
+            {
+                repeticiones_busqueda = strtol(input,NULL,10);
+                if (repeticiones_busqueda >= 1 && repeticiones_busqueda <= 5000000) {input[0]; break;}
+                printf("Se ingreso un dato incorrecto. Vuelva a intentarlo\n");
+            }
+        }
+
 
         //Pido cantidad de repeticiones
         while (true)
@@ -182,15 +206,25 @@ int main()
             if (validarEntero(input))
             {
                 repeticiones = strtol(input,NULL,10);
-                if (repeticiones >= 1 && repeticiones <= 5000) input[0]; break;
+                if (repeticiones >= 1 && repeticiones <= 5000) {input[0]; break;}
                 printf("Se ingreso un dato incorrecto. Vuelva a intentarlo\n");
             }
         }
 
 
-        th = CargarTH(min,max,repeticiones);
-        avl = CargarAVL(min,max,repeticiones);
-        Tiempo_Busqueda(th,avl,repeticiones,max,min);
+        for (i = 0; i < repeticiones; i++)
+        {
+            th = CargarTH(min,max,repeticiones);
+            avl = CargarAVL(min,max,repeticiones);
+            tiempo_HASH = tiempo_HASH + Tiempo_Busqueda_hash(th,repeticiones_busqueda,max,min);
+            tiempo_AVL = tiempo_AVL + Tiempo_Busqueda_avl(avl,repeticiones_busqueda,max,min);
+        }
+
+        printf("\nCONCLUSIONES:\n");
+        printf("Promedio de tiempo HASH --> %.5f \n", tiempo_HASH / (double) repeticiones);
+        printf("Promedio de tiempo AVL --> %.5f \n", tiempo_AVL / (double) repeticiones);
+
+
 
         //Consulo si quiere salir del programa
         printf("\nIngrese X si quiere salir o enter para continuar...\n");
