@@ -306,6 +306,7 @@ void Modificar_Alumno(TablaHash th, alumno datos_alumno, char nombre_archivo[], 
                         {
                             datos_alumno->nombre[j] = opcion[j];
                         }
+                        datos_alumno->nombre[j] = 0;
                         Esvalido = true;
                     }
                     break;
@@ -318,6 +319,7 @@ void Modificar_Alumno(TablaHash th, alumno datos_alumno, char nombre_archivo[], 
                         {
                             datos_alumno->apellido[j] = opcion[j];
                         }
+                        datos_alumno->apellido[j] = 0;
                         Esvalido = true;
                     }
                     break;
@@ -330,6 +332,7 @@ void Modificar_Alumno(TablaHash th, alumno datos_alumno, char nombre_archivo[], 
                         {
                             datos_alumno->domicilio[j] = opcion[j];
                         }
+                        datos_alumno->domicilio[j] = 0;
                         Esvalido = true;
                     }
                     break;
@@ -342,6 +345,7 @@ void Modificar_Alumno(TablaHash th, alumno datos_alumno, char nombre_archivo[], 
                         {
                             datos_alumno->telefono[j] = opcion[j];
                         }
+                        datos_alumno->telefono[j] = 0;
                         Esvalido = true;
                     }
                     break;
