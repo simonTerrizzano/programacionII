@@ -68,7 +68,7 @@ bool perteneceConjunto(Conjunto conj1, TipoElemento X){
     for (int i = 0; i < cto_cantidad_elementos(conj1) + 1; i++)
     {
         X = cto_recuperar(conj1, i);
-        if (X->clave = Y->clave)
+        if (X->clave == Y->clave)
         {
             resultado = true;
             break;
