@@ -1,11 +1,9 @@
-#include "conjuntos_listas.c"
-#include "listas_apuntadores.c"
-#include "tipo_elemento.c"
-#include "funciones_conjuntos.c"
-#include "DataEntry.c"
+#include "../Ejercicio 1 (TADs)/conjuntos_listas.c"
+#include "../funcionesConjuntos/funciones_conjuntos.c"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+
 
 
 Conjunto UnionVariosConjuntos(Conjunto conjuntos){

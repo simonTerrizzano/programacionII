@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include "conjuntos.h"
-#include "arbol_avl.h"
+#include "arbol-avl.c"
 #include "listas.h"
 
 

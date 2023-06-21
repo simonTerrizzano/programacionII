@@ -1,10 +1,8 @@
-#include "conjuntos.h"
-#include "listas.h"
-#include "tipo_elemento.h"
+#include "../Ejercicio 1 (TADs)/conjuntos.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "DataEntry.h"
+#include "DataEntry.c"
 
 void randomizarConjunto(Conjunto* conjunto, int tamanio, int clavemax, int clavemin) {
     TipoElemento X;

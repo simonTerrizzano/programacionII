@@ -1,11 +1,9 @@
+#include "../Ejercicio 1 (TADs)/conjuntos_listas.c"
+#include "../funcionesConjuntos/funciones_conjuntos.c"
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <math.h>
-#include "conjuntos.h"
-#include "conjuntos_listas.c"
-#include "tipo_elemento.c"
-#include "listas_apuntadores.c"
+#include <time.h>
+
 
 //========================================
 bool validarEntero(char* cadena)

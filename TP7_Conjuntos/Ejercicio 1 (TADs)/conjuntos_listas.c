@@ -1,5 +1,5 @@
 #include "conjuntos.h"
-#include "listas.h"
+#include "listas_apuntadores.c"
 #include <stdlib.h>
 
 struct ConjuntoRep {
