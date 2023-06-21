@@ -6,31 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-//========================================
-bool validarEntero(char* cadena)
-{
-    int i;
-    bool esNumero = false;
-    int longitud = strlen(cadena);
 
-    if (cadena[0] == '-') i = 1;
-    else i = 0;
-
-    for (i; i < longitud; i++)
-    {
-        //Valido que el input sea un NUMERO
-        if (cadena[i] >= 48 && cadena[i] <=57)
-        {
-            if (cadena[i] != ' ') esNumero = true;
-            else return false;
-            
-        }
-        else return false;
-    }
-
-    return esNumero;
-}
-//========================================
 
 Conjunto UnionVariosConjuntos(Conjunto conjuntos){
     Conjunto temp, resultado = cto_crear();
