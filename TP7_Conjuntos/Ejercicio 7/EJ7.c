@@ -206,7 +206,9 @@ int main()
 
     printf("\n\n COMPLEJIDAD ALGORITMICA \n");
     printf("La complejidad algoritmica de la funcion 'es_subconjuntos_parcial()' y 'es_subconjuntos_total()' es O(N) ya que\nes un bucle con el tamanio del conjunto a");
-
+    
+    printf("La complejidad algoritmica de la funcion 'es_subconjuntos_parcial()' y 'es_subconjuntos_total()' es O(n²) en el caso de usar la implementación con LISTAS ya que es un por cada elemento del conjunto A se recorreran como máximo todos los elementos del conjunto B ");
+    printf("La complejidad algoritmica de la funcion 'es_subconjuntos_parcial()' y 'es_subconjuntos_total()' es O(n log n) en el caso de usar la implementación con ARBOLES AVL ya que es un por cada elemento del conjunto A se realizará una búsqueda binaria en el conjunto B ");
 
     system("pause");
     return 0;
