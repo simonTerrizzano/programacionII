@@ -6,6 +6,31 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+//========================================
+bool validarEntero(char* cadena)
+{
+    int i;
+    bool esNumero = false;
+    int longitud = strlen(cadena);
+
+    if (cadena[0] == '-') i = 1;
+    else i = 0;
+
+    for (i; i < longitud; i++)
+    {
+        //Valido que el input sea un NUMERO
+        if (cadena[i] >= 48 && cadena[i] <=57)
+        {
+            if (cadena[i] != ' ') esNumero = true;
+            else return false;
+            
+        }
+        else return false;
+    }
+
+    return esNumero;
+}
+//========================================
 
 Conjunto UnionVariosConjuntos(Conjunto conjuntos){
     Conjunto temp, resultado = cto_crear();
@@ -24,23 +49,37 @@ Conjunto UnionVariosConjuntos(Conjunto conjuntos){
 
 int main(int argc, char const *argv[])
 {
-    TipoElemento X;
+    TipoElemento X,Y;
+    char * input;
     bool * condicion;
+    bool fin = false;
+    int num;
     Conjunto conjuntos = cto_crear();
     Conjunto conjunto = cto_crear();
-    printf("Ingresa la cantidad de conjuntos que se generaran");
+    printf("Se crearan los conjuntos\n");
+    printf("Ingresa la cantidad de conjuntos que se ingresaran: \n");
     int cantidadconjuntos = ingreso_normalizado_enteros(2,20,condicion);
-    printf("Valor maximo a tomar de los conjuntos: \n");
-    int max = ingreso_normalizado_enteros(5,1000,condicion);
-    for (int i = 0; i < cantidadconjuntos; i++)
+    for (int i = 1; i < cantidadconjuntos+1; i++)
     {
-        srand(time(NULL) * ((i * 200)%50));
-        randomizarConjunto(&conjunto,max,max*-1,0);
+        while(!fin){
+            printf("Conjunto %d\n",i);
+            printf("Ingrese -1 para finalizar\n");
+            num = ingreso_normalizado_enteros(-10000,10000,condicion);
+            if(num == -1){
+                fin = true;
+            }
+            else{
+                Y = te_crear(num);
+                cto_agregar(conjunto,Y);
+            }
+        }
         X = te_crear_con_valor(i,(void*)conjunto);
         cto_agregar(conjuntos,X);
+        conjunto = cto_crear();
+        fin = false;
     }
     printf("Claves de los conjuntos: \n");
-    for (int j = 0; j < cantidadconjuntos; j++)
+    for (int j = 1; j < cantidadconjuntos + 1; j++)
     {
         printf("Conjunto %d: \n",j);
         conjunto = (Conjunto)cto_recuperar(conjuntos,j)->valor;
